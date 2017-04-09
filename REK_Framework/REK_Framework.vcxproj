@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{09E7029D-85BC-414D-B1CF-E729BA3BDBC7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>FirstSDLGame</RootNamespace>
+    <RootNamespace>REK_Framework</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>REK_Framework</ProjectName>
   </PropertyGroup>
@@ -180,7 +180,7 @@
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="FirstSDLGame.rc" />
+    <ResourceCompile Include="REK_Framework.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\xbox360pad\360_A.png" />
@@ -200,12 +200,6 @@
     <Image Include="resources\xbox360pad\360_Start_Alt.png" />
     <Image Include="resources\xbox360pad\360_X.png" />
     <Image Include="resources\xbox360pad\360_Y.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="resources\songs\theme_a_loop_01.mp3" />
-    <Media Include="resources\songs\theme_a_loop_02.mp3" />
-    <Media Include="resources\songs\theme_a_loop_03.mp3" />
-    <Media Include="resources\songs\theme_a_loop_04.mp3" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\fonts\Minecraft.ttf" />

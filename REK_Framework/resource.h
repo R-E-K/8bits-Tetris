@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by FirstSDLGame.rc
+// Used by REK_Framework.rc
 
 // Next default values for new objects
 // 

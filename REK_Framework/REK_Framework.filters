@@ -139,7 +139,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="FirstSDLGame.rc">
+    <ResourceCompile Include="REK_Framework.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

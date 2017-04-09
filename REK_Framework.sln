@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FirstSDLGame", "FirstSDLGame\FirstSDLGame.vcxproj", "{09E7029D-85BC-414D-B1CF-E729BA3BDBC7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "REK_Framework", "REK_Framework\REK_Framework.vcxproj", "{09E7029D-85BC-414D-B1CF-E729BA3BDBC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
