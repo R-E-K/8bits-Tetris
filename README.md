@@ -1,2 +1,2 @@
-# REK-Framework
-My own Framework based on SDL2
+# 8bits-Tetris
+Another Tetris Game
