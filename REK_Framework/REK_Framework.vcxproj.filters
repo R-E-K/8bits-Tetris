@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ErrorMessageManager.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContextManager.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLMainObjectsProvider.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawGameButtonLabelService.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawPictureManager.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawTextService.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputGamepadManager.cpp">
+      <Filter>sources\input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputKeyboardManager.cpp">
+      <Filter>sources\input</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>sources\input</Filter>
+    </ClCompile>
+    <ClCompile Include="GamepadConfiguration.cpp">
+      <Filter>sources\input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
+      <Filter>sources\menu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ErrorMessageManager.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContext.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContextManager.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLMainObjectsProvider.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawGameButtonLabelService.h">
+      <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawPictureManager.h">
+      <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawTextService.h">
+      <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageLoader.h">
+      <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InputGamepadManager.h">
+      <Filter>sources\input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputKeyboardManager.h">
+      <Filter>sources\input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>sources\input</Filter>
+    </ClInclude>
+    <ClInclude Include="GamepadButtonsFilePathConsts.h">
+      <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GamepadConfiguration.h">
+      <Filter>sources\input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenu.h">
+      <Filter>sources\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenuItem.h">
+      <Filter>sources\menu</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="REK_Framework.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\xbox360pad\360_A.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_B.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Back_Alt.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Down.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Left.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Right.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Up.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_LB.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Left_Stick.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_LT.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_RB.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Right_Stick.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_RT.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Start_Alt.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_X.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Y.png">
+      <Filter>resources\xbox360pad</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="resources">
+      <UniqueIdentifier>{bdb03446-30ca-4786-aece-6e7a434d9985}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\fonts">
+      <UniqueIdentifier>{fe3df5de-ae9b-494a-b7fb-4fbad06a868e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\xbox360pad">
+      <UniqueIdentifier>{132004d9-a59a-40c2-9075-cadf77910383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources">
+      <UniqueIdentifier>{b98af5f4-5e2b-4e04-b0cf-11cf343d6f3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\core">
+      <UniqueIdentifier>{d491e9b5-7733-4399-b837-75cb6f049b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\graphics">
+      <UniqueIdentifier>{ddc261b9-6f8c-446c-b206-4d31e292a290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\input">
+      <UniqueIdentifier>{e2fb87ac-6cf6-4261-a438-0d44ba985326}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\menu">
+      <UniqueIdentifier>{ef73bab8-29d2-4033-9523-49c72562da73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\Minecraft.ttf">
+      <Filter>resources\fonts</Filter>
+    </Font>
+  </ItemGroup>
+</Project>
