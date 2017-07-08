@@ -1,7 +1,10 @@
 #pragma once
 
-enum GameContext
+namespace REKFramework
 {
-	MENU = 0,
-	INGAME = 1
-};
+	enum GameContext
+	{
+		MENU = 0,
+		INGAME = 1
+	};
+}

@@ -1,19 +1,23 @@
 #pragma once
 #include <SDL2/SDL.h>
 
-class SDLMainObjectsProvider
+
+namespace REKFramework
 {
-public:
-	friend class Game;
+	class SDLMainObjectsProvider
+	{
+	public:
+		friend class Game;
 
-	SDLMainObjectsProvider();
-	~SDLMainObjectsProvider();
+		SDLMainObjectsProvider();
+		~SDLMainObjectsProvider();
 
-	static SDL_Renderer* GetRenderer();
-	static SDL_Window* GetWindow();
+		static SDL_Renderer* GetRenderer();
+		static SDL_Window* GetWindow();
 
-private:
-	static SDL_Renderer* renderer;
-	static SDL_Window* window;
-};
+	private:
+		static SDL_Renderer* renderer;
+		static SDL_Window* window;
+	};
+}
 

@@ -4,14 +4,17 @@
 #include "ImageLoader.h"
 #include "DrawTextService.h"
 
-class DrawGameButtonLabelService
+namespace REKFramework
 {
-public:
-	DrawGameButtonLabelService();
-	~DrawGameButtonLabelService();
+	class DrawGameButtonLabelService
+	{
+	public:
+		DrawGameButtonLabelService();
+		~DrawGameButtonLabelService();
 
-	void DrawWithLabel(const char* pathFile, char* label, int x, int y) const;
-private:
-	DrawTextService* drawTextSrvc;
-};
+		void DrawWithLabel(const char* pathFile, char* label, int x, int y) const;
+	private:
+		DrawTextService* drawTextSrvc;
+	};
+}
 

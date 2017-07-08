@@ -2,12 +2,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-class ImageLoader
+namespace REKFramework
 {
-public:
-	ImageLoader();
-	~ImageLoader();
+	class ImageLoader
+	{
+	public:
+		ImageLoader();
+		~ImageLoader();
 
-	static SDL_Surface* GetImage(const char* pathfile);
-};
+		static SDL_Surface* GetImage(const char* pathfile);
+	};
+}
 

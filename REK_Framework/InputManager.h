@@ -6,39 +6,40 @@
 #include <algorithm>
 #include "GamepadConfiguration.h"
 
-
-class InputManager
+namespace REKFramework
 {
-public:
-	InputManager(GameContextManager* gameContextManager);
-	~InputManager();
+	class InputManager
+	{
+	public:
+		InputManager(GameContextManager* gameContextManager);
+		~InputManager();
 
-	void CheckInput(SDL_Event* e, bool* quitGame);
-	
-private:
-	SDL_Event* PressedInput;
-	InputKeyboardManager* keyboardManager;
-	InputGamepadManager* gamepadManager;
-	GamepadConfiguration* gamepadCnfg;
-	GameContextManager* gameContextMngr;
+		void CheckInput(SDL_Event* e, bool* quitGame);
 
-	bool continuousButtonPressed;
+	private:
+		SDL_Event* PressedInput;
+		InputKeyboardManager* keyboardManager;
+		InputGamepadManager* gamepadManager;
+		GamepadConfiguration* gamepadCnfg;
+		GameContextManager* gameContextMngr;
 
-	std::vector<Uint8> gamepadButtonsPressedState;
+		bool continuousButtonPressed;
 
-	bool RTTriggered;
-	bool LTTriggered;
+		std::vector<Uint8> gamepadButtonsPressedState;
 
-	bool canCheckKeyboardInput;
+		bool RTTriggered;
+		bool LTTriggered;
 
-	void SetPressedButton();
-	void SetReleasedButton();
+		bool canCheckKeyboardInput;
 
-	void SetAxisMotion();
+		void SetPressedButton();
+		void SetReleasedButton();
 
-	void CheckInputNotHold();
+		void SetAxisMotion();
 
-	void CheckGamepadInput() const;
-	void CheckGamepadAxisMotion() const;
-};
+		void CheckInputNotHold();
 
+		void CheckGamepadInput() const;
+		void CheckGamepadAxisMotion() const;
+	};
+}

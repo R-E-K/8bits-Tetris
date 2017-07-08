@@ -2,15 +2,18 @@
 #include <SDL2/SDL.h>
 #include "GameContextManager.h"
 
-class InputGamepadManager
+namespace REKFramework
 {
-public:
-	explicit InputGamepadManager(GameContextManager* gameContextManager);
-	~InputGamepadManager();
+	class InputGamepadManager
+	{
+	public:
+		explicit InputGamepadManager(GameContextManager* gameContextManager);
+		~InputGamepadManager();
 
-	void CheckInput(Uint8 pressedButton) const;
-	void CheckAxisMotion(Uint8 axisMotion) const;
-private:
-	GameContextManager* gameContextMngr;
-};
+		void CheckInput(Uint8 pressedButton) const;
+		void CheckAxisMotion(Uint8 axisMotion) const;
+	private:
+		GameContextManager* gameContextMngr;
+	};
+}
 

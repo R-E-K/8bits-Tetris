@@ -7,24 +7,27 @@
 #include "GamepadConfiguration.h"
 
 
-class Game
+namespace REKFramework
 {
-public:
-	Game();
-	~Game();
-	void Loop(SDL_Event* e);
-	bool Init();
-private:
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	class Game
+	{
+	public:
+		Game();
+		~Game();
+		void Loop(SDL_Event* e);
+		bool Init();
+	private:
+		SDL_Window* window;
+		SDL_Renderer* renderer;
 
-	GameContextManager* gameContextMngr;
-	InputManager* inputMngr;
+		GameContextManager* gameContextMngr;
+		InputManager* inputMngr;
 
-	GameMenu* gameMenu;
+		GameMenu* gameMenu;
 
-	void SetSDLMainObjectsToProvider() const;
+		void SetSDLMainObjectsToProvider() const;
 
-	void HandleGameMenu();
-};
+		void HandleGameMenu();
+	};
+}
 

@@ -2,15 +2,18 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-class GamepadConfiguration
+namespace REKFramework
 {
-public:
-	GamepadConfiguration();
-	~GamepadConfiguration();
-	void PlugGamepad();
-	void UnplugGamepad();
-private:
-	SDL_GameController* gamepad;
-	void DisplayDebugInformations() const;
-};
+	class GamepadConfiguration
+	{
+	public:
+		GamepadConfiguration();
+		~GamepadConfiguration();
+		void PlugGamepad();
+		void UnplugGamepad();
+	private:
+		SDL_GameController* gamepad;
+		void DisplayDebugInformations() const;
+	};
+}
 

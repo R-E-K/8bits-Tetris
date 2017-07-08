@@ -1,18 +1,19 @@
 #pragma once
 #include "ErrorMessageManager.h"
 
-using namespace std;
-
-ErrorMessageManager::ErrorMessageManager()
+namespace REKFramework
 {
-}
+	ErrorMessageManager::ErrorMessageManager()
+	{
+	}
 
 
-ErrorMessageManager::~ErrorMessageManager()
-{
-}
+	ErrorMessageManager::~ErrorMessageManager()
+	{
+	}
 
-void ErrorMessageManager::WriteErrorMessageToConsole(char* userMessage)
-{
-	cout << userMessage << SDL_GetError();
+	void ErrorMessageManager::WriteErrorMessageToConsole(char* userMessage)
+	{
+		std::cout << userMessage << SDL_GetError();
+	}
 }

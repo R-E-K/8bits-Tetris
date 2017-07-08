@@ -1,10 +1,9 @@
 #pragma once
-
 #include "../REK_Framework/Game.h"
 
 int main(int argc, char* args[])
 {
-	Game* game = new Game();
+	REKFramework::Game* game = new REKFramework::Game();
 
 	if (game->Init())
 	{

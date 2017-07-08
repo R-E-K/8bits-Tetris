@@ -2,12 +2,15 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-class ErrorMessageManager
+namespace REKFramework
 {
-public:
-	ErrorMessageManager();
-	~ErrorMessageManager();
+	class ErrorMessageManager
+	{
+	public:
+		ErrorMessageManager();
+		~ErrorMessageManager();
 
-	static void WriteErrorMessageToConsole(char* userMessage);
-};
+		static void WriteErrorMessageToConsole(char* userMessage);
+	};
+}
 
