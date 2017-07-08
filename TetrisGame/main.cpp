@@ -1,5 +1,6 @@
 #pragma once
-#include "Game.h"
+
+#include "../REK_Framework/Game.h"
 
 int main(int argc, char* args[])
 {

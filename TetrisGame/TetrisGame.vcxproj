@@ -145,7 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\REK_Framework\main.cpp" />
+    <ClCompile Include="..\TetrisGame\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\REK_Framework\REK_Framework.vcxproj">
