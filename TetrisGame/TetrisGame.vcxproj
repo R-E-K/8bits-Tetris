@@ -19,15 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{09E7029D-85BC-414D-B1CF-E729BA3BDBC7}</ProjectGuid>
+    <ProjectGuid>{C554D9AC-5B55-4F31-8836-9A3AD8636B26}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>REK_Framework</RootNamespace>
+    <RootNamespace>TetrisGame</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>REK_Framework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
@@ -72,6 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Workspace\SDL_Games\Tetris\Debug;$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\Workspace\SDL_Games\Tetris\Debug;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,11 +94,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>REK_Framework.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,7 +108,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,7 +125,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -149,42 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DrawGameButtonLabelService.cpp" />
-    <ClCompile Include="DrawPictureManager.cpp" />
-    <ClCompile Include="DrawTextService.cpp" />
-    <ClCompile Include="ErrorMessageManager.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameContextManager.cpp" />
-    <ClCompile Include="GameMenu.cpp" />
-    <ClCompile Include="GamepadConfiguration.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="InputGamepadManager.cpp" />
-    <ClCompile Include="InputKeyboardManager.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="SDLMainObjectsProvider.cpp" />
+    <ClCompile Include="..\REK_Framework\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DrawGameButtonLabelService.h" />
-    <ClInclude Include="DrawPictureManager.h" />
-    <ClInclude Include="DrawTextService.h" />
-    <ClInclude Include="ErrorMessageManager.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameContext.h" />
-    <ClInclude Include="GameContextManager.h" />
-    <ClInclude Include="GameMenu.h" />
-    <ClInclude Include="GameMenuItem.h" />
-    <ClInclude Include="GamepadButtonsFilePathConsts.h" />
-    <ClInclude Include="GamepadConfiguration.h" />
-    <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="InputGamepadManager.h" />
-    <ClInclude Include="InputKeyboardManager.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SDLMainObjectsProvider.h" />
-    <ClInclude Include="window.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="REK_Framework.rc" />
+    <ProjectReference Include="..\REK_Framework\REK_Framework.vcxproj">
+      <Project>{09e7029d-85bc-414d-b1cf-e729ba3bdbc7}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -29,6 +29,11 @@ Game::~Game()
 	delete inputMngr;
 	delete gameContextMngr;
 	if (gameMenu != nullptr) delete gameMenu;
+
+	//Quit SDL subsystems
+	TTF_Quit();
+	IMG_Quit();
+	SDL_Quit();
 }
 
 void Game::Loop(SDL_Event* e)

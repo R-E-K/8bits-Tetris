@@ -12,11 +12,6 @@ int main(int argc, char* args[])
 	}
 	
 	delete game;
-
-	//Quit SDL subsystems
-	TTF_Quit();
-	IMG_Quit();
-	SDL_Quit();
 	
 	return 0;
 }
