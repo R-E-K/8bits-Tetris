@@ -162,6 +162,7 @@
     <ClCompile Include="InputKeyboardManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawGameButtonLabelService.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLMainObjectsProvider.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>

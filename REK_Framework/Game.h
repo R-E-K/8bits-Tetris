@@ -5,6 +5,7 @@
 #include "ErrorMessageManager.h"
 #include "InputManager.h"
 #include "GamepadConfiguration.h"
+#include "SoundManager.h"
 
 
 namespace REKFramework
@@ -22,6 +23,7 @@ namespace REKFramework
 
 		GameContextManager* gameContextMngr;
 		InputManager* inputMngr;
+		SoundManager* soundMngr;
 
 		GameMenu* gameMenu;
 

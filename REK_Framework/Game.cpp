@@ -15,7 +15,11 @@ namespace REKFramework
 		// The class who manage all input
 		inputMngr = nullptr;
 
+		// Handle the game behavior according to the context (In-game, Pause, Menu etc...)
 		gameContextMngr = nullptr;
+
+		// Manage all sounds
+		soundMngr = nullptr;
 
 		gameMenu = nullptr;
 	}
@@ -33,12 +37,7 @@ namespace REKFramework
 		TTF_Quit();
 		IMG_Quit();
 
-		// https://www.libsdl.org/projects/SDL_mixer/docs/SDL_mixer_10.html#SEC10
-		// Since each call to Mix_Init may set different flags, there is no way, currently, 
-		// to request how many times each one was initted. In other words, 
-		// the only way to quit for sure is to do a loop :
-		while (Mix_Init(0))
-			Mix_Quit();
+		delete soundMngr;
 
 		SDL_Quit();
 	}
@@ -92,49 +91,37 @@ namespace REKFramework
 					ErrorMessageManager::WriteErrorMessageToConsole("Renderer could not be created! SDL_Error : ");
 					isInitOk = false;
 				}
-
-				// Init screen with light grey all over the surface
-				SDL_SetRenderDrawColor(renderer, 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
-
-				gameContextMngr = new GameContextManager();
-
-				inputMngr = new InputManager(gameContextMngr);
-
-
-				// SDL_ttf
-				if (TTF_Init() != 0)
+				else
 				{
-					ErrorMessageManager::WriteErrorMessageToConsole("Could not load SDL_ttf, SDL_Error : ");
-					isInitOk = false;
+					// Init screen with light grey all over the surface
+					SDL_SetRenderDrawColor(renderer, 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
+
+					gameContextMngr = new GameContextManager();
+
+					inputMngr = new InputManager(gameContextMngr);
+
+
+					// SDL_ttf
+					if (TTF_Init() != 0)
+					{
+						ErrorMessageManager::WriteErrorMessageToConsole("Could not load SDL_ttf, SDL_Error : ");
+						isInitOk = false;
+					}
+					else
+					{
+						soundMngr = new SoundManager();
+						if (soundMngr->Init() < 0)
+						{
+							ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");
+							isInitOk = false;
+						}
+
+						soundMngr->LoadMusic("resources/songs/MUS_N_CD_1.ogg", 2000);
+
+						SetSDLMainObjectsToProvider();
+					}
 				}
-
-				SetSDLMainObjectsToProvider();
 			}
-		}
-
-		// TODO : Refactoring
-		if (isInitOk)
-		{
-			int SDLMixerInitFlags = MIX_INIT_OGG;
-			int result = Mix_Init(SDLMixerInitFlags);
-			if (result & SDLMixerInitFlags != SDLMixerInitFlags)
-			{
-				ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with MP3 and OGG formats, SDL_Error : ");
-				isInitOk = false;
-			}
-
-			Mix_VolumeMusic(MIX_MAX_VOLUME);
-			Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
-
-			Mix_Music* music = Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg");
-			if (music != nullptr)
-			{
-				Mix_PlayMusic(music, -1);
-			}
-
-			// Crash if we put this line here
-			// Need to add it in destructor of class managing sound when created
-			//Mix_FreeMusic(music);
 		}
 
 		return isInitOk;

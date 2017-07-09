@@ -40,6 +40,9 @@
     <ClCompile Include="GameMenu.cpp">
       <Filter>sources\menu</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>sources\sounds</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -94,6 +97,9 @@
     <ClInclude Include="GameMenuItem.h">
       <Filter>sources\menu</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>sources\sounds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />
@@ -113,6 +119,9 @@
     </Filter>
     <Filter Include="sources\menu">
       <UniqueIdentifier>{ef73bab8-29d2-4033-9523-49c72562da73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\sounds">
+      <UniqueIdentifier>{af73e2b2-440a-4d55-bf06-6b596e82047c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
