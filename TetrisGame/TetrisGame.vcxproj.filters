@@ -11,7 +11,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\REK_Framework\main.cpp">
+    <ClCompile Include="..\TetrisGame\main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>

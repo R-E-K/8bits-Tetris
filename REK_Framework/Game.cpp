@@ -1,5 +1,6 @@
 #pragma once
 #include "Game.h"
+#include <SDL2/SDL_mixer.h>
 
 namespace REKFramework
 {
@@ -31,6 +32,14 @@ namespace REKFramework
 		//Quit SDL subsystems
 		TTF_Quit();
 		IMG_Quit();
+
+		// https://www.libsdl.org/projects/SDL_mixer/docs/SDL_mixer_10.html#SEC10
+		// Since each call to Mix_Init may set different flags, there is no way, currently, 
+		// to request how many times each one was initted. In other words, 
+		// the only way to quit for sure is to do a loop :
+		while (Mix_Init(0))
+			Mix_Quit();
+
 		SDL_Quit();
 	}
 
@@ -59,7 +68,7 @@ namespace REKFramework
 		bool isInitOk = true;
 
 		//Initialize SDL
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER) < 0)
+		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) < 0)
 		{
 			ErrorMessageManager::WriteErrorMessageToConsole("SDL could not initialize! SDL_Error : ");
 			isInitOk = false;
@@ -101,6 +110,31 @@ namespace REKFramework
 
 				SetSDLMainObjectsToProvider();
 			}
+		}
+
+		// TODO : Refactoring
+		if (isInitOk)
+		{
+			int SDLMixerInitFlags = MIX_INIT_OGG;
+			int result = Mix_Init(SDLMixerInitFlags);
+			if (result & SDLMixerInitFlags != SDLMixerInitFlags)
+			{
+				ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with MP3 and OGG formats, SDL_Error : ");
+				isInitOk = false;
+			}
+
+			Mix_VolumeMusic(MIX_MAX_VOLUME);
+			Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+
+			Mix_Music* music = Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg");
+			if (music != nullptr)
+			{
+				Mix_PlayMusic(music, -1);
+			}
+
+			// Crash if we put this line here
+			// Need to add it in destructor of class managing sound when created
+			//Mix_FreeMusic(music);
 		}
 
 		return isInitOk;
