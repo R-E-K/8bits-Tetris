@@ -106,6 +106,15 @@ namespace REKFramework
 		return isInitOk;
 	}
 
+	void Game::Execute()
+	{
+		if (Init())
+		{
+			SDL_Event e;
+			Loop(&e);
+		}
+	}
+
 	void Game::SetSDLMainObjectsToProvider() const
 	{
 		SDLMainObjectsProvider::renderer = renderer;

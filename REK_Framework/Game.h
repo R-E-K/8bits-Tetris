@@ -14,8 +14,8 @@ namespace REKFramework
 	public:
 		Game();
 		~Game();
-		void Loop(SDL_Event* e);
-		bool Init();
+		
+		void Execute();
 	private:
 		SDL_Window* window;
 		SDL_Renderer* renderer;
@@ -24,6 +24,9 @@ namespace REKFramework
 		InputManager* inputMngr;
 
 		GameMenu* gameMenu;
+
+		void Loop(SDL_Event* e);
+		bool Init();
 
 		void SetSDLMainObjectsToProvider() const;
 
