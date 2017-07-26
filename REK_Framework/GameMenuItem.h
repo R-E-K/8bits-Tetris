@@ -2,7 +2,7 @@
 
 namespace REKFramework
 {
-	enum GameMenuItem
+	enum class GameMenuItem
 	{
 		PLAY = 0,
 		CREDITS = 1,

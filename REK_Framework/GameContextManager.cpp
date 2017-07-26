@@ -5,7 +5,7 @@ namespace REKFramework
 {
 	GameContextManager::GameContextManager()
 	{
-		currentGameContext = MENU;
+		currentGameContext = GameContext::MENU;
 		DrawPictureMngr = new DrawPictureManager();
 
 		gameMenu = nullptr;
@@ -26,10 +26,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawAButton();
 			break;
-		case MENU:
+		case GameContext::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->SelectItemMenu();
@@ -46,10 +46,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawBButton();
 			break;
-		case MENU:
+		case GameContext::MENU:
 			if (gameMenu != nullptr)
 			{
 				if (gameMenu->MustDestroyGameMenuOnBack())
@@ -66,7 +66,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawXButton();
 			break;
 		}
@@ -76,7 +76,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawYButton();
 			break;
 		}
@@ -86,7 +86,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawLBButton();
 			break;
 		}
@@ -96,7 +96,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawRBButton();
 			break;
 		}
@@ -106,10 +106,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawDPadDownButton();
 			break;
-		case MENU:
+		case GameContext::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->NavigateDown();
@@ -122,10 +122,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawDPadUpButton();
 			break;
-		case MENU:
+		case GameContext::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->NavigateUp();
@@ -138,7 +138,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawDPadLeftButton();
 			break;
 		}
@@ -148,7 +148,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawDPadRightButton();
 			break;
 		}
@@ -158,7 +158,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawLeftStickButton();
 			break;
 		}
@@ -168,7 +168,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawRightStickButton();
 			break;
 		}
@@ -178,10 +178,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
-			currentGameContext = MENU;
+		case GameContext::INGAME:
+			currentGameContext = GameContext::MENU;
 			break;
-		case MENU:
+		case GameContext::MENU:
 			CloseGameMenu();
 			break;
 		}
@@ -191,10 +191,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawBackButton();
 			break;
-		case MENU:
+		case GameContext::MENU:
 			if (gameMenu != nullptr)
 			{
 				if (gameMenu->MustDestroyGameMenuOnBack())
@@ -211,7 +211,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawLTButton();
 			break;
 		}
@@ -221,7 +221,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case INGAME:
+		case GameContext::INGAME:
 			DrawPictureMngr->DrawRTButton();
 			break;
 		}
@@ -229,6 +229,6 @@ namespace REKFramework
 
 	void GameContextManager::CloseGameMenu()
 	{
-		currentGameContext = INGAME;
+		currentGameContext = GameContext::INGAME;
 	}
 }

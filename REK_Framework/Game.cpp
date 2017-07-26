@@ -144,7 +144,7 @@ namespace REKFramework
 
 	void Game::HandleGameMenu()
 	{
-		if (gameContextMngr != nullptr && gameContextMngr->currentGameContext == MENU)
+		if (gameContextMngr != nullptr && gameContextMngr->currentGameContext == GameContext::MENU)
 		{
 			if (gameMenu == nullptr)
 			{
@@ -154,7 +154,7 @@ namespace REKFramework
 			gameMenu->Draw();
 		}
 
-		if (gameContextMngr->currentGameContext == INGAME && gameMenu != nullptr)
+		if (gameContextMngr->currentGameContext == GameContext::INGAME && gameMenu != nullptr)
 		{
 			delete gameMenu;
 			gameMenu = nullptr;

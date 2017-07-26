@@ -2,7 +2,7 @@
 
 namespace REKFramework
 {
-	enum GameContext
+	enum class GameContext
 	{
 		MENU = 0,
 		INGAME = 1

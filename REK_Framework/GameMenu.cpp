@@ -7,13 +7,13 @@ namespace REKFramework
 	GameMenu::GameMenu()
 	{
 		gameMenuItems.clear();
-		gameMenuItems[0] = PLAY;
-		gameMenuItems[1] = CREDITS;
-		gameMenuItems[2] = QUITGAME;
+		gameMenuItems[0] = GameMenuItem::PLAY;
+		gameMenuItems[1] = GameMenuItem::CREDITS;
+		gameMenuItems[2] = GameMenuItem::QUITGAME;
 
 		GameMenuLevel = 0;
 
-		selectedItem = PLAY;
+		selectedItem = GameMenuItem::PLAY;
 		selectedItemIndex = 0;
 
 		background = nullptr;
@@ -42,7 +42,7 @@ namespace REKFramework
 		{
 			switch (selectedItem)
 			{
-			case CREDITS:
+			case GameMenuItem::CREDITS:
 				DrawCredits();
 				break;
 			}
@@ -71,12 +71,12 @@ namespace REKFramework
 	{
 		switch (selectedItem)
 		{
-		case PLAY:
+		case GameMenuItem::PLAY:
 			break;
-		case CREDITS:
+		case GameMenuItem::CREDITS:
 			GameMenuLevel = 1;
 			break;
-		case QUITGAME:
+		case GameMenuItem::QUITGAME:
 			SDL_Event quitGame;
 			quitGame.type = SDL_QUIT;
 			SDL_PushEvent(&quitGame);
@@ -88,10 +88,10 @@ namespace REKFramework
 	{
 		switch (selectedItem)
 		{
-		case PLAY:
-		case QUITGAME:
+		case GameMenuItem::PLAY:
+		case GameMenuItem::QUITGAME:
 			break;
-		case CREDITS:
+		case GameMenuItem::CREDITS:
 			GameMenuLevel = 0;
 			break;
 		}
@@ -99,7 +99,7 @@ namespace REKFramework
 
 	bool GameMenu::MustDestroyGameMenuOnSelect() const
 	{
-		return (selectedItem == PLAY || selectedItem == QUITGAME);
+		return (selectedItem == GameMenuItem::PLAY || selectedItem == GameMenuItem::QUITGAME);
 	}
 
 	bool GameMenu::MustDestroyGameMenuOnBack() const
@@ -149,11 +149,11 @@ namespace REKFramework
 		int x = backgroundPositionX + 20;
 		int y = backgroundPositionY + 20;
 
-		DrawItemMenu("Play", PLAY, x, y);
+		DrawItemMenu("Play", GameMenuItem::PLAY, x, y);
 		y += 40;
-		DrawItemMenu("Credits", CREDITS, x, y);
+		DrawItemMenu("Credits", GameMenuItem::CREDITS, x, y);
 		y += 40;
-		DrawItemMenu("Quit game", QUITGAME, x, y);
+		DrawItemMenu("Quit game", GameMenuItem::QUITGAME, x, y);
 	}
 
 	void GameMenu::DrawItemMenu(const char* itemMenuName, GameMenuItem gameMenuItem, int x, int y) const
