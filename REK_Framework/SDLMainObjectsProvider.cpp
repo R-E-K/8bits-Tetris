@@ -3,8 +3,8 @@
 
 namespace REKFramework
 {
-	SDL_Renderer* SDLMainObjectsProvider::renderer;
-	SDL_Window* SDLMainObjectsProvider::window;
+	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::renderer;
+	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::window;
 
 
 	SDLMainObjectsProvider::SDLMainObjectsProvider()
@@ -16,13 +16,37 @@ namespace REKFramework
 	{
 	}
 
-	SDL_Renderer* SDLMainObjectsProvider::GetRenderer()
+	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::GetRenderer()
 	{
 		return renderer;
 	}
 
-	SDL_Window* SDLMainObjectsProvider::GetWindow()
+	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::GetWindow()
 	{
 		return window;
+	}
+
+	SDL_Renderer* SDLMainObjectsProvider::GetRendererPointer()
+	{
+		if (renderer != nullptr)
+		{
+			return renderer.get();
+		}
+		else
+		{
+			// TODO : Handle Exception
+		}
+	}
+
+	SDL_Window* SDLMainObjectsProvider::GetWindowPointer()
+	{
+		if (window != nullptr)
+		{
+			return window.get();
+		}
+		else
+		{
+			// TODO : Handle Exception
+		}
 	}
 }

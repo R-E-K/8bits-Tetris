@@ -7,13 +7,13 @@ namespace REKFramework
 	class InputGamepadManager
 	{
 	public:
-		explicit InputGamepadManager(GameContextManager* gameContextManager);
+		explicit InputGamepadManager(std::shared_ptr<GameContextManager> gameContextManager);
 		~InputGamepadManager();
 
 		void CheckInput(Uint8 pressedButton) const;
 		void CheckAxisMotion(Uint8 axisMotion) const;
 	private:
-		GameContextManager* gameContextMngr;
+		std::shared_ptr<GameContextManager> gameContextMngr;
 	};
 }
 

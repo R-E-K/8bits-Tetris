@@ -3,7 +3,7 @@
 
 namespace REKFramework
 {
-	InputGamepadManager::InputGamepadManager(GameContextManager* gameContextManager)
+	InputGamepadManager::InputGamepadManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
 		gameContextMngr = gameContextManager;
 	}

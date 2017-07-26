@@ -37,7 +37,7 @@ namespace REKFramework
 	{
 		TTF_Font* fontMenu = TTF_OpenFont("resources/fonts/Minecraft.ttf", textSize);
 		SDL_Surface* textSurface = TTF_RenderText_Solid(fontMenu, itemMenuName, *color);
-		SDL_Texture* textTexture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRenderer(), textSurface);
+		SDL_Texture* textTexture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererPointer(), textSurface);
 
 		int textureWidth, textureHeight;
 		SDL_QueryTexture(textTexture, nullptr, nullptr, &textureWidth, &textureHeight);
@@ -48,7 +48,7 @@ namespace REKFramework
 		itemMenuPosition.w = textureWidth;
 		itemMenuPosition.h = textureHeight;
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRenderer(), textTexture, nullptr, &itemMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), textTexture, nullptr, &itemMenuPosition);
 
 		SDL_FreeSurface(textSurface);
 		SDL_DestroyTexture(textTexture);

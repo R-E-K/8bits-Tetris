@@ -100,6 +100,9 @@
     <ClInclude Include="SoundManager.h">
       <Filter>sources\sounds</Filter>
     </ClInclude>
+    <ClInclude Include="SDLDeletersFunctor.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

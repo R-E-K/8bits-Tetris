@@ -181,6 +181,7 @@
     <ClInclude Include="InputKeyboardManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="SDLDeletersFunctor.h" />
     <ClInclude Include="SDLMainObjectsProvider.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="window.h" />

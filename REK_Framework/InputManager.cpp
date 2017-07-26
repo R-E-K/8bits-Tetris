@@ -4,7 +4,7 @@
 
 namespace REKFramework
 {
-	InputManager::InputManager(GameContextManager* gameContextManager)
+	InputManager::InputManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
 		PressedInput = nullptr;
 		keyboardManager = new InputKeyboardManager(gameContextManager);

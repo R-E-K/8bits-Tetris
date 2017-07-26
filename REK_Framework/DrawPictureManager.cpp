@@ -156,7 +156,7 @@ namespace REKFramework
 	{
 
 		SDL_Surface* image = ImageLoader::GetImage(imageFilePath);
-		SDL_Texture* texture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRenderer(), image);
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererPointer(), image);
 
 		int textureWidth, textureHeight;
 		SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
@@ -164,7 +164,7 @@ namespace REKFramework
 		imagePosition->w = textureWidth;
 		imagePosition->h = textureHeight;
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRenderer(), texture, nullptr, imagePosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), texture, nullptr, imagePosition);
 
 		SDL_FreeSurface(image);
 		SDL_DestroyTexture(texture);

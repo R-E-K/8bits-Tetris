@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <memory>
 
 
 namespace REKFramework
@@ -12,12 +13,15 @@ namespace REKFramework
 		SDLMainObjectsProvider();
 		~SDLMainObjectsProvider();
 
-		static SDL_Renderer* GetRenderer();
-		static SDL_Window* GetWindow();
+		static std::shared_ptr<SDL_Renderer> GetRenderer();
+		static std::shared_ptr<SDL_Window> GetWindow();
+
+		static SDL_Renderer* GetRendererPointer();
+		static SDL_Window* GetWindowPointer();
 
 	private:
-		static SDL_Renderer* renderer;
-		static SDL_Window* window;
+		static std::shared_ptr<SDL_Renderer> renderer;
+		static std::shared_ptr<SDL_Window> window;
 	};
 }
 

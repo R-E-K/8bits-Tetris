@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include <SDL2/SDL_mixer.h>
+#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {
@@ -27,19 +28,9 @@ namespace REKFramework
 
 	Game::~Game()
 	{
-		SDL_DestroyRenderer(renderer);
-		SDL_DestroyWindow(window);
-		delete inputMngr;
-		delete gameContextMngr;
 		if (gameMenu != nullptr) delete gameMenu;
 
-		//Quit SDL subsystems
-		TTF_Quit();
-		IMG_Quit();
-
 		delete soundMngr;
-
-		SDL_Quit();
 	}
 
 	void Game::Loop(SDL_Event* e)
@@ -48,15 +39,16 @@ namespace REKFramework
 
 		while (!quitGame)
 		{
-			SDL_RenderClear(renderer);
+			SDL_RenderClear(renderer.get());
 
 			HandleGameMenu();
 
-			inputMngr->CheckInput(e, &quitGame);
+			if (inputMngr != nullptr)
+				inputMngr->CheckInput(e, &quitGame);
 
 			//Update the surface
 			//SDL_UpdateWindowSurface(window); // software rendering : Not good
-			SDL_RenderPresent(renderer); // GPU rendering : Good !
+			SDL_RenderPresent(renderer.get()); // GPU rendering : Good !
 
 		}
 	}
@@ -74,8 +66,10 @@ namespace REKFramework
 		}
 		else
 		{
-			window = SDL_CreateWindow("The best game ever !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-				SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+			window = std::shared_ptr<SDL_Window>(
+				SDL_CreateWindow("The best game ever !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)
+				, SdlDeleter()
+				);
 
 			if (window == nullptr)
 			{
@@ -84,7 +78,10 @@ namespace REKFramework
 			}
 			else
 			{
-				renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+				renderer = std::shared_ptr<SDL_Renderer>(
+					SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
+					, SdlDeleter()
+					);
 
 				if (renderer == nullptr)
 				{
@@ -94,11 +91,11 @@ namespace REKFramework
 				else
 				{
 					// Init screen with light grey all over the surface
-					SDL_SetRenderDrawColor(renderer, 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
+					SDL_SetRenderDrawColor(renderer.get(), 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
 
-					gameContextMngr = new GameContextManager();
+					gameContextMngr = std::make_shared<GameContextManager>();
 
-					inputMngr = new InputManager(gameContextMngr);
+					inputMngr = std::make_unique<InputManager>(gameContextMngr);
 
 
 					// SDL_ttf

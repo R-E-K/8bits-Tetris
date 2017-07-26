@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "GamepadConfiguration.h"
 #include "SoundManager.h"
+#include <memory>
 
 
 namespace REKFramework
@@ -18,11 +19,11 @@ namespace REKFramework
 		
 		void Execute();
 	private:
-		SDL_Window* window;
-		SDL_Renderer* renderer;
+		std::shared_ptr<SDL_Window> window;
+		std::shared_ptr<SDL_Renderer> renderer;
 
-		GameContextManager* gameContextMngr;
-		InputManager* inputMngr;
+		std::shared_ptr<GameContextManager> gameContextMngr;
+		std::unique_ptr<InputManager> inputMngr;
 		SoundManager* soundMngr;
 
 		GameMenu* gameMenu;

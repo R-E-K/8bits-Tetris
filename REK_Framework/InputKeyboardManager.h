@@ -8,12 +8,12 @@ namespace REKFramework
 	class InputKeyboardManager
 	{
 	public:
-		explicit InputKeyboardManager(GameContextManager* gameContextManager);
+		explicit InputKeyboardManager(std::shared_ptr<GameContextManager> gameContextManager);
 		~InputKeyboardManager();
 
 		void CheckInputHold() const;
 		void CheckInputNotHold(SDL_Scancode scan) const;
 	private:
-		GameContextManager* gameContextMngr;
+		std::shared_ptr<GameContextManager> gameContextMngr;
 	};
 }
