@@ -24,7 +24,7 @@ namespace REKFramework
 
 		std::shared_ptr<GameContextManager> gameContextMngr;
 		std::unique_ptr<InputManager> inputMngr;
-		SoundManager* soundMngr;
+		std::shared_ptr<SoundManager> soundMngr;
 
 		GameMenu* gameMenu;
 

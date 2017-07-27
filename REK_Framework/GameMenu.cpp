@@ -117,7 +117,7 @@ namespace REKFramework
 		auto backgroundSurface = SDL_CreateRGBSurface(0, gameMenuPosition->w, gameMenuPosition->h, 32, 0, 0, 0, 0);
 		SDL_FillRect(backgroundSurface, nullptr, SDL_MapRGB(backgroundSurface->format, 0x00, 0x00, 0x00));
 
-		background = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererPointer(), backgroundSurface);
+		background = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), backgroundSurface);
 
 		// Active Alpha Blending (Opacity) to "background" texture
 		SDL_SetTextureBlendMode(background, SDL_BLENDMODE_BLEND);
@@ -133,7 +133,7 @@ namespace REKFramework
 		SDL_Rect* gameMenuPosition = new SDL_Rect();
 		background = CreateBackground(gameMenuPosition);
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), background, nullptr, gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background, nullptr, gameMenuPosition);
 
 		DrawItemsMenu();
 		AddValidButton();
@@ -156,7 +156,7 @@ namespace REKFramework
 		DrawItemMenu("Quit game", GameMenuItem::QUITGAME, x, y);
 	}
 
-	void GameMenu::DrawItemMenu(const char* itemMenuName, GameMenuItem gameMenuItem, int x, int y) const
+	void GameMenu::DrawItemMenu(std::string const& itemMenuName, GameMenuItem gameMenuItem, int x, int y) const
 	{
 		SDL_Color textColorSelected = { 255, 255, 0 };
 
@@ -174,7 +174,7 @@ namespace REKFramework
 	{
 		SDL_Rect* gameMenuPosition = new SDL_Rect();
 		background = CreateBackground(gameMenuPosition);
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), background, nullptr, gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background, nullptr, gameMenuPosition);
 
 		int x = backgroundPositionX + 40;
 		int y = backgroundPositionY + 40;

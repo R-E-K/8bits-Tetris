@@ -22,7 +22,7 @@ namespace REKFramework
 		itemMenuPosition.x = 10;
 		itemMenuPosition.y = 10;
 
-		DrawPicture(GamepadButtonsFilePathConsts::AButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::AButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawBButton() const
@@ -31,7 +31,7 @@ namespace REKFramework
 		itemMenuPosition.x = 120;
 		itemMenuPosition.y = 10;
 
-		DrawPicture(GamepadButtonsFilePathConsts::BButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::BButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawXButton() const
@@ -40,7 +40,7 @@ namespace REKFramework
 		itemMenuPosition.x = 230;
 		itemMenuPosition.y = 10;
 
-		DrawPicture(GamepadButtonsFilePathConsts::XButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::XButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawYButton() const
@@ -49,7 +49,7 @@ namespace REKFramework
 		itemMenuPosition.x = 340;
 		itemMenuPosition.y = 10;
 
-		DrawPicture(GamepadButtonsFilePathConsts::YButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::YButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawLBButton() const
@@ -58,7 +58,7 @@ namespace REKFramework
 		itemMenuPosition.x = 10;
 		itemMenuPosition.y = 120;
 
-		DrawPicture(GamepadButtonsFilePathConsts::LBButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::LBButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawRBButton() const
@@ -67,7 +67,7 @@ namespace REKFramework
 		itemMenuPosition.x = 120;
 		itemMenuPosition.y = 120;
 
-		DrawPicture(GamepadButtonsFilePathConsts::RBButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::RBButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawLTButton() const
@@ -76,7 +76,7 @@ namespace REKFramework
 		itemMenuPosition.x = 230;
 		itemMenuPosition.y = 120;
 
-		DrawPicture(GamepadButtonsFilePathConsts::LTButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::LTButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawRTButton() const
@@ -85,7 +85,7 @@ namespace REKFramework
 		itemMenuPosition.x = 340;
 		itemMenuPosition.y = 120;
 
-		DrawPicture(GamepadButtonsFilePathConsts::RTButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::RTButton, itemMenuPosition);
 	}
 
 
@@ -95,7 +95,7 @@ namespace REKFramework
 		itemMenuPosition.x = 10;
 		itemMenuPosition.y = 230;
 
-		DrawPicture(GamepadButtonsFilePathConsts::DpadDownButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::DpadDownButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawDPadUpButton() const
@@ -104,7 +104,7 @@ namespace REKFramework
 		itemMenuPosition.x = 120;
 		itemMenuPosition.y = 230;
 
-		DrawPicture(GamepadButtonsFilePathConsts::DpadUpButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::DpadUpButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawDPadLeftButton() const
@@ -113,7 +113,7 @@ namespace REKFramework
 		itemMenuPosition.x = 230;
 		itemMenuPosition.y = 230;
 
-		DrawPicture(GamepadButtonsFilePathConsts::DpadLeftButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::DpadLeftButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawDPadRightButton() const
@@ -122,7 +122,7 @@ namespace REKFramework
 		itemMenuPosition.x = 340;
 		itemMenuPosition.y = 230;
 
-		DrawPicture(GamepadButtonsFilePathConsts::DpadRightButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::DpadRightButton, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawLeftStickButton() const
@@ -131,7 +131,7 @@ namespace REKFramework
 		itemMenuPosition.x = 10;
 		itemMenuPosition.y = 340;
 
-		DrawPicture(GamepadButtonsFilePathConsts::L3Button, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::L3Button, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawRightStickButton() const
@@ -140,7 +140,7 @@ namespace REKFramework
 		itemMenuPosition.x = 120;
 		itemMenuPosition.y = 340;
 
-		DrawPicture(GamepadButtonsFilePathConsts::R3Button, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::R3Button, itemMenuPosition);
 	}
 
 	void DrawPictureManager::DrawBackButton() const
@@ -149,25 +149,23 @@ namespace REKFramework
 		itemMenuPosition.x = 230;
 		itemMenuPosition.y = 340;
 
-		DrawPicture(GamepadButtonsFilePathConsts::BackButton, &itemMenuPosition);
+		DrawPicture(GamepadButtonsFilePathConsts::BackButton, itemMenuPosition);
 	}
 
-	void DrawPictureManager::DrawPicture(const char* imageFilePath, SDL_Rect* imagePosition) const
+	void DrawPictureManager::DrawPicture(std::string const& imageFilePath, SDL_Rect& imagePosition) const
 	{
-
-		SDL_Surface* image = ImageLoader::GetImage(imageFilePath);
-		SDL_Texture* texture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererPointer(), image);
+		auto image = ImageLoader::GetImage(imageFilePath);
+		auto texture = std::unique_ptr<SDL_Texture, SdlDeleter>(
+			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), image.get()),
+			SdlDeleter()
+			);
 
 		int textureWidth, textureHeight;
-		SDL_QueryTexture(texture, nullptr, nullptr, &textureWidth, &textureHeight);
+		SDL_QueryTexture(texture.get(), nullptr, nullptr, &textureWidth, &textureHeight);
 
-		imagePosition->w = textureWidth;
-		imagePosition->h = textureHeight;
+		imagePosition.w = textureWidth;
+		imagePosition.h = textureHeight;
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), texture, nullptr, imagePosition);
-
-		SDL_FreeSurface(image);
-		SDL_DestroyTexture(texture);
-
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), texture.get(), nullptr, &imagePosition);
 	}
 }

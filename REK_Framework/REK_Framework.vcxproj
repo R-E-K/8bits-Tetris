@@ -156,6 +156,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameContextManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="GamepadButtonsFilePathConsts.cpp" />
     <ClCompile Include="GamepadConfiguration.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
     <ClCompile Include="InputGamepadManager.cpp" />

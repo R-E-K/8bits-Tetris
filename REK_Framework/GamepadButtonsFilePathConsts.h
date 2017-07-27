@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace REKFramework
 {
@@ -7,23 +8,23 @@ namespace REKFramework
 	public:
 
 
-		static constexpr const char* AButton = "resources/xbox360pad/360_A.png";
-		static constexpr const char* BButton = "resources/xbox360pad/360_B.png";
-		static constexpr const char* XButton = "resources/xbox360pad/360_X.png";
-		static constexpr const char* YButton = "resources/xbox360pad/360_Y.png";
-		static constexpr const char* StartButton = "resources/xbox360pad/360_Start_Alt.png";
-		static constexpr const char* BackButton = "resources/xbox360pad/360_Back_Alt.png";
-		static constexpr const char* L3Button = "resources/xbox360pad/360_Left_Stick.png";
-		static constexpr const char* R3Button = "resources/xbox360pad/360_Right_Stick.png";
-		static constexpr const char* LBButton = "resources/xbox360pad/360_LB.png";
-		static constexpr const char* RBButton = "resources/xbox360pad/360_RB.png";
-		static constexpr const char* LTButton = "resources/xbox360pad/360_LT.png";
-		static constexpr const char* RTButton = "resources/xbox360pad/360_RT.png";
+		static const std::string AButton;
+		static const std::string BButton;
+		static const std::string XButton;
+		static const std::string YButton;
+		static const std::string StartButton;
+		static const std::string BackButton;
+		static const std::string L3Button;
+		static const std::string R3Button;
+		static const std::string LBButton;
+		static const std::string RBButton;
+		static const std::string LTButton;
+		static const std::string RTButton;
 
-		static constexpr const char* DpadDownButton = "resources/xbox360pad/360_Dpad_Down.png";
-		static constexpr const char* DpadLeftButton = "resources/xbox360pad/360_Dpad_Left.png";
-		static constexpr const char* DpadUpButton = "resources/xbox360pad/360_Dpad_Up.png";
-		static constexpr const char* DpadRightButton = "resources/xbox360pad/360_Dpad_Right.png";
+		static const std::string DpadDownButton;
+		static const std::string DpadLeftButton;
+		static const std::string DpadUpButton;
+		static const std::string DpadRightButton;
 
 	};
 }

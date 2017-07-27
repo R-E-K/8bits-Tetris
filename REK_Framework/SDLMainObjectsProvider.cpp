@@ -26,7 +26,7 @@ namespace REKFramework
 		return window;
 	}
 
-	SDL_Renderer* SDLMainObjectsProvider::GetRendererPointer()
+	SDL_Renderer* SDLMainObjectsProvider::GetRendererRawPointer()
 	{
 		if (renderer != nullptr)
 		{
@@ -38,7 +38,7 @@ namespace REKFramework
 		}
 	}
 
-	SDL_Window* SDLMainObjectsProvider::GetWindowPointer()
+	SDL_Window* SDLMainObjectsProvider::GetWindowRawPointer()
 	{
 		if (window != nullptr)
 		{

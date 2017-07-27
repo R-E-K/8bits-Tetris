@@ -6,7 +6,7 @@ namespace REKFramework
 	GameContextManager::GameContextManager()
 	{
 		currentGameContext = GameContext::MENU;
-		DrawPictureMngr = new DrawPictureManager();
+		DrawPictureMngr = std::make_unique<DrawPictureManager>();
 
 		gameMenu = nullptr;
 	}
@@ -14,7 +14,7 @@ namespace REKFramework
 
 	GameContextManager::~GameContextManager()
 	{
-		delete DrawPictureMngr;
+		
 	}
 
 	void GameContextManager::SetGameMenu(GameMenu* gMenu)

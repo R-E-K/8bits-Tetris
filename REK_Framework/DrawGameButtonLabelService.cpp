@@ -1,39 +1,39 @@
 #pragma once
 #include "DrawGameButtonLabelService.h"
+#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {
 	DrawGameButtonLabelService::DrawGameButtonLabelService()
 	{
-		drawTextSrvc = new DrawTextService();
+		drawTextSrvc = std::make_unique<DrawTextService>();
 	}
 
 
 	DrawGameButtonLabelService::~DrawGameButtonLabelService()
 	{
-		delete drawTextSrvc;
+		
 	}
 
-	void DrawGameButtonLabelService::DrawWithLabel(const char* imagePathFile, char* label, int x, int y) const
+	void DrawGameButtonLabelService::DrawWithLabel(std::string const& imagePathFile, char* label, int x, int y) const
 	{
-		SDL_Surface* buttonImg = ImageLoader::GetImage(imagePathFile);
-		SDL_Texture* buttonTexture = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererPointer(), buttonImg);
+		auto buttonImg = ImageLoader::GetImage(imagePathFile);
+		auto buttonTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
+			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), buttonImg.get())
+			, SdlDeleter()
+			);
 
-		SDL_Rect* itemMenuPosition = new SDL_Rect();
-		itemMenuPosition->x = x;
-		itemMenuPosition->y = y;
-		itemMenuPosition->w = 32;
-		itemMenuPosition->h = 32;
+		SDL_Rect itemMenuPosition;
+		itemMenuPosition.x = x;
+		itemMenuPosition.y = y;
+		itemMenuPosition.w = 32;
+		itemMenuPosition.h = 32;
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererPointer(), buttonTexture, nullptr, itemMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), buttonTexture.get(), nullptr, &itemMenuPosition);
 
-		x = itemMenuPosition->x + 40;
-		y = itemMenuPosition->y + 7;
+		x = itemMenuPosition.x + 40;
+		y = itemMenuPosition.y + 7;
 
 		drawTextSrvc->DrawText(label, x, y);
-
-		delete itemMenuPosition;
-		SDL_FreeSurface(buttonImg);
-		SDL_DestroyTexture(buttonTexture);
 	}
 }

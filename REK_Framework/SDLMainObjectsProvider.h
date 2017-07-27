@@ -16,8 +16,8 @@ namespace REKFramework
 		static std::shared_ptr<SDL_Renderer> GetRenderer();
 		static std::shared_ptr<SDL_Window> GetWindow();
 
-		static SDL_Renderer* GetRendererPointer();
-		static SDL_Window* GetWindowPointer();
+		static SDL_Renderer* GetRendererRawPointer();
+		static SDL_Window* GetWindowRawPointer();
 
 	private:
 		static std::shared_ptr<SDL_Renderer> renderer;

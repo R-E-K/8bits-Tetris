@@ -37,7 +37,7 @@ namespace REKFramework
 	private:
 		GameMenu* gameMenu;
 
-		DrawPictureManager* DrawPictureMngr;
+		std::unique_ptr<DrawPictureManager> DrawPictureMngr;
 
 		void CloseGameMenu();
 

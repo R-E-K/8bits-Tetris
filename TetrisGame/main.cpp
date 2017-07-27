@@ -23,8 +23,8 @@ void GameExecution()
 void ExitSDL()
 {
 	// TODO : Avoid static properties in order to handle properly the destruction
-	SDL_DestroyRenderer(REKFramework::SDLMainObjectsProvider::GetRendererPointer());
-	SDL_DestroyWindow(REKFramework::SDLMainObjectsProvider::GetWindowPointer());
+	SDL_DestroyRenderer(REKFramework::SDLMainObjectsProvider::GetRendererRawPointer());
+	SDL_DestroyWindow(REKFramework::SDLMainObjectsProvider::GetWindowRawPointer());
 
 	//Quit SDL subsystems
 

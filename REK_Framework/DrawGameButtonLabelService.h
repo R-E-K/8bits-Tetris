@@ -3,6 +3,7 @@
 #include "SDLMainObjectsProvider.h"
 #include "ImageLoader.h"
 #include "DrawTextService.h"
+#include <string>
 
 namespace REKFramework
 {
@@ -12,9 +13,9 @@ namespace REKFramework
 		DrawGameButtonLabelService();
 		~DrawGameButtonLabelService();
 
-		void DrawWithLabel(const char* pathFile, char* label, int x, int y) const;
+		void DrawWithLabel(std::string const& imagePathFile, char* label, int x, int y) const;
 	private:
-		DrawTextService* drawTextSrvc;
+		std::unique_ptr<DrawTextService> drawTextSrvc;
 	};
 }
 

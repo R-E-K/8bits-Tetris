@@ -41,7 +41,7 @@ namespace REKFramework
 		SDL_Texture* CreateBackground(SDL_Rect* gameMenuPosition);
 		void DrawMainMenu();
 		void DrawItemsMenu() const;
-		void DrawItemMenu(const char* itemMenuName, GameMenuItem gameMenuItem, int x, int y) const;
+		void DrawItemMenu(std::string const& itemMenuName, GameMenuItem gameMenuItem, int x, int y) const;
 
 		void DrawCredits();
 

@@ -29,8 +29,6 @@ namespace REKFramework
 	Game::~Game()
 	{
 		if (gameMenu != nullptr) delete gameMenu;
-
-		delete soundMngr;
 	}
 
 	void Game::Loop(SDL_Event* e)
@@ -106,7 +104,7 @@ namespace REKFramework
 					}
 					else
 					{
-						soundMngr = new SoundManager();
+						soundMngr = std::make_shared<SoundManager>();
 						if (soundMngr->Init() < 0)
 						{
 							ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");

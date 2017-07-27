@@ -43,6 +43,9 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>sources\sounds</Filter>
     </ClCompile>
+    <ClCompile Include="GamepadButtonsFilePathConsts.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
