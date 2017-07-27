@@ -7,9 +7,9 @@ namespace REKFramework
 	InputManager::InputManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
 		PressedInput = nullptr;
-		keyboardManager = new InputKeyboardManager(gameContextManager);
-		gamepadManager = new InputGamepadManager(gameContextManager);
-		gamepadCnfg = new GamepadConfiguration();
+		keyboardManager = std::make_unique<InputKeyboardManager>(gameContextManager);
+		gamepadManager = std::make_unique<InputGamepadManager>(gameContextManager);
+		gamepadCnfg = std::make_unique<GamepadConfiguration>();
 
 		gameContextMngr = gameContextManager;
 		continuousButtonPressed = false;
@@ -24,21 +24,21 @@ namespace REKFramework
 
 	InputManager::~InputManager()
 	{
-		delete keyboardManager;
-		delete gamepadManager;
-		delete gamepadCnfg;
+
 	}
 
-	void InputManager::CheckInput(SDL_Event* e, bool* quitGame)
+	void InputManager::CheckInput(SDL_Event& e, bool& quitGame)
 	{
-		while (SDL_PollEvent(e) > 0)
+		// Smart pointers don't work well with SDL_PollEvent()
+		// Even if i do mySmartPointer.get(), PressedInput become undefined
+		while (SDL_PollEvent(&e) > 0)
 		{
-			PressedInput = e;
+			PressedInput = std::make_unique<SDL_Event>(e);
 
 			switch (PressedInput->type)
 			{
 			case SDL_QUIT:
-				*quitGame = true;
+				quitGame = true;
 				break;
 			case SDL_KEYDOWN:
 				CheckInputNotHold();

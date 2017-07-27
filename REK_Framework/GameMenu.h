@@ -31,14 +31,14 @@ namespace REKFramework
 		Uint8 selectedItemIndex;
 		Uint8 GameMenuLevel;
 
-		DrawTextService* drawTextSrvc;
-		DrawGameButtonLabelService* DrawGameButtonLabelSrvc;
+		std::unique_ptr<DrawTextService> drawTextSrvc;
+		std::unique_ptr<DrawGameButtonLabelService> DrawGameButtonLabelSrvc;
 
-		SDL_Texture* background;
+		std::shared_ptr<SDL_Texture> background;
 		int backgroundPositionX;
 		int backgroundPositionY;
 
-		SDL_Texture* CreateBackground(SDL_Rect* gameMenuPosition);
+		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition) const;
 		void DrawMainMenu();
 		void DrawItemsMenu() const;
 		void DrawItemMenu(std::string const& itemMenuName, GameMenuItem gameMenuItem, int x, int y) const;

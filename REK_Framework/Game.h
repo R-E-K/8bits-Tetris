@@ -28,7 +28,7 @@ namespace REKFramework
 
 		GameMenu* gameMenu;
 
-		void Loop(SDL_Event* e);
+		void Loop(SDL_Event& e);
 		bool Init();
 
 		void SetSDLMainObjectsToProvider() const;

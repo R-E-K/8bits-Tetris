@@ -14,13 +14,13 @@ namespace REKFramework
 		InputManager(std::shared_ptr<GameContextManager> gameContextManager);
 		~InputManager();
 
-		void CheckInput(SDL_Event* e, bool* quitGame);
+		void CheckInput(SDL_Event& e, bool& quitGame);
 
 	private:
-		SDL_Event* PressedInput;
-		InputKeyboardManager* keyboardManager;
-		InputGamepadManager* gamepadManager;
-		GamepadConfiguration* gamepadCnfg;
+		std::unique_ptr<SDL_Event> PressedInput;
+		std::unique_ptr<InputKeyboardManager> keyboardManager;
+		std::unique_ptr<InputGamepadManager> gamepadManager;
+		std::unique_ptr<GamepadConfiguration> gamepadCnfg;
 		std::shared_ptr<GameContextManager> gameContextMngr;
 
 		bool continuousButtonPressed;

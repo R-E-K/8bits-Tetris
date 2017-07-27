@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL2/SDL_mixer.h>
 #include <string>
+#include <memory>
+#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {
@@ -16,7 +18,7 @@ namespace REKFramework
 		void LoadMusic(std::string const& filepath, int fadeInDuration);
 
 	private:
-		Mix_Music* currentMusic;
+		std::unique_ptr<Mix_Music, SdlDeleter> currentMusic;
 	};
 
 }

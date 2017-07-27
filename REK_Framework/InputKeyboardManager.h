@@ -8,7 +8,7 @@ namespace REKFramework
 	class InputKeyboardManager
 	{
 	public:
-		explicit InputKeyboardManager(std::shared_ptr<GameContextManager> gameContextManager);
+		InputKeyboardManager(std::shared_ptr<GameContextManager> gameContextManager);
 		~InputKeyboardManager();
 
 		void CheckInputHold() const;

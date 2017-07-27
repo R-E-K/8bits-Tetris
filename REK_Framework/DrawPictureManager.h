@@ -26,9 +26,7 @@ namespace REKFramework
 		void DrawDPadLeftButton() const;
 		void DrawDPadRightButton() const;
 	private:
-		ImageLoader* ImageLdr;
 		void DrawPicture(std::string const& imageFilePath, SDL_Rect& imagePosition) const;
-		static void DestroyPicture(SDL_Texture* pictureGraphic, SDL_Rect* picturePosition);
 	};
 }
 

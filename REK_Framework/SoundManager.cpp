@@ -11,8 +11,6 @@ namespace REKFramework
 
 	SoundManager::~SoundManager()
 	{
-		Mix_FreeMusic(currentMusic);
-
 		// https://www.libsdl.org/projects/SDL_mixer/docs/SDL_mixer_10.html#SEC10
 		// Since each call to Mix_Init may set different flags, there is no way, currently, 
 		// to request how many times each one was initted. In other words, 
@@ -39,10 +37,14 @@ namespace REKFramework
 
 	void SoundManager::LoadMusic(std::string const& filepath, int fadeInDuration)
 	{
-		currentMusic = Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg");
+		currentMusic = std::unique_ptr<Mix_Music, SdlDeleter>(
+			Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg"),
+			SdlDeleter()
+			);
+
 		if (currentMusic != nullptr)
 		{
-			Mix_FadeInMusic(currentMusic, -1, fadeInDuration);
+			Mix_FadeInMusic(currentMusic.get(), -1, fadeInDuration);
 		}
 	}
 }

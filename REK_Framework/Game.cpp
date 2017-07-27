@@ -31,7 +31,7 @@ namespace REKFramework
 		if (gameMenu != nullptr) delete gameMenu;
 	}
 
-	void Game::Loop(SDL_Event* e)
+	void Game::Loop(SDL_Event& e)
 	{
 		bool quitGame = false;
 
@@ -42,7 +42,7 @@ namespace REKFramework
 			HandleGameMenu();
 
 			if (inputMngr != nullptr)
-				inputMngr->CheckInput(e, &quitGame);
+				inputMngr->CheckInput(e, quitGame);
 
 			//Update the surface
 			//SDL_UpdateWindowSurface(window); // software rendering : Not good
@@ -127,7 +127,7 @@ namespace REKFramework
 		if (Init())
 		{
 			SDL_Event e;
-			Loop(&e);
+			Loop(e);
 		}
 	}
 

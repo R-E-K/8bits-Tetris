@@ -7,13 +7,13 @@ namespace REKFramework
 {
 	DrawPictureManager::DrawPictureManager()
 	{
-		ImageLdr = new ImageLoader();
+		
 	}
 
 
 	DrawPictureManager::~DrawPictureManager()
 	{
-		delete ImageLdr;
+		
 	}
 
 	void DrawPictureManager::DrawAButton() const

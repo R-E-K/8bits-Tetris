@@ -18,8 +18,8 @@ namespace REKFramework
 
 		background = nullptr;
 
-		drawTextSrvc = new DrawTextService();
-		DrawGameButtonLabelSrvc = new DrawGameButtonLabelService();
+		drawTextSrvc = std::make_unique<DrawTextService>();
+		DrawGameButtonLabelSrvc = std::make_unique<DrawGameButtonLabelService>();
 
 		backgroundPositionX = (SCREEN_WIDTH / 4);
 		backgroundPositionY = (SCREEN_HEIGHT / 8);
@@ -27,9 +27,7 @@ namespace REKFramework
 
 	GameMenu::~GameMenu()
 	{
-		if (background != nullptr) SDL_DestroyTexture(background);
-		delete drawTextSrvc;
-		delete DrawGameButtonLabelSrvc;
+
 	}
 
 	void GameMenu::Draw()
@@ -107,41 +105,42 @@ namespace REKFramework
 		return GameMenuLevel == 0;
 	}
 
-	SDL_Texture* GameMenu::CreateBackground(SDL_Rect* gameMenuPosition)
+	std::shared_ptr<SDL_Texture> GameMenu::CreateBackground(SDL_Rect& gameMenuPosition) const
 	{
-		gameMenuPosition->x = backgroundPositionX;
-		gameMenuPosition->y = backgroundPositionY;
-		gameMenuPosition->w = (SCREEN_WIDTH / 2);
-		gameMenuPosition->h = (SCREEN_HEIGHT / 1.5);
+		gameMenuPosition.x = backgroundPositionX;
+		gameMenuPosition.y = backgroundPositionY;
+		gameMenuPosition.w = (SCREEN_WIDTH / 2);
+		gameMenuPosition.h = (SCREEN_HEIGHT / 1.5);
 
-		auto backgroundSurface = SDL_CreateRGBSurface(0, gameMenuPosition->w, gameMenuPosition->h, 32, 0, 0, 0, 0);
-		SDL_FillRect(backgroundSurface, nullptr, SDL_MapRGB(backgroundSurface->format, 0x00, 0x00, 0x00));
+		auto backgroundSurface = std::unique_ptr<SDL_Surface, SdlDeleter>(
+			SDL_CreateRGBSurface(0, gameMenuPosition.w, gameMenuPosition.h, 32, 0, 0, 0, 0)
+			, SdlDeleter()
+			);
 
-		background = SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), backgroundSurface);
+		SDL_FillRect(backgroundSurface.get(), nullptr, SDL_MapRGB(backgroundSurface->format, 0x00, 0x00, 0x00));
+
+		auto background = std::shared_ptr<SDL_Texture>(
+			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), backgroundSurface.get())
+			, SdlDeleter()
+			);
 
 		// Active Alpha Blending (Opacity) to "background" texture
-		SDL_SetTextureBlendMode(background, SDL_BLENDMODE_BLEND);
-		SDL_SetTextureAlphaMod(background, 0xAA);
-
-		SDL_FreeSurface(backgroundSurface);
+		SDL_SetTextureBlendMode(background.get(), SDL_BLENDMODE_BLEND);
+		SDL_SetTextureAlphaMod(background.get(), 0xAA);
 
 		return background;
 	}
 
 	void GameMenu::DrawMainMenu()
 	{
-		SDL_Rect* gameMenuPosition = new SDL_Rect();
+		SDL_Rect gameMenuPosition;
 		background = CreateBackground(gameMenuPosition);
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background, nullptr, gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
 
 		DrawItemsMenu();
 		AddValidButton();
 		AddBackButton();
-
-		delete gameMenuPosition;
-		SDL_DestroyTexture(background);
-		background = nullptr;
 	}
 
 	void GameMenu::DrawItemsMenu() const
@@ -162,7 +161,7 @@ namespace REKFramework
 
 		if (selectedItem == gameMenuItem)
 		{
-			drawTextSrvc->DrawTextWithColor(itemMenuName, x, y, &textColorSelected);
+			drawTextSrvc->DrawTextWithColor(itemMenuName, x, y, textColorSelected);
 		}
 		else
 		{
@@ -172,9 +171,9 @@ namespace REKFramework
 
 	void GameMenu::DrawCredits()
 	{
-		SDL_Rect* gameMenuPosition = new SDL_Rect();
+		SDL_Rect gameMenuPosition;
 		background = CreateBackground(gameMenuPosition);
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background, nullptr, gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
 
 		int x = backgroundPositionX + 40;
 		int y = backgroundPositionY + 40;
@@ -186,16 +185,12 @@ namespace REKFramework
 		drawTextSrvc->DrawTextWithSize("REK", x, y, 72);
 
 		AddBackButton();
-
-		delete gameMenuPosition;
-		SDL_DestroyTexture(background);
-		background = nullptr;
 	}
 
 	void GameMenu::AddBackButton() const
 	{
 		int textureWidth, textureHeight;
-		SDL_QueryTexture(background, nullptr, nullptr, &textureWidth, &textureHeight);
+		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
 		int x = backgroundPositionX + (textureWidth - (textureWidth / 3.5));
 		int y = backgroundPositionY + (textureHeight - (textureHeight / 8));
 
@@ -205,7 +200,7 @@ namespace REKFramework
 	void GameMenu::AddValidButton() const
 	{
 		int textureWidth, textureHeight;
-		SDL_QueryTexture(background, nullptr, nullptr, &textureWidth, &textureHeight);
+		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
 		int x = backgroundPositionX + 5;
 		int y = backgroundPositionY + (textureHeight - (textureHeight / 8));
 
