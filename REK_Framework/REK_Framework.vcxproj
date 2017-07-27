@@ -162,6 +162,7 @@
     <ClCompile Include="InputGamepadManager.cpp" />
     <ClCompile Include="InputKeyboardManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="SDLDeletersFunctor.cpp" />
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
     <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
