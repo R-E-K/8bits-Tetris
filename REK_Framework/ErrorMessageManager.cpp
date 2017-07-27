@@ -12,8 +12,8 @@ namespace REKFramework
 	{
 	}
 
-	void ErrorMessageManager::WriteErrorMessageToConsole(char* userMessage)
+	void ErrorMessageManager::WriteErrorMessageToConsole(std::string const& userMessage)
 	{
-		std::cout << userMessage << SDL_GetError();
+		std::cout << userMessage.c_str() << SDL_GetError();
 	}
 }

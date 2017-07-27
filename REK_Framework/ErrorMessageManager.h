@@ -10,7 +10,7 @@ namespace REKFramework
 		ErrorMessageManager();
 		~ErrorMessageManager();
 
-		static void WriteErrorMessageToConsole(char* userMessage);
+		static void WriteErrorMessageToConsole(std::string const& userMessage);
 	};
 }
 

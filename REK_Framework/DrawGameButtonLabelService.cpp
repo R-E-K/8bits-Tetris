@@ -15,7 +15,7 @@ namespace REKFramework
 		
 	}
 
-	void DrawGameButtonLabelService::DrawWithLabel(std::string const& imagePathFile, char* label, int x, int y) const
+	void DrawGameButtonLabelService::DrawWithLabel(std::string const& imagePathFile, std::string const& label, int x, int y) const
 	{
 		auto buttonImg = ImageLoader::GetImage(imagePathFile);
 		auto buttonTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(

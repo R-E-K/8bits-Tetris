@@ -13,7 +13,7 @@ namespace REKFramework
 		DrawGameButtonLabelService();
 		~DrawGameButtonLabelService();
 
-		void DrawWithLabel(std::string const& imagePathFile, char* label, int x, int y) const;
+		void DrawWithLabel(std::string const& imagePathFile, std::string const& label, int x, int y) const;
 	private:
 		std::unique_ptr<DrawTextService> drawTextSrvc;
 	};

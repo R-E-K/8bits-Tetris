@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL_mixer.h>
+#include <string>
 
 namespace REKFramework
 {
@@ -12,7 +13,7 @@ namespace REKFramework
 		int MusicVolume;
 
 		int Init();
-		void LoadMusic(char* filepath, int fadeInDuration);
+		void LoadMusic(std::string const& filepath, int fadeInDuration);
 
 	private:
 		Mix_Music* currentMusic;

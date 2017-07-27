@@ -37,7 +37,7 @@ namespace REKFramework
 		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 	}
 
-	void SoundManager::LoadMusic(char* filepath, int fadeInDuration)
+	void SoundManager::LoadMusic(std::string const& filepath, int fadeInDuration)
 	{
 		currentMusic = Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg");
 		if (currentMusic != nullptr)
