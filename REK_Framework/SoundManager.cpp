@@ -28,11 +28,12 @@ namespace REKFramework
 			return -1;
 
 		// Check all flags setted up and not just at least one (not just checking for 0 as before)
-		if (result & SDLMixerInitFlags != SDLMixerInitFlags)
+		if ((result & SDLMixerInitFlags) != SDLMixerInitFlags)
 			return -1;
 
 		Mix_VolumeMusic(MusicVolume);
 		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+		return 0;
 	}
 
 	void SoundManager::LoadMusic(std::string const& filepath, int fadeInDuration)
