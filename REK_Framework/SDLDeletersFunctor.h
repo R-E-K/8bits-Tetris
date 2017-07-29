@@ -14,5 +14,6 @@ namespace REKFramework
 		void operator()(SDL_Surface* p) const;
 		void operator()(TTF_Font* p) const;
 		void operator()(Mix_Music* p) const;
+		void operator()(Mix_Chunk* p) const;
 	};
 }

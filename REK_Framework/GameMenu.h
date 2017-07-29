@@ -7,13 +7,14 @@
 #include "GamepadButtonsFilePathConsts.h"
 #include "DrawTextService.h"
 #include "DrawGameButtonLabelService.h"
+#include "SoundManager.h"
 
 namespace REKFramework
 {
 	class GameMenu
 	{
 	public:
-		GameMenu();
+		GameMenu(std::shared_ptr<SoundManager> soundManager);
 		~GameMenu();
 
 		void Draw();
@@ -33,6 +34,7 @@ namespace REKFramework
 
 		std::unique_ptr<DrawTextService> drawTextSrvc;
 		std::unique_ptr<DrawGameButtonLabelService> DrawGameButtonLabelSrvc;
+		std::shared_ptr<SoundManager> soundMngr;
 
 		std::shared_ptr<SDL_Texture> background;
 		int backgroundPositionX;

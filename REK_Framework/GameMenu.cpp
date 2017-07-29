@@ -1,10 +1,11 @@
 #pragma once
 #include "GameMenu.h"
+#include "SoundManager.h"
 
 
 namespace REKFramework
 {
-	GameMenu::GameMenu()
+	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager)
 	{
 		gameMenuItems.clear();
 		gameMenuItems[0] = GameMenuItem::PLAY;
@@ -20,6 +21,8 @@ namespace REKFramework
 
 		drawTextSrvc = std::make_unique<DrawTextService>();
 		DrawGameButtonLabelSrvc = std::make_unique<DrawGameButtonLabelService>();
+
+		soundMngr = soundManager;
 
 		backgroundPositionX = (SCREEN_WIDTH / 4);
 		backgroundPositionY = (SCREEN_HEIGHT / 8);
@@ -53,6 +56,7 @@ namespace REKFramework
 		{
 			selectedItemIndex++;
 			selectedItem = gameMenuItems[selectedItemIndex];
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}
 
@@ -62,6 +66,7 @@ namespace REKFramework
 		{
 			selectedItemIndex--;
 			selectedItem = gameMenuItems[selectedItemIndex];
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}
 
@@ -70,8 +75,10 @@ namespace REKFramework
 		switch (selectedItem)
 		{
 		case GameMenuItem::PLAY:
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			break;
 		case GameMenuItem::CREDITS:
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			GameMenuLevel = 1;
 			break;
 		case GameMenuItem::QUITGAME:
@@ -91,6 +98,7 @@ namespace REKFramework
 			break;
 		case GameMenuItem::CREDITS:
 			GameMenuLevel = 0;
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			break;
 		}
 	}

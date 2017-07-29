@@ -32,4 +32,9 @@ namespace REKFramework
 	{
 		Mix_FreeMusic(p);
 	}
+
+	void SdlDeleter::operator()(Mix_Chunk* p) const
+	{
+		Mix_FreeChunk(p);
+	}
 }

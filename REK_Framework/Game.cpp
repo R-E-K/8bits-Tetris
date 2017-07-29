@@ -111,7 +111,7 @@ namespace REKFramework
 							isInitOk = false;
 						}
 
-						soundMngr->LoadMusic("resources/songs/MUS_N_CD_1.ogg", 2000);
+						soundMngr->PlayMusic("resources/songs/MUS_N_CD_1.ogg", 2000);
 
 						SetSDLMainObjectsToProvider();
 					}
@@ -143,8 +143,9 @@ namespace REKFramework
 		{
 			if (gameMenu == nullptr)
 			{
-				gameMenu = new GameMenu();
+				gameMenu = new GameMenu(soundMngr);
 				gameContextMngr->SetGameMenu(gameMenu);
+				soundMngr->PlaySound("resources/sounds/MenuClick.wav", 1);
 			}
 			gameMenu->Draw();
 		}
@@ -153,6 +154,7 @@ namespace REKFramework
 		{
 			delete gameMenu;
 			gameMenu = nullptr;
+			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}
 

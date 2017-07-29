@@ -5,7 +5,11 @@ namespace REKFramework
 	SoundManager::SoundManager()
 	{
 		currentMusic = nullptr;
+		currentSoundChannels[0] = nullptr;
+		currentSoundChannels[1] = nullptr;
+
 		MusicVolume = MIX_MAX_VOLUME;
+		SoundVolume = MIX_MAX_VOLUME * 0.75;
 	}
 
 
@@ -32,14 +36,16 @@ namespace REKFramework
 			return -1;
 
 		Mix_VolumeMusic(MusicVolume);
-		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+		Mix_Volume(1, SoundVolume);
+
+		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
 		return 0;
 	}
 
-	void SoundManager::LoadMusic(std::string const& filepath, int fadeInDuration)
+	void SoundManager::PlayMusic(std::string const& filepath, int fadeInDuration)
 	{
 		currentMusic = std::unique_ptr<Mix_Music, SdlDeleter>(
-			Mix_LoadMUS("resources/songs/MUS_N_CD_1.ogg"),
+			Mix_LoadMUS(filepath.c_str()),
 			SdlDeleter()
 			);
 
@@ -47,5 +53,15 @@ namespace REKFramework
 		{
 			Mix_FadeInMusic(currentMusic.get(), -1, fadeInDuration);
 		}
+	}
+
+	void SoundManager::PlaySound(std::string const& filepath, int channel)
+	{
+		currentSoundChannels[channel - 1] = std::unique_ptr<Mix_Chunk, SdlDeleter>(
+			Mix_LoadWAV(filepath.c_str()),
+			SdlDeleter()
+			);
+
+		Mix_PlayChannel(channel, currentSoundChannels[channel - 1].get(), 0);
 	}
 }
