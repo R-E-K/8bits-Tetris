@@ -13,6 +13,11 @@ namespace REKFramework
 		SDL_DestroyRenderer(p);
 	}
 
+	void SdlDeleter::operator()(SDL_GameController* p) const
+	{
+		SDL_GameControllerClose(p);
+	}
+
 	void SdlDeleter::operator()(SDL_Texture* p) const
 	{
 		SDL_DestroyTexture(p);

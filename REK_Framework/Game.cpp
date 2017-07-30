@@ -28,7 +28,7 @@ namespace REKFramework
 
 	Game::~Game()
 	{
-		if (gameMenu != nullptr) delete gameMenu;
+		
 	}
 
 	void Game::Loop(SDL_Event& e)
@@ -143,7 +143,7 @@ namespace REKFramework
 		{
 			if (gameMenu == nullptr)
 			{
-				gameMenu = new GameMenu(soundMngr);
+				gameMenu = std::make_shared<GameMenu>(soundMngr);
 				gameContextMngr->SetGameMenu(gameMenu);
 				soundMngr->PlaySound("resources/sounds/MenuClick.wav", 1);
 			}
@@ -152,8 +152,7 @@ namespace REKFramework
 
 		if (gameContextMngr->currentGameContext == GameContext::INGAME && gameMenu != nullptr)
 		{
-			delete gameMenu;
-			gameMenu = nullptr;
+			gameMenu.reset();
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}

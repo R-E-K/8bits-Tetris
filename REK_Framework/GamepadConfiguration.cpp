@@ -12,7 +12,7 @@ namespace REKFramework
 
 	GamepadConfiguration::~GamepadConfiguration()
 	{
-		if (gamepad != nullptr) SDL_GameControllerClose(gamepad);
+		
 	}
 
 
@@ -20,7 +20,7 @@ namespace REKFramework
 	{
 		if (SDL_IsGameController(0))
 		{
-			gamepad = SDL_GameControllerOpen(0);
+			gamepad = std::unique_ptr<SDL_GameController, SdlDeleter>(SDL_GameControllerOpen(0), SdlDeleter());
 			if (gamepad != nullptr)
 			{
 				DisplayDebugInformations();
@@ -32,15 +32,14 @@ namespace REKFramework
 	{
 		if (gamepad != nullptr)
 		{
-			std::cout << "Game controller " << SDL_GameControllerName(gamepad) << "Removed" << std::endl << std::endl;
-			SDL_GameControllerClose(gamepad);
-			gamepad = nullptr;
+			std::cout << "Game controller " << SDL_GameControllerName(gamepad.get()) << "Removed" << std::endl << std::endl;
+			gamepad.reset();
 		}
 	}
 
 	void GamepadConfiguration::DisplayDebugInformations() const
 	{
 		std::cout << "Gamepad controller informations : " << std::endl;
-		std::cout << "Name : " << SDL_GameControllerName(gamepad) << std::endl << std::endl;
+		std::cout << "Name : " << SDL_GameControllerName(gamepad.get()) << std::endl << std::endl;
 	}
 }

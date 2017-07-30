@@ -14,7 +14,7 @@ namespace REKFramework
 
 		GameContext currentGameContext;
 
-		void SetGameMenu(GameMenu* gMenu);
+		void SetGameMenu(std::shared_ptr<GameMenu> gMenu);
 
 		void ExecuteAButtonAction();
 		void ExecuteBButtonAction();
@@ -35,7 +35,7 @@ namespace REKFramework
 		void ExecuteRTTriggerAction();
 
 	private:
-		GameMenu* gameMenu;
+		std::shared_ptr<GameMenu> gameMenu;
 
 		std::unique_ptr<DrawPictureManager> DrawPictureMngr;
 

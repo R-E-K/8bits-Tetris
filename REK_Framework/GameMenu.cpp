@@ -75,7 +75,6 @@ namespace REKFramework
 		switch (selectedItem)
 		{
 		case GameMenuItem::PLAY:
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			break;
 		case GameMenuItem::CREDITS:
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);

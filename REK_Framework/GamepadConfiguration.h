@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <memory>
+#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {
@@ -12,7 +14,7 @@ namespace REKFramework
 		void PlugGamepad();
 		void UnplugGamepad();
 	private:
-		SDL_GameController* gamepad;
+		std::unique_ptr<SDL_GameController, SdlDeleter> gamepad;
 		void DisplayDebugInformations() const;
 	};
 }

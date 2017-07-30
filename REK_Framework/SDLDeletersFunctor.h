@@ -10,6 +10,7 @@ namespace REKFramework
 	{
 		void operator()(SDL_Window* p) const;
 		void operator()(SDL_Renderer* p) const;
+		void operator()(SDL_GameController* p) const;
 		void operator()(SDL_Texture* p) const;
 		void operator()(SDL_Surface* p) const;
 		void operator()(TTF_Font* p) const;

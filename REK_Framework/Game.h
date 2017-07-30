@@ -26,7 +26,7 @@ namespace REKFramework
 		std::unique_ptr<InputManager> inputMngr;
 		std::shared_ptr<SoundManager> soundMngr;
 
-		GameMenu* gameMenu;
+		std::shared_ptr<GameMenu> gameMenu;
 
 		void Loop(SDL_Event& e);
 		bool Init();

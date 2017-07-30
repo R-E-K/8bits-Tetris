@@ -17,7 +17,7 @@ namespace REKFramework
 		
 	}
 
-	void GameContextManager::SetGameMenu(GameMenu* gMenu)
+	void GameContextManager::SetGameMenu(std::shared_ptr<GameMenu> gMenu)
 	{
 		gameMenu = gMenu;
 	}
@@ -56,7 +56,10 @@ namespace REKFramework
 				{
 					CloseGameMenu();
 				}
-				gameMenu->MenuBack();
+				else
+				{
+					gameMenu->MenuBack();
+				}
 			}
 			break;
 		}
@@ -201,7 +204,10 @@ namespace REKFramework
 				{
 					CloseGameMenu();
 				}
-				gameMenu->MenuBack();
+				else
+				{
+					gameMenu->MenuBack();
+				}
 			}
 			break;
 		}
@@ -230,5 +236,6 @@ namespace REKFramework
 	void GameContextManager::CloseGameMenu()
 	{
 		currentGameContext = GameContext::INGAME;
+		gameMenu.reset();
 	}
 }
