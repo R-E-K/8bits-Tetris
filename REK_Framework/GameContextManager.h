@@ -1,5 +1,5 @@
 #pragma once
-#include "GameContext.h"
+#include "GameContextEnum.h"
 #include <SDL2/SDL.h>
 #include "DrawPictureManager.h"
 #include "GameMenu.h"
@@ -12,7 +12,7 @@ namespace REKFramework
 		GameContextManager();
 		~GameContextManager();
 
-		GameContext currentGameContext;
+		GameContextEnum currentGameContext;
 
 		void SetGameMenu(std::shared_ptr<GameMenu> gMenu);
 

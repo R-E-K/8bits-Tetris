@@ -5,7 +5,7 @@ namespace REKFramework
 {
 	GameContextManager::GameContextManager()
 	{
-		currentGameContext = GameContext::MENU;
+		currentGameContext = GameContextEnum::MENU;
 		DrawPictureMngr = std::make_unique<DrawPictureManager>();
 
 		gameMenu = nullptr;
@@ -26,10 +26,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawAButton();
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->SelectItemMenu();
@@ -46,10 +46,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawBButton();
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
 				if (gameMenu->MustDestroyGameMenuOnBack())
@@ -69,7 +69,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawXButton();
 			break;
 		}
@@ -79,7 +79,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawYButton();
 			break;
 		}
@@ -89,7 +89,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawLBButton();
 			break;
 		}
@@ -99,7 +99,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawRBButton();
 			break;
 		}
@@ -109,10 +109,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawDPadDownButton();
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->NavigateDown();
@@ -125,10 +125,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawDPadUpButton();
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
 				gameMenu->NavigateUp();
@@ -141,7 +141,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawDPadLeftButton();
 			break;
 		}
@@ -151,7 +151,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawDPadRightButton();
 			break;
 		}
@@ -161,7 +161,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawLeftStickButton();
 			break;
 		}
@@ -171,7 +171,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawRightStickButton();
 			break;
 		}
@@ -181,10 +181,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
-			currentGameContext = GameContext::MENU;
+		case GameContextEnum::INGAME:
+			currentGameContext = GameContextEnum::MENU;
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			CloseGameMenu();
 			break;
 		}
@@ -194,10 +194,10 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawBackButton();
 			break;
-		case GameContext::MENU:
+		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
 				if (gameMenu->MustDestroyGameMenuOnBack())
@@ -217,7 +217,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawLTButton();
 			break;
 		}
@@ -227,7 +227,7 @@ namespace REKFramework
 	{
 		switch (currentGameContext)
 		{
-		case GameContext::INGAME:
+		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawRTButton();
 			break;
 		}
@@ -235,7 +235,7 @@ namespace REKFramework
 
 	void GameContextManager::CloseGameMenu()
 	{
-		currentGameContext = GameContext::INGAME;
+		currentGameContext = GameContextEnum::INGAME;
 		gameMenu.reset();
 	}
 }

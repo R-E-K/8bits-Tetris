@@ -42,7 +42,7 @@ namespace REKFramework
 
 			if (boardGame != nullptr)
 			{
-				boardGame->DrawBackground();
+				boardGame->Draw();
 			}
 
 			if (inputMngr != nullptr)
@@ -145,7 +145,7 @@ namespace REKFramework
 
 	void Game::HandleGameMenu()
 	{
-		if (gameContextMngr != nullptr && gameContextMngr->currentGameContext == GameContext::MENU)
+		if (gameContextMngr != nullptr && gameContextMngr->currentGameContext == GameContextEnum::MENU)
 		{
 			if (gameMenu == nullptr)
 			{
@@ -156,7 +156,7 @@ namespace REKFramework
 			gameMenu->Draw();
 		}
 
-		if (gameContextMngr->currentGameContext == GameContext::INGAME && gameMenu != nullptr)
+		if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && gameMenu != nullptr)
 		{
 			gameMenu.reset();
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);

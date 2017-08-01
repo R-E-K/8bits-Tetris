@@ -49,7 +49,9 @@
     <ClCompile Include="SDLDeletersFunctor.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
-    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Board.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -57,9 +59,6 @@
       <Filter>sources\core</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>sources\core</Filter>
-    </ClInclude>
-    <ClInclude Include="GameContext.h">
       <Filter>sources\core</Filter>
     </ClInclude>
     <ClInclude Include="GameContextManager.h">
@@ -101,16 +100,24 @@
     <ClInclude Include="GameMenu.h">
       <Filter>sources\menu</Filter>
     </ClInclude>
-    <ClInclude Include="GameMenuItem.h">
-      <Filter>sources\menu</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>sources\sounds</Filter>
     </ClInclude>
     <ClInclude Include="SDLDeletersFunctor.h">
       <Filter>sources\core</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h" />
+    <ClInclude Include="Board.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrominoColorEnum.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenuItemEnum.h">
+      <Filter>sources\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContextEnum.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

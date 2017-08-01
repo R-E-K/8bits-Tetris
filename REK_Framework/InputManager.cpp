@@ -66,14 +66,14 @@ namespace REKFramework
 			if (continuousButtonPressed) CheckGamepadInput();
 			if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
-			if (gameContextMngr->currentGameContext == GameContext::INGAME && !canCheckKeyboardInput)
+			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 				keyboardManager->CheckInputHold();
 
 		}
 		if (continuousButtonPressed) CheckGamepadInput();
 		if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
-		if (gameContextMngr->currentGameContext == GameContext::INGAME && !canCheckKeyboardInput)
+		if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 			keyboardManager->CheckInputHold();
 	}
 
@@ -83,7 +83,7 @@ namespace REKFramework
 			&PressedInput->jbutton != nullptr &&
 			&PressedInput->jbutton.button != nullptr)
 		{
-			if (gameContextMngr->currentGameContext == GameContext::INGAME
+			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME
 				&& PressedInput->jbutton.button != SDL_CONTROLLER_BUTTON_START)
 			{
 				gamepadButtonsPressedState.push_back(PressedInput->jbutton.button);
@@ -121,7 +121,7 @@ namespace REKFramework
 			&PressedInput->jaxis.axis != nullptr &&
 			&PressedInput->jaxis.value != nullptr)
 		{
-			if (gameContextMngr->currentGameContext == GameContext::INGAME)
+			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME)
 			{
 				if (PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT)
 				{
@@ -158,10 +158,10 @@ namespace REKFramework
 			&PressedInput->key.keysym.scancode != nullptr)
 		{
 			if (
-				(gameContextMngr->currentGameContext == GameContext::INGAME &&
+				(gameContextMngr->currentGameContext == GameContextEnum::INGAME &&
 					PressedInput->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				||
-				gameContextMngr->currentGameContext == GameContext::MENU
+				gameContextMngr->currentGameContext == GameContextEnum::MENU
 				)
 			{
 				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);

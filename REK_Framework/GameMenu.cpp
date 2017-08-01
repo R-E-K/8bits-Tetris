@@ -8,13 +8,13 @@ namespace REKFramework
 	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager)
 	{
 		gameMenuItems.clear();
-		gameMenuItems[0] = GameMenuItem::PLAY;
-		gameMenuItems[1] = GameMenuItem::CREDITS;
-		gameMenuItems[2] = GameMenuItem::QUITGAME;
+		gameMenuItems[0] = GameMenuItemEnum::PLAY;
+		gameMenuItems[1] = GameMenuItemEnum::CREDITS;
+		gameMenuItems[2] = GameMenuItemEnum::QUITGAME;
 
 		GameMenuLevel = 0;
 
-		selectedItem = GameMenuItem::PLAY;
+		selectedItem = GameMenuItemEnum::PLAY;
 		selectedItemIndex = 0;
 
 		background = nullptr;
@@ -43,7 +43,7 @@ namespace REKFramework
 		{
 			switch (selectedItem)
 			{
-			case GameMenuItem::CREDITS:
+			case GameMenuItemEnum::CREDITS:
 				DrawCredits();
 				break;
 			}
@@ -74,13 +74,13 @@ namespace REKFramework
 	{
 		switch (selectedItem)
 		{
-		case GameMenuItem::PLAY:
+		case GameMenuItemEnum::PLAY:
 			break;
-		case GameMenuItem::CREDITS:
+		case GameMenuItemEnum::CREDITS:
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			GameMenuLevel = 1;
 			break;
-		case GameMenuItem::QUITGAME:
+		case GameMenuItemEnum::QUITGAME:
 			SDL_Event quitGame;
 			quitGame.type = SDL_QUIT;
 			SDL_PushEvent(&quitGame);
@@ -92,10 +92,10 @@ namespace REKFramework
 	{
 		switch (selectedItem)
 		{
-		case GameMenuItem::PLAY:
-		case GameMenuItem::QUITGAME:
+		case GameMenuItemEnum::PLAY:
+		case GameMenuItemEnum::QUITGAME:
 			break;
-		case GameMenuItem::CREDITS:
+		case GameMenuItemEnum::CREDITS:
 			GameMenuLevel = 0;
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 			break;
@@ -104,7 +104,7 @@ namespace REKFramework
 
 	bool GameMenu::MustDestroyGameMenuOnSelect() const
 	{
-		return (selectedItem == GameMenuItem::PLAY || selectedItem == GameMenuItem::QUITGAME);
+		return (selectedItem == GameMenuItemEnum::PLAY || selectedItem == GameMenuItemEnum::QUITGAME);
 	}
 
 	bool GameMenu::MustDestroyGameMenuOnBack() const
@@ -155,14 +155,14 @@ namespace REKFramework
 		int x = backgroundPositionX + 20;
 		int y = backgroundPositionY + 20;
 
-		DrawItemMenu("Play", GameMenuItem::PLAY, x, y);
+		DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
 		y += 40;
-		DrawItemMenu("Credits", GameMenuItem::CREDITS, x, y);
+		DrawItemMenu("Credits", GameMenuItemEnum::CREDITS, x, y);
 		y += 40;
-		DrawItemMenu("Quit game", GameMenuItem::QUITGAME, x, y);
+		DrawItemMenu("Quit game", GameMenuItemEnum::QUITGAME, x, y);
 	}
 
-	void GameMenu::DrawItemMenu(std::string const& itemMenuName, GameMenuItem gameMenuItem, int x, int y) const
+	void GameMenu::DrawItemMenu(std::string const& itemMenuName, GameMenuItemEnum gameMenuItem, int x, int y) const
 	{
 		SDL_Color textColorSelected = { 255, 255, 0 };
 

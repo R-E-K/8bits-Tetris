@@ -1,5 +1,5 @@
 #pragma once
-#include "GameMenuItem.h"
+#include "GameMenuItemEnum.h"
 #include <map>
 #include <SDL2/SDL.h>
 #include "window.h"
@@ -27,8 +27,8 @@ namespace REKFramework
 		bool MustDestroyGameMenuOnBack() const;
 
 	private:
-		std::map<Uint8, GameMenuItem> gameMenuItems;
-		GameMenuItem selectedItem;
+		std::map<Uint8, GameMenuItemEnum> gameMenuItems;
+		GameMenuItemEnum selectedItem;
 		Uint8 selectedItemIndex;
 		Uint8 GameMenuLevel;
 
@@ -43,7 +43,7 @@ namespace REKFramework
 		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition) const;
 		void DrawMainMenu();
 		void DrawItemsMenu() const;
-		void DrawItemMenu(std::string const& itemMenuName, GameMenuItem gameMenuItem, int x, int y) const;
+		void DrawItemMenu(std::string const& itemMenuName, GameMenuItemEnum gameMenuItem, int x, int y) const;
 
 		void DrawCredits();
 

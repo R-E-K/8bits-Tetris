@@ -179,10 +179,10 @@
     <ClInclude Include="DrawTextService.h" />
     <ClInclude Include="ErrorMessageManager.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameContext.h" />
+    <ClInclude Include="GameContextEnum.h" />
     <ClInclude Include="GameContextManager.h" />
     <ClInclude Include="GameMenu.h" />
-    <ClInclude Include="GameMenuItem.h" />
+    <ClInclude Include="GameMenuItemEnum.h" />
     <ClInclude Include="GamepadButtonsFilePathConsts.h" />
     <ClInclude Include="GamepadConfiguration.h" />
     <ClInclude Include="ImageLoader.h" />
@@ -193,6 +193,7 @@
     <ClInclude Include="SDLDeletersFunctor.h" />
     <ClInclude Include="SDLMainObjectsProvider.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="TetrominoColorEnum.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
