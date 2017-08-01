@@ -9,7 +9,7 @@ namespace REKFramework
 	{
 	public:
 		DrawTextService();
-		DrawTextService(SDL_Color* defaultColor);
+		DrawTextService(SDL_Color defaultColor);
 
 		~DrawTextService();
 

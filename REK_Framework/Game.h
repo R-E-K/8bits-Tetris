@@ -7,6 +7,7 @@
 #include "GamepadConfiguration.h"
 #include "SoundManager.h"
 #include <memory>
+#include "Board.h"
 
 
 namespace REKFramework
@@ -27,6 +28,8 @@ namespace REKFramework
 		std::shared_ptr<SoundManager> soundMngr;
 
 		std::shared_ptr<GameMenu> gameMenu;
+
+		std::unique_ptr<Board> boardGame;
 
 		void Loop(SDL_Event& e);
 		bool Init();

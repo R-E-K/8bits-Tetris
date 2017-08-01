@@ -23,6 +23,7 @@ namespace REKFramework
 		soundMngr = nullptr;
 
 		gameMenu = nullptr;
+		boardGame = nullptr;
 	}
 
 
@@ -39,10 +40,15 @@ namespace REKFramework
 		{
 			SDL_RenderClear(renderer.get());
 
-			HandleGameMenu();
+			if (boardGame != nullptr)
+			{
+				boardGame->DrawBackground();
+			}
 
 			if (inputMngr != nullptr)
 				inputMngr->CheckInput(e, quitGame);
+
+			HandleGameMenu();
 
 			//Update the surface
 			//SDL_UpdateWindowSurface(window); // software rendering : Not good
@@ -154,6 +160,9 @@ namespace REKFramework
 		{
 			gameMenu.reset();
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
+
+			if (boardGame == nullptr)
+				boardGame = std::make_unique<Board>();
 		}
 	}
 

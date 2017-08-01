@@ -49,6 +49,7 @@
     <ClCompile Include="SDLDeletersFunctor.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="SDLDeletersFunctor.h">
       <Filter>sources\core</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />
@@ -131,6 +133,9 @@
     </Filter>
     <Filter Include="sources\sounds">
       <UniqueIdentifier>{af73e2b2-440a-4d55-bf06-6b596e82047c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\entities">
+      <UniqueIdentifier>{da082d10-f7ae-473a-b493-0eafc58d5551}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

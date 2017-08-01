@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="DrawGameButtonLabelService.cpp" />
     <ClCompile Include="DrawPictureManager.cpp" />
     <ClCompile Include="DrawTextService.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="DrawGameButtonLabelService.h" />
     <ClInclude Include="DrawPictureManager.h" />
     <ClInclude Include="DrawTextService.h" />

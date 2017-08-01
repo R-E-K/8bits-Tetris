@@ -9,9 +9,9 @@ namespace REKFramework
 		defaultClr = { 255, 255, 255 };
 	}
 
-	DrawTextService::DrawTextService(SDL_Color* defaultColor)
+	DrawTextService::DrawTextService(SDL_Color defaultColor)
 	{
-
+		defaultClr = defaultColor;
 	}
 
 	DrawTextService::~DrawTextService()
