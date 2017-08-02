@@ -52,6 +52,9 @@
     <ClCompile Include="Board.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
+    <ClCompile Include="Tetromino.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -117,6 +120,12 @@
     </ClInclude>
     <ClInclude Include="GameContextEnum.h">
       <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Tetromino.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrominoShapeEnum.h">
+      <Filter>sources\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

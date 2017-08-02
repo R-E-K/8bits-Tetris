@@ -11,6 +11,6 @@ namespace REKFramework
 		PURPLE = 4,
 		RED = 5,
 		YELLOW = 6,
-		NONE = 7,
+		NONE = 7
 	};
 }

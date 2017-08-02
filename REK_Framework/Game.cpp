@@ -40,13 +40,14 @@ namespace REKFramework
 		{
 			SDL_RenderClear(renderer.get());
 
-			if (boardGame != nullptr)
-			{
-				boardGame->Draw();
-			}
-
 			if (inputMngr != nullptr)
 				inputMngr->CheckInput(e, quitGame);
+
+			if (boardGame != nullptr)
+			{
+				boardGame->Update();
+				boardGame->Draw();
+			}
 
 			HandleGameMenu();
 

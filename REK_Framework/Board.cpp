@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "ImageLoader.h"
+#include <ctime>
 
 namespace REKFramework
 {
@@ -13,6 +14,8 @@ namespace REKFramework
 		SetTexturesBackground();
 		SetTetrominosTextures();
 		InitLogicalTetrominosArray();
+
+		NewTetromino();
 	}
 
 
@@ -20,11 +23,23 @@ namespace REKFramework
 	{
 	}
 
-	void Board::Draw()
+	void Board::Draw() const
 	{
 		DrawBorder();
 		DrawBackground();
 		DrawTetrominos();
+	}
+
+	void Board::NewTetromino()
+	{
+		TetrominoShapeEnum selectedShape = RandomlySelectTetrominoType();
+		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
+		SetTetrominoStartPosition(selectedShape);
+	}
+
+	void Board::Update()
+	{
+		PlaceCurrentTetrominosOnBoard();
 	}
 
 	void Board::SetTexturesBackground()
@@ -67,7 +82,7 @@ namespace REKFramework
 			);
 	}
 
-	std::shared_ptr<SDL_Texture> Board::GetTetrominoTexture(std::string const& imageFilePath)
+	std::shared_ptr<SDL_Texture> Board::GetTetrominoTexture(std::string const& imageFilePath) const
 	{
 		auto tetrominoSurface = ImageLoader::GetImageWithoutTransparency(imageFilePath);
 
@@ -126,6 +141,26 @@ namespace REKFramework
 		logicalTetrominosArray[17][3] = TetrominoColorEnum::RED;
 	}
 
+	void Board::PlaceCurrentTetrominosOnBoard()
+	{
+		auto Tetromino = CurrentTetromino->GetTetromino();
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < Tetromino.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+			tetrominoTileX = TetrominoPositionX - 1;
+			for (int j = 0; j < Tetromino[i].size(); j++) // X Axis
+			{
+				tetrominoTileX++;
+
+				if (Tetromino[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+					logicalTetrominosArray[tetrominoTileY][tetrominoTileX] = CurrentTetromino->GetColor();
+			}
+		}
+	}
 
 	void Board::DrawBorder() const
 	{
@@ -198,6 +233,43 @@ namespace REKFramework
 						, nullptr, &backgroundTilePosition);
 				}
 			}
+		}
+	}
+
+	TetrominoShapeEnum Board::RandomlySelectTetrominoType()
+	{
+		// Init Randomness
+		srand(time(nullptr));
+		// Generate a number between 0 and 99
+		int rng = rand() % 100;
+
+		if (rng < 5)
+			return TetrominoShapeEnum::I;
+		else if (rng < 20)
+			return TetrominoShapeEnum::J;
+		else if (rng < 35)
+			return TetrominoShapeEnum::L;
+		else if (rng < 50)
+			return TetrominoShapeEnum::O;
+		else if (rng < 65)
+			return TetrominoShapeEnum::S;
+		else if (rng < 80)
+			return TetrominoShapeEnum::T;
+		else if (rng < 100)
+			return TetrominoShapeEnum::Z;
+	}
+
+	void Board::SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape)
+	{
+		TetrominoPositionY = 0;
+
+		if (tetrominoShape == TetrominoShapeEnum::O)
+		{
+			TetrominoPositionX = 4;
+		}
+		else
+		{
+			TetrominoPositionX = 3;
 		}
 	}
 }
