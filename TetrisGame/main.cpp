@@ -2,12 +2,16 @@
 #include "../REK_Framework/Game.h"
 #include "../REK_Framework/SDLDeletersFunctor.h"
 #include <memory>
+#include <ctime>
 
 void GameExecution();
 void ExitSDL();
 
 int main(int argc, char* args[])
 {
+	// Init Randomness
+	srand(time(nullptr));
+
 	GameExecution();
 	ExitSDL();
 	

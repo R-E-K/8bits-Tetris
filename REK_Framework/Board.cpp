@@ -238,8 +238,6 @@ namespace REKFramework
 
 	TetrominoShapeEnum Board::RandomlySelectTetrominoType()
 	{
-		// Init Randomness
-		srand(time(nullptr));
 		// Generate a number between 0 and 99
 		int rng = rand() % 100;
 
