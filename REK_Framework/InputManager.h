@@ -23,8 +23,6 @@ namespace REKFramework
 		std::unique_ptr<GamepadConfiguration> gamepadCnfg;
 		std::shared_ptr<GameContextManager> gameContextMngr;
 
-		bool continuousButtonPressed;
-
 		std::vector<Uint8> gamepadButtonsPressedState;
 
 		bool RTTriggered;

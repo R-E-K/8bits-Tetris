@@ -163,7 +163,10 @@ namespace REKFramework
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 
 			if (boardGame == nullptr)
-				boardGame = std::make_unique<Board>();
+			{
+				boardGame = std::make_shared<Board>();
+				gameContextMngr->SetBoardGame(boardGame);
+			}
 		}
 	}
 

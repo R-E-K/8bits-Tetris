@@ -8,6 +8,7 @@
 #include "TetrominoColorEnum.h"
 #include "TetrominoShapeEnum.h"
 #include "Tetromino.h"
+#include <stack>
 
 namespace REKFramework
 {
@@ -23,11 +24,30 @@ namespace REKFramework
 		void NewTetromino();
 		void Update();
 
+		void MoveTetrominoToTheLeft();
+		void MoveTetrominoToTheRight();
+
 	private:
 
 		const Uint8 NB_COLUMNS = 10;
 		const Uint8 NB_ROWS = 18;
 		const int BORDER_THICKNESS = 5;
+
+		// TODO : Faire une structure
+		int moveLeftTime;
+		int moveLeftLastTime;
+		int moveLeftHoldTime;
+		bool IsHoldInputMoveLeft;
+		bool IsJustHoldMoveLeft;
+
+		int moveRightTime;
+		int moveRightLastTime;
+		int moveRightHoldTime;
+		bool IsHoldInputMoveRight;
+		bool IsJustHoldMoveRight;
+
+		std::stack<int> TetrominoTileXPrevious;
+		std::stack<int> TetrominoTileYPrevious;
 
 		std::shared_ptr<SDL_Texture> lightBackgroundTexture;
 		std::shared_ptr<SDL_Texture> darkBackgroundTexture;

@@ -12,7 +12,6 @@ namespace REKFramework
 		gamepadCnfg = std::make_unique<GamepadConfiguration>();
 
 		gameContextMngr = gameContextManager;
-		continuousButtonPressed = false;
 
 		LTTriggered = false;
 		RTTriggered = false;
@@ -63,18 +62,20 @@ namespace REKFramework
 				break;
 			}
 
-			if (continuousButtonPressed) CheckGamepadInput();
 			if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
 			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 				keyboardManager->CheckInputHold();
 
+			CheckGamepadInput();
+
 		}
-		if (continuousButtonPressed) CheckGamepadInput();
 		if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
 		if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 			keyboardManager->CheckInputHold();
+
+		CheckGamepadInput();
 	}
 
 	void InputManager::SetPressedButton()
@@ -87,12 +88,10 @@ namespace REKFramework
 				&& PressedInput->jbutton.button != SDL_CONTROLLER_BUTTON_START)
 			{
 				gamepadButtonsPressedState.push_back(PressedInput->jbutton.button);
-				continuousButtonPressed = true;
 			}
 			else
 			{
 				gamepadManager->CheckInput(PressedInput->jbutton.button);
-				continuousButtonPressed = false;
 			}
 		}
 	}
@@ -174,7 +173,7 @@ namespace REKFramework
 	{
 		if (!gamepadButtonsPressedState.empty())
 		{
-			for (auto &pressedButton : gamepadButtonsPressedState)
+			for (auto pressedButton : gamepadButtonsPressedState)
 			{
 				gamepadManager->CheckInput(pressedButton);
 			}

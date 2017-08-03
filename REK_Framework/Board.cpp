@@ -40,6 +40,71 @@ namespace REKFramework
 	void Board::Update()
 	{
 		PlaceCurrentTetrominosOnBoard();
+		moveLeftTime = SDL_GetTicks();
+		moveRightTime = SDL_GetTicks();
+	}
+
+	void Board::MoveTetrominoToTheLeft()
+	{
+		IsHoldInputMoveLeft = (moveLeftTime - moveLeftLastTime <= 30);
+
+		if(IsHoldInputMoveLeft)
+		{
+			if (!IsJustHoldMoveLeft)
+			{
+				if (moveLeftTime - moveLeftHoldTime >= 150)
+				{
+					TetrominoPositionX--;
+					moveLeftHoldTime = moveLeftTime;
+				}
+			}
+			else
+			{
+				IsJustHoldMoveLeft = false;
+				moveLeftHoldTime = moveLeftTime + 500; // Temporisation de 500 ms sur le maintient de la touche
+			}
+		}
+		else if (!IsHoldInputMoveLeft)
+		{
+			if (moveLeftTime - moveLeftLastTime >= 50)
+			{
+				TetrominoPositionX--;
+				IsJustHoldMoveLeft = true;
+			}
+			moveLeftLastTime = moveLeftTime;
+		}
+	}
+
+	void Board::MoveTetrominoToTheRight()
+	{
+		IsHoldInputMoveRight = (moveRightTime - moveRightLastTime <= 30);
+
+		if (IsHoldInputMoveRight)
+		{
+			if (!IsJustHoldMoveRight)
+			{
+				if (moveRightTime - moveRightHoldTime >= 150)
+				{
+					TetrominoPositionX++;
+					moveRightHoldTime = moveRightTime;
+				}
+			}
+			else
+			{
+				IsJustHoldMoveRight = false;
+				moveRightHoldTime = moveRightTime + 500; // Temporisation de 500 ms sur le maintient de la touche
+			}
+			
+		}
+		else if (!IsHoldInputMoveRight)
+		{
+			if (moveRightTime - moveRightLastTime >= 50)
+			{
+				TetrominoPositionX++;
+				IsJustHoldMoveRight = true;
+			}
+			moveRightLastTime = moveRightTime;
+		}
 	}
 
 	void Board::SetTexturesBackground()
@@ -143,6 +208,20 @@ namespace REKFramework
 
 	void Board::PlaceCurrentTetrominosOnBoard()
 	{
+		if (!TetrominoTileXPrevious.empty())
+		{
+			for (int i = 0; i < TetrominoTileYPrevious.size(); i++) // Y Axis
+			{
+				int x = TetrominoTileXPrevious.top();
+				TetrominoTileXPrevious.pop();
+
+				int y = TetrominoTileYPrevious.top();
+				TetrominoTileYPrevious.pop();
+
+				logicalTetrominosArray[y][x] = TetrominoColorEnum::NONE;
+			}
+		}
+
 		auto Tetromino = CurrentTetromino->GetTetromino();
 
 		int tetrominoTileX = TetrominoPositionX - 1;
@@ -151,13 +230,18 @@ namespace REKFramework
 		for (int i = 0; i < Tetromino.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
+
 			tetrominoTileX = TetrominoPositionX - 1;
 			for (int j = 0; j < Tetromino[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
 
 				if (Tetromino[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+				{
 					logicalTetrominosArray[tetrominoTileY][tetrominoTileX] = CurrentTetromino->GetColor();
+					TetrominoTileYPrevious.push(tetrominoTileY);
+					TetrominoTileXPrevious.push(tetrominoTileX);
+				}
 			}
 		}
 	}

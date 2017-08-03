@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include "DrawPictureManager.h"
 #include "GameMenu.h"
+#include "Board.h"
 
 namespace REKFramework
 {
@@ -15,6 +16,7 @@ namespace REKFramework
 		GameContextEnum currentGameContext;
 
 		void SetGameMenu(std::shared_ptr<GameMenu> gMenu);
+		void SetBoardGame(std::shared_ptr<Board> gBoard);
 
 		void ExecuteAButtonAction();
 		void ExecuteBButtonAction();
@@ -36,6 +38,7 @@ namespace REKFramework
 
 	private:
 		std::shared_ptr<GameMenu> gameMenu;
+		std::shared_ptr<Board> boardGame;
 
 		std::unique_ptr<DrawPictureManager> DrawPictureMngr;
 

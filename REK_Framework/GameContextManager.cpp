@@ -22,6 +22,11 @@ namespace REKFramework
 		gameMenu = gMenu;
 	}
 
+	void GameContextManager::SetBoardGame(std::shared_ptr<Board> gBoard)
+	{
+		boardGame = gBoard;
+	}
+
 	void GameContextManager::ExecuteAButtonAction()
 	{
 		switch (currentGameContext)
@@ -90,7 +95,10 @@ namespace REKFramework
 		switch (currentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawLBButton();
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoToTheLeft();
+			}
 			break;
 		}
 	}
@@ -100,7 +108,10 @@ namespace REKFramework
 		switch (currentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawRBButton();
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoToTheRight();
+			}
 			break;
 		}
 	}
@@ -142,7 +153,10 @@ namespace REKFramework
 		switch (currentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawDPadLeftButton();
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoToTheLeft();
+			}
 			break;
 		}
 	}
@@ -152,7 +166,10 @@ namespace REKFramework
 		switch (currentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawDPadRightButton();
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoToTheRight();
+			}
 			break;
 		}
 	}
