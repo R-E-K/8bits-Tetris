@@ -34,11 +34,7 @@ namespace REKFramework
 		case GameContextEnum::INGAME:
 			if (boardGame != nullptr)
 			{
-				auto tetromino = boardGame->GetCurrentTetromino();
-				if (tetromino != nullptr)
-				{
-					tetromino->RotateRight();
-				}
+				boardGame->RotateTetrominoToRightIfPossible();
 			}
 			break;
 		case GameContextEnum::MENU:
@@ -84,11 +80,7 @@ namespace REKFramework
 		case GameContextEnum::INGAME:
 			if (boardGame != nullptr)
 			{
-				auto tetromino = boardGame->GetCurrentTetromino();
-				if (tetromino != nullptr)
-				{
-					tetromino->RotateLeft();
-				}
+				boardGame->RotateTetrominoToLeftIfPossible();
 			}
 			break;
 		}
@@ -111,11 +103,7 @@ namespace REKFramework
 		case GameContextEnum::INGAME:
 			if (boardGame != nullptr)
 			{
-				auto tetromino = boardGame->GetCurrentTetromino();
-				if (tetromino != nullptr)
-				{
-					tetromino->RotateLeft();
-				}
+				boardGame->RotateTetrominoToLeftIfPossible();
 			}
 			break;
 		}
@@ -128,11 +116,7 @@ namespace REKFramework
 		case GameContextEnum::INGAME:
 			if (boardGame != nullptr)
 			{
-				auto tetromino = boardGame->GetCurrentTetromino();
-				if (tetromino != nullptr)
-				{
-					tetromino->RotateRight();
-				}
+				boardGame->RotateTetrominoToRightIfPossible();
 			}
 			break;
 		}

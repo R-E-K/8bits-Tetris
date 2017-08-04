@@ -43,25 +43,42 @@ namespace REKFramework
 		PlaceCurrentTetrominosOnBoard();
 	}
 
-	std::shared_ptr<Tetromino> Board::GetCurrentTetromino() const
-	{
-		return CurrentTetromino;
-	}
-
 	void Board::MoveTetrominoToTheLeft()
 	{
-		MoveTetrominoToLeftOrRightTimer.Execute([&]()
+		if (CanMoveToLeft(CurrentTetromino->GetTetrominoCurrentShape()))
 		{
-			TetrominoPositionX--;
-		});
+			MoveTetrominoToLeftOrRightTimer.Execute([&]()
+			{
+				TetrominoPositionX--;
+			});
+		}
 	}
 
 	void Board::MoveTetrominoToTheRight()
 	{
-		MoveTetrominoToLeftOrRightTimer.Execute([&]()
+		if (CanMoveToRight(CurrentTetromino->GetTetrominoCurrentShape()))
 		{
-			TetrominoPositionX++;
-		});
+			MoveTetrominoToLeftOrRightTimer.Execute([&]()
+			{
+				TetrominoPositionX++;
+			});
+		}
+	}
+
+	void Board::RotateTetrominoToLeftIfPossible()
+	{
+		if (CanRotateLeft())
+		{
+			CurrentTetromino->RotateLeft();
+		}
+	}
+
+	void Board::RotateTetrominoToRightIfPossible()
+	{
+		if (CanRotateRight())
+		{
+			CurrentTetromino->RotateRight();
+		}
 	}
 
 	void Board::SetTexturesBackground()
@@ -179,7 +196,7 @@ namespace REKFramework
 			}
 		}
 
-		auto Tetromino = CurrentTetromino->GetTetromino();
+		auto Tetromino = CurrentTetromino->GetTetrominoCurrentShape();
 
 		int tetrominoTileX = TetrominoPositionX - 1;
 		int tetrominoTileY = TetrominoPositionY - 1;
@@ -310,6 +327,110 @@ namespace REKFramework
 		{
 			TetrominoPositionX = 3;
 		}
+	}
+
+	bool Board::CanMoveToLeft(std::vector<std::vector<int>> shapeToCheck)
+	{
+		bool isMovable = true;
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+
+			tetrominoTileX = TetrominoPositionX - 1;
+			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
+			{
+				tetrominoTileX++;
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+				{
+					// Left collision
+					if (tetrominoTileX <= 0 ||
+						logicalTetrominosArray[tetrominoTileY][tetrominoTileX - 1] != TetrominoColorEnum::NONE)
+					{
+						isMovable = false;
+					}
+
+					break; // We only check the first colored tile of the line for left collision
+				}
+			}
+		}
+
+		return isMovable;
+	}
+
+	bool Board::CanMoveToRight(std::vector<std::vector<int>> shapeToCheck)
+	{
+		bool isMovable = true;
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+
+			tetrominoTileX = TetrominoPositionX + shapeToCheck[i].size();
+			for (int j = shapeToCheck[i].size() - 1; j >= 0; j--) // X Axis
+			{
+				tetrominoTileX--;
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+				{
+					// Right collision
+					if (tetrominoTileX >= NB_COLUMNS - 1 ||
+						logicalTetrominosArray[tetrominoTileY][tetrominoTileX + 1] != TetrominoColorEnum::NONE)
+					{
+						isMovable = false;
+					}
+					break;
+				}
+			}
+		}
+
+		return isMovable;
+	}
+
+	bool Board::CanRotate(std::vector<std::vector<int>> shapeToCheck) const
+	{
+		bool isRotatable = true;
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+
+			tetrominoTileX = TetrominoPositionX - 1;
+			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
+			{
+				tetrominoTileX++;
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+				{
+					// Left collision
+					if (tetrominoTileX < 0 || tetrominoTileX >= NB_COLUMNS - 1)
+					{
+						isRotatable = false;
+					}
+
+					break; // We only check the first colored tile of the line for left collision
+				}
+			}
+		}
+
+		return isRotatable;
+	}
+
+	bool Board::CanRotateLeft()
+	{
+		return CanRotate(CurrentTetromino->GetPreviousShape());
+	}
+
+	bool Board::CanRotateRight()
+	{
+		return CanRotate(CurrentTetromino->GetNextShape());
 	}
 
 	void Board::SetTimers()

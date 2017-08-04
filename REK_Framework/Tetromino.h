@@ -12,11 +12,14 @@ namespace REKFramework
 		Tetromino(TetrominoShapeEnum tetrominoShape);
 		~Tetromino();
 
-		std::vector<std::vector<int>> GetTetromino() const;
+		std::vector<std::vector<int>> GetTetrominoCurrentShape() const;
 		TetrominoColorEnum GetColor() const;
 
 		void RotateLeft();
 		void RotateRight();
+
+		std::vector<std::vector<int>> GetNextShape();
+		std::vector<std::vector<int>> GetPreviousShape();
 
 	private:
 

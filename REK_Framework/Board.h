@@ -13,7 +13,6 @@
 
 namespace REKFramework
 {
-	enum class TetrominoShapeEnum;
 
 	class Board
 	{
@@ -25,10 +24,10 @@ namespace REKFramework
 		void NewTetromino();
 		void Update();
 
-		std::shared_ptr<Tetromino> GetCurrentTetromino() const;
-
 		void MoveTetrominoToTheLeft();
 		void MoveTetrominoToTheRight();
+		void RotateTetrominoToLeftIfPossible();
+		void RotateTetrominoToRightIfPossible();
 
 	private:
 
@@ -53,7 +52,7 @@ namespace REKFramework
 		// TODO : Maybe Boost Multi Array could be interesting
 		std::vector<std::vector<TetrominoColorEnum>> logicalTetrominosArray;
 
-		std::shared_ptr<Tetromino> CurrentTetromino;
+		std::unique_ptr<Tetromino> CurrentTetromino;
 		int TetrominoPositionX;
 		int TetrominoPositionY;
 			
@@ -72,6 +71,12 @@ namespace REKFramework
 
 		TetrominoShapeEnum RandomlySelectTetrominoType();
 		void SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape);
+
+		bool CanMoveToLeft(std::vector<std::vector<int>> shapeToCheck);
+		bool CanMoveToRight(std::vector<std::vector<int>> shapeToCheck);
+		bool CanRotate(std::vector<std::vector<int>> shapeToCheck) const;
+		bool CanRotateLeft();
+		bool CanRotateRight();
 
 		void SetTimers();
 	};

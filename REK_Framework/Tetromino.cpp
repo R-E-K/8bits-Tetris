@@ -19,7 +19,7 @@ namespace REKFramework
 	{
 	}
 
-	std::vector<std::vector<int>> Tetromino::GetTetromino() const
+	std::vector<std::vector<int>> Tetromino::GetTetrominoCurrentShape() const
 	{
 		return CurrentTetrominoShape;
 	}
@@ -53,6 +53,30 @@ namespace REKFramework
 			ShapeIndex++;
 			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
 		});
+	}
+
+	std::vector<std::vector<int>> Tetromino::GetNextShape()
+	{
+		if (ShapeIndex == TetrominoShapesArray.size() - 1)
+		{
+			return TetrominoShapesArray[0];
+		}
+		else
+		{
+			return TetrominoShapesArray[ShapeIndex + 1];
+		}
+	}
+
+	std::vector<std::vector<int>> Tetromino::GetPreviousShape()
+	{
+		if (ShapeIndex == 0)
+		{
+			return TetrominoShapesArray[TetrominoShapesArray.size() - 1];
+		}
+		else
+		{
+			return TetrominoShapesArray[ShapeIndex - 1];
+		}
 	}
 
 	void Tetromino::SetShapes()
