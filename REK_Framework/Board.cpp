@@ -14,6 +14,7 @@ namespace REKFramework
 		SetTexturesBackground();
 		SetTetrominosTextures();
 		InitLogicalTetrominosArray();
+		SetTimers();
 
 		NewTetromino();
 	}
@@ -40,71 +41,27 @@ namespace REKFramework
 	void Board::Update()
 	{
 		PlaceCurrentTetrominosOnBoard();
-		moveLeftTime = SDL_GetTicks();
-		moveRightTime = SDL_GetTicks();
+	}
+
+	std::shared_ptr<Tetromino> Board::GetCurrentTetromino() const
+	{
+		return CurrentTetromino;
 	}
 
 	void Board::MoveTetrominoToTheLeft()
 	{
-		IsHoldInputMoveLeft = (moveLeftTime - moveLeftLastTime <= 30);
-
-		if(IsHoldInputMoveLeft)
+		MoveTetrominoToLeftOrRightTimer.Execute([&]()
 		{
-			if (!IsJustHoldMoveLeft)
-			{
-				if (moveLeftTime - moveLeftHoldTime >= 150)
-				{
-					TetrominoPositionX--;
-					moveLeftHoldTime = moveLeftTime;
-				}
-			}
-			else
-			{
-				IsJustHoldMoveLeft = false;
-				moveLeftHoldTime = moveLeftTime + 500; // Temporisation de 500 ms sur le maintient de la touche
-			}
-		}
-		else if (!IsHoldInputMoveLeft)
-		{
-			if (moveLeftTime - moveLeftLastTime >= 50)
-			{
-				TetrominoPositionX--;
-				IsJustHoldMoveLeft = true;
-			}
-			moveLeftLastTime = moveLeftTime;
-		}
+			TetrominoPositionX--;
+		});
 	}
 
 	void Board::MoveTetrominoToTheRight()
 	{
-		IsHoldInputMoveRight = (moveRightTime - moveRightLastTime <= 30);
-
-		if (IsHoldInputMoveRight)
+		MoveTetrominoToLeftOrRightTimer.Execute([&]()
 		{
-			if (!IsJustHoldMoveRight)
-			{
-				if (moveRightTime - moveRightHoldTime >= 150)
-				{
-					TetrominoPositionX++;
-					moveRightHoldTime = moveRightTime;
-				}
-			}
-			else
-			{
-				IsJustHoldMoveRight = false;
-				moveRightHoldTime = moveRightTime + 500; // Temporisation de 500 ms sur le maintient de la touche
-			}
-			
-		}
-		else if (!IsHoldInputMoveRight)
-		{
-			if (moveRightTime - moveRightLastTime >= 50)
-			{
-				TetrominoPositionX++;
-				IsJustHoldMoveRight = true;
-			}
-			moveRightLastTime = moveRightTime;
-		}
+			TetrominoPositionX++;
+		});
 	}
 
 	void Board::SetTexturesBackground()
@@ -353,5 +310,11 @@ namespace REKFramework
 		{
 			TetrominoPositionX = 3;
 		}
+	}
+
+	void Board::SetTimers()
+	{
+		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
+		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
 	}
 }

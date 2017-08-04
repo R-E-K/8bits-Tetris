@@ -8,7 +8,11 @@ namespace REKFramework
 		Shape = tetrominoShape;
 		SetShapes();
 		SetColor();
-		CurrentTetrominoShape = TetrominoShapesArray[0];
+		ShapeIndex = 0;
+		CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+
+		RotateTimer.SetInputRepeatFrequency(500);
+		RotateTimer.SetStartHoldInputDownDelay(500);
 	}
 
 	Tetromino::~Tetromino()
@@ -25,6 +29,32 @@ namespace REKFramework
 		return Color;
 	}
 
+	void Tetromino::RotateLeft()
+	{
+		RotateTimer.Execute([&]()
+		{
+			if (ShapeIndex == 0)
+			{
+				ShapeIndex = TetrominoShapesArray.size();
+			}
+			ShapeIndex--;
+			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+		});
+	}
+
+	void Tetromino::RotateRight()
+	{
+		RotateTimer.Execute([&]()
+		{
+			if (ShapeIndex == TetrominoShapesArray.size() - 1)
+			{
+				ShapeIndex = -1;
+			}
+			ShapeIndex++;
+			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+		});
+	}
+
 	void Tetromino::SetShapes()
 	{
 		switch (Shape)
@@ -33,8 +63,8 @@ namespace REKFramework
 			TetrominoShapesArray = { 
 				{
 					{ 7, 7, 7, 7 },
-					{ 2, 2, 2, 2 },
 					{ 7, 7, 7, 7 },
+					{ 2, 2, 2, 2 },
 					{ 7, 7, 7, 7 }
 				},
 				{

@@ -9,6 +9,7 @@
 #include "TetrominoShapeEnum.h"
 #include "Tetromino.h"
 #include <stack>
+#include "InputTimer.h"
 
 namespace REKFramework
 {
@@ -24,6 +25,8 @@ namespace REKFramework
 		void NewTetromino();
 		void Update();
 
+		std::shared_ptr<Tetromino> GetCurrentTetromino() const;
+
 		void MoveTetrominoToTheLeft();
 		void MoveTetrominoToTheRight();
 
@@ -33,18 +36,7 @@ namespace REKFramework
 		const Uint8 NB_ROWS = 18;
 		const int BORDER_THICKNESS = 5;
 
-		// TODO : Faire une structure
-		int moveLeftTime;
-		int moveLeftLastTime;
-		int moveLeftHoldTime;
-		bool IsHoldInputMoveLeft;
-		bool IsJustHoldMoveLeft;
-
-		int moveRightTime;
-		int moveRightLastTime;
-		int moveRightHoldTime;
-		bool IsHoldInputMoveRight;
-		bool IsJustHoldMoveRight;
+		InputTimer MoveTetrominoToLeftOrRightTimer;
 
 		std::stack<int> TetrominoTileXPrevious;
 		std::stack<int> TetrominoTileYPrevious;
@@ -61,7 +53,7 @@ namespace REKFramework
 		// TODO : Maybe Boost Multi Array could be interesting
 		std::vector<std::vector<TetrominoColorEnum>> logicalTetrominosArray;
 
-		std::unique_ptr<Tetromino> CurrentTetromino;
+		std::shared_ptr<Tetromino> CurrentTetromino;
 		int TetrominoPositionX;
 		int TetrominoPositionY;
 			
@@ -80,6 +72,8 @@ namespace REKFramework
 
 		TetrominoShapeEnum RandomlySelectTetrominoType();
 		void SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape);
+
+		void SetTimers();
 	};
 
 }

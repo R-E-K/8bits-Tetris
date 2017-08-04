@@ -168,6 +168,7 @@
     <ClCompile Include="InputGamepadManager.cpp" />
     <ClCompile Include="InputKeyboardManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InputTimer.cpp" />
     <ClCompile Include="SDLDeletersFunctor.cpp" />
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="InputGamepadManager.h" />
     <ClInclude Include="InputKeyboardManager.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InputTimer.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SDLDeletersFunctor.h" />
     <ClInclude Include="SDLMainObjectsProvider.h" />
