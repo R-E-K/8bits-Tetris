@@ -407,10 +407,12 @@ namespace REKFramework
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
-				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE) 
+					&& CurrentTetromino->GetTetrominoCurrentShape()[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 				{
 					// Left collision
-					if (tetrominoTileX < 0 || tetrominoTileX >= NB_COLUMNS - 1)
+					if (tetrominoTileX - j < 0 || tetrominoTileX >= NB_COLUMNS - 1
+						|| logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != CurrentTetromino->GetColor())
 					{
 						isRotatable = false;
 					}
