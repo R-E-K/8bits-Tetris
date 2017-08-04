@@ -173,6 +173,7 @@
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Tetromino.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="TetrominoColorEnum.h" />
     <ClInclude Include="TetrominoShapeEnum.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>

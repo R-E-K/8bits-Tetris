@@ -10,6 +10,7 @@
 #include "Tetromino.h"
 #include <stack>
 #include "InputTimer.h"
+#include "Timer.h"
 
 namespace REKFramework
 {
@@ -20,7 +21,7 @@ namespace REKFramework
 		Board();
 		~Board();
 
-		void Draw() const;
+		void Draw();
 		void NewTetromino();
 		void Update();
 
@@ -36,6 +37,7 @@ namespace REKFramework
 		const int BORDER_THICKNESS = 5;
 
 		InputTimer MoveTetrominoToLeftOrRightTimer;
+		Timer TetrominoMovingDownTimer;
 
 		std::stack<int> TetrominoTileXPrevious;
 		std::stack<int> TetrominoTileYPrevious;
@@ -63,11 +65,10 @@ namespace REKFramework
 
 		void InitLogicalTetrominosArray();
 
-		void PlaceCurrentTetrominosOnBoard();
-
 		void DrawBorder() const;
 		void DrawBackground() const;
 		void DrawTetrominos() const;
+		void DrawCurrentTetrominosOnBoard();
 
 		TetrominoShapeEnum RandomlySelectTetrominoType();
 		void SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape);
@@ -75,8 +76,8 @@ namespace REKFramework
 		bool CanMoveToLeft(std::vector<std::vector<int>> shapeToCheck);
 		bool CanMoveToRight(std::vector<std::vector<int>> shapeToCheck);
 		bool CanRotate(std::vector<std::vector<int>> shapeToCheck) const;
-		bool CanRotateLeft();
-		bool CanRotateRight();
+		bool CanRotateLeft() const;
+		bool CanRotateRight() const;
 
 		void SetTimers();
 	};

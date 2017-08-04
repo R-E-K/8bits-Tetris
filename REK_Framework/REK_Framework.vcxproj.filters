@@ -58,6 +58,7 @@
     <ClCompile Include="InputTimer.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="InputTimer.h">
       <Filter>sources\core</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

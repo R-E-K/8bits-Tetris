@@ -13,7 +13,9 @@ namespace REKFramework
 		GameContextManager();
 		~GameContextManager();
 
-		GameContextEnum currentGameContext;
+		static GameContextEnum CurrentGameContext;
+
+		static bool IsGamePaused();
 
 		void SetGameMenu(std::shared_ptr<GameMenu> gMenu);
 		void SetBoardGame(std::shared_ptr<Board> gBoard);

@@ -1,6 +1,5 @@
 #include "Board.h"
 #include "ImageLoader.h"
-#include <ctime>
 
 namespace REKFramework
 {
@@ -24,11 +23,12 @@ namespace REKFramework
 	{
 	}
 
-	void Board::Draw() const
+	void Board::Draw()
 	{
 		DrawBorder();
 		DrawBackground();
 		DrawTetrominos();
+		DrawCurrentTetrominosOnBoard();
 	}
 
 	void Board::NewTetromino()
@@ -40,7 +40,10 @@ namespace REKFramework
 
 	void Board::Update()
 	{
-		PlaceCurrentTetrominosOnBoard();
+		TetrominoMovingDownTimer.Execute([&]()
+		{
+			TetrominoPositionY++;
+		});
 	}
 
 	void Board::MoveTetrominoToTheLeft()
@@ -180,7 +183,7 @@ namespace REKFramework
 		logicalTetrominosArray[17][3] = TetrominoColorEnum::RED;
 	}
 
-	void Board::PlaceCurrentTetrominosOnBoard()
+	void Board::DrawCurrentTetrominosOnBoard()
 	{
 		if (!TetrominoTileXPrevious.empty())
 		{
@@ -407,17 +410,25 @@ namespace REKFramework
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
-				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE) 
+
+				// Left and right collision
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
 					&& CurrentTetromino->GetTetrominoCurrentShape()[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 				{
-					// Left collision
-					if (tetrominoTileX - j < 0 || tetrominoTileX >= NB_COLUMNS - 1
-						|| logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != CurrentTetromino->GetColor())
+					if (tetrominoTileX - j < 0 || tetrominoTileX >= NB_COLUMNS - 1)
 					{
 						isRotatable = false;
 					}
+				}
 
-					break; // We only check the first colored tile of the line for left collision
+				// Others pieces collision
+				if (tetrominoTileX > 0 && tetrominoTileX < NB_COLUMNS)
+				{
+					if (CurrentTetromino->GetTetrominoCurrentShape()[i][j] == static_cast<int>(TetrominoColorEnum::NONE)
+						&& logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != TetrominoColorEnum::NONE)
+					{
+						isRotatable = false;
+					}
 				}
 			}
 		}
@@ -425,12 +436,12 @@ namespace REKFramework
 		return isRotatable;
 	}
 
-	bool Board::CanRotateLeft()
+	bool Board::CanRotateLeft() const
 	{
 		return CanRotate(CurrentTetromino->GetPreviousShape());
 	}
 
-	bool Board::CanRotateRight()
+	bool Board::CanRotateRight() const
 	{
 		return CanRotate(CurrentTetromino->GetNextShape());
 	}
@@ -439,5 +450,7 @@ namespace REKFramework
 	{
 		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
 		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
+
+		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
 	}
 }

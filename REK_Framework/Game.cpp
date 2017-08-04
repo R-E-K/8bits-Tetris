@@ -146,7 +146,7 @@ namespace REKFramework
 
 	void Game::HandleGameMenu()
 	{
-		if (gameContextMngr != nullptr && gameContextMngr->currentGameContext == GameContextEnum::MENU)
+		if (gameContextMngr != nullptr && GameContextManager::CurrentGameContext == GameContextEnum::MENU)
 		{
 			if (gameMenu == nullptr)
 			{
@@ -157,7 +157,7 @@ namespace REKFramework
 			gameMenu->Draw();
 		}
 
-		if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && gameMenu != nullptr)
+		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && gameMenu != nullptr)
 		{
 			gameMenu.reset();
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);

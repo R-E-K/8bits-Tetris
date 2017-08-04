@@ -64,7 +64,7 @@ namespace REKFramework
 
 			if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
-			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
+			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 				keyboardManager->CheckInputHold();
 
 			CheckGamepadInput();
@@ -72,7 +72,7 @@ namespace REKFramework
 		}
 		if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
 
-		if (gameContextMngr->currentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
+		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
 			keyboardManager->CheckInputHold();
 
 		CheckGamepadInput();
@@ -84,7 +84,7 @@ namespace REKFramework
 			&PressedInput->jbutton != nullptr &&
 			&PressedInput->jbutton.button != nullptr)
 		{
-			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME
+			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME
 				&& PressedInput->jbutton.button != SDL_CONTROLLER_BUTTON_START)
 			{
 				gamepadButtonsPressedState.push_back(PressedInput->jbutton.button);
@@ -120,7 +120,7 @@ namespace REKFramework
 			&PressedInput->jaxis.axis != nullptr &&
 			&PressedInput->jaxis.value != nullptr)
 		{
-			if (gameContextMngr->currentGameContext == GameContextEnum::INGAME)
+			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
 			{
 				if (PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT)
 				{
@@ -157,10 +157,10 @@ namespace REKFramework
 			&PressedInput->key.keysym.scancode != nullptr)
 		{
 			if (
-				(gameContextMngr->currentGameContext == GameContextEnum::INGAME &&
+				(GameContextManager::CurrentGameContext == GameContextEnum::INGAME &&
 					PressedInput->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				||
-				gameContextMngr->currentGameContext == GameContextEnum::MENU
+				GameContextManager::CurrentGameContext == GameContextEnum::MENU
 				)
 			{
 				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);
