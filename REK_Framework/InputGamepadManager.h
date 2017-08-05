@@ -11,6 +11,7 @@ namespace REKFramework
 		~InputGamepadManager();
 
 		void CheckInput(Uint8 pressedButton) const;
+		void CheckReleasedInput(Uint8 releasedButton) const;
 		void CheckAxisMotion(Uint8 axisMotion) const;
 	private:
 		std::shared_ptr<GameContextManager> gameContextMngr;

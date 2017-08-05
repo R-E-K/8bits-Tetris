@@ -62,6 +62,16 @@ namespace REKFramework
 		}
 	}
 
+	void InputGamepadManager::CheckReleasedInput(Uint8 releasedButton) const
+	{
+		switch (releasedButton)
+		{
+		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+			gameContextMngr->ExecuteDPadDownButtonReleaseAction();
+			break;
+		}
+	}
+
 	void InputGamepadManager::CheckAxisMotion(Uint8 axisMotion) const
 	{
 		switch (axisMotion)

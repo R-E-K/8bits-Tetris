@@ -135,7 +135,10 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawDPadDownButton();
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoDown();
+			}
 			break;
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
@@ -260,6 +263,19 @@ namespace REKFramework
 		{
 		case GameContextEnum::INGAME:
 			DrawPictureMngr->DrawRTButton();
+			break;
+		}
+	}
+
+	void GameContextManager::ExecuteDPadDownButtonReleaseAction()
+	{
+		switch (CurrentGameContext)
+		{
+		case GameContextEnum::INGAME:
+			if (boardGame != nullptr)
+			{
+				boardGame->MoveTetrominoDownRelease();
+			}
 			break;
 		}
 	}

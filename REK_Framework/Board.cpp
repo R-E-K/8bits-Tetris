@@ -106,6 +106,16 @@ namespace REKFramework
 		}
 	}
 
+	void Board::MoveTetrominoDown()
+	{
+		TetrominoMovingDownTimer.SetRepeatFrequency(50);
+	}
+
+	void Board::MoveTetrominoDownRelease()
+	{
+		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
+	}
+
 	void Board::SetTexturesBackground()
 	{
 		auto surfaceLight = std::unique_ptr<SDL_Surface, SdlDeleter>(
@@ -511,6 +521,6 @@ namespace REKFramework
 		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
 		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
 
-		TetrominoMovingDownTimer.SetRepeatFrequency(250);
+		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
 	}
 }

@@ -102,6 +102,8 @@ namespace REKFramework
 			&PressedInput->jbutton != nullptr &&
 			&PressedInput->jbutton.button != nullptr)
 		{
+			gamepadManager->CheckReleasedInput(PressedInput->jbutton.button);
+
 			// We check that element exists in vector before remove it
 			if (find(gamepadButtonsPressedState.begin(), gamepadButtonsPressedState.end(), PressedInput->jbutton.button)
 				!= gamepadButtonsPressedState.end())

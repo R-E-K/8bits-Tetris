@@ -38,6 +38,9 @@ namespace REKFramework
 		void ExecuteLTTriggerAction();
 		void ExecuteRTTriggerAction();
 
+
+		void ExecuteDPadDownButtonReleaseAction();
+
 	private:
 		std::shared_ptr<GameMenu> gameMenu;
 		std::shared_ptr<Board> boardGame;

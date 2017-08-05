@@ -30,6 +30,9 @@ namespace REKFramework
 		void RotateTetrominoToLeftIfPossible();
 		void RotateTetrominoToRightIfPossible();
 
+		void MoveTetrominoDown();
+		void MoveTetrominoDownRelease();
+
 	private:
 
 		const Uint8 NB_COLUMNS = 10;
