@@ -55,6 +55,7 @@ namespace REKFramework
 
 			HandleGameMenu();
 
+			// Handle Game Over
 			if (boardGame != nullptr)
 			{
 				if (boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
