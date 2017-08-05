@@ -79,6 +79,8 @@ namespace REKFramework
 		bool CanRotateLeft() const;
 		bool CanRotateRight() const;
 
+		bool IsCollideBottom();
+
 		void SetTimers();
 	};
 

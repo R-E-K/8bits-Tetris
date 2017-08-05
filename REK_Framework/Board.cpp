@@ -40,9 +40,30 @@ namespace REKFramework
 
 	void Board::Update()
 	{
+		DrawCurrentTetrominosOnBoard();
+
 		TetrominoMovingDownTimer.Execute([&]()
 		{
-			TetrominoPositionY++;
+			if (!IsCollideBottom())
+			{
+				TetrominoPositionY++;
+			}
+			else
+			{
+				// Clear Stacks
+				// Unfortunately, extension methods don't exist in C++
+				while (!TetrominoTileXPrevious.empty())
+				{
+					TetrominoTileXPrevious.pop();
+				}
+
+				while (!TetrominoTileYPrevious.empty())
+				{
+					TetrominoTileYPrevious.pop();
+				}
+
+				NewTetromino();
+			}
 		});
 	}
 
@@ -160,27 +181,6 @@ namespace REKFramework
 				logicalTetrominosArray[i][j] = TetrominoColorEnum::NONE;
 			}
 		}
-
-		// TESTS
-		logicalTetrominosArray[5][2] = TetrominoColorEnum::BLUE;
-		logicalTetrominosArray[5][3] = TetrominoColorEnum::BLUE;
-		logicalTetrominosArray[5][4] = TetrominoColorEnum::BLUE;
-		logicalTetrominosArray[5][5] = TetrominoColorEnum::RED;
-
-		logicalTetrominosArray[6][2] = TetrominoColorEnum::GREEN;
-		logicalTetrominosArray[7][2] = TetrominoColorEnum::GREEN;
-		logicalTetrominosArray[8][2] = TetrominoColorEnum::GREEN;
-		logicalTetrominosArray[9][2] = TetrominoColorEnum::GREEN;
-
-		logicalTetrominosArray[15][2] = TetrominoColorEnum::ORANGE;
-		logicalTetrominosArray[15][3] = TetrominoColorEnum::ORANGE;
-		logicalTetrominosArray[16][3] = TetrominoColorEnum::ORANGE;
-		logicalTetrominosArray[16][4] = TetrominoColorEnum::ORANGE;
-
-		logicalTetrominosArray[17][0] = TetrominoColorEnum::YELLOW;
-		logicalTetrominosArray[17][1] = TetrominoColorEnum::BROWN;
-		logicalTetrominosArray[17][2] = TetrominoColorEnum::PURPLE;
-		logicalTetrominosArray[17][3] = TetrominoColorEnum::RED;
 	}
 
 	void Board::DrawCurrentTetrominosOnBoard()
@@ -446,11 +446,70 @@ namespace REKFramework
 		return CanRotate(CurrentTetromino->GetNextShape());
 	}
 
+	bool Board::IsCollideBottom()
+	{
+		auto shapeToCheck = CurrentTetromino->GetTetrominoCurrentShape();
+		bool isCollide = false;
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+
+			tetrominoTileX = TetrominoPositionX - 1;
+			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
+			{
+				tetrominoTileX++;
+
+				// Bottom collision
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
+					&& tetrominoTileY + 1 >= NB_ROWS)
+				{
+					isCollide = true;
+				}
+				else // Others pieces bottom collision
+				{
+					// Si tuile du tétromino est pleine
+					if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+					{
+
+						// Si pas de tuile de tétromino en dessous et tuile du plateau est pleine
+						if (i == shapeToCheck.size() - 1
+							&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+						{
+							// Alors isCollide = true;
+							isCollide = true;
+							// Fin Si
+						}
+						else if (i < shapeToCheck.size() - 1)
+						{
+							// Si tuile du tétromino en dessous est vide et tuile du plateau est pleine
+							if (shapeToCheck[i + 1][j] == static_cast<int>(TetrominoColorEnum::NONE)
+								&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+							{
+								// Alors isCollide = true;
+								isCollide = true;
+								// Fin Si
+							}
+						}
+
+						// Fin Si
+					}
+				}
+
+			}
+		}
+
+		return isCollide;
+	}
+
 	void Board::SetTimers()
 	{
 		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
 		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
 
-		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
+		TetrominoMovingDownTimer.SetRepeatFrequency(250);
 	}
 }
