@@ -1,5 +1,6 @@
 #include "Board.h"
 #include "ImageLoader.h"
+#include <algorithm>
 
 namespace REKFramework
 {
@@ -62,6 +63,8 @@ namespace REKFramework
 				{
 					TetrominoTileYPrevious.pop();
 				}
+
+				RemoveFullLines();
 
 				NewTetromino();
 			}
@@ -455,6 +458,47 @@ namespace REKFramework
 	bool Board::CanRotateRight() const
 	{
 		return CanRotate(CurrentTetromino->GetNextShape());
+	}
+
+	void Board::RemoveFullLines()
+	{
+		int countLines = logicalTetrominosArray.size();
+
+		// Searching for full lines
+		auto iteratorRemoveFullLines = [](std::vector<TetrominoColorEnum> line) -> bool
+		{
+			bool needToBeRemoved = true;
+
+			for (auto tile : line)
+			{
+				if (tile == TetrominoColorEnum::NONE)
+					needToBeRemoved = false;
+			}
+
+			return needToBeRemoved;
+		};
+
+		// Call std::remove_if and obtain iterator
+		auto iterator = std::remove_if(logicalTetrominosArray.begin(), logicalTetrominosArray.end(), iteratorRemoveFullLines);
+		// Delete full lines
+		logicalTetrominosArray.erase(iterator, logicalTetrominosArray.end());
+
+
+		// Inserting new empty lines
+		int countLinesRemoved = countLines - logicalTetrominosArray.size();
+		logicalTetrominosArray.insert(logicalTetrominosArray.begin(), countLinesRemoved, {
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE,
+			TetrominoColorEnum::NONE
+		});
+
 	}
 
 	bool Board::IsCollideBottom()

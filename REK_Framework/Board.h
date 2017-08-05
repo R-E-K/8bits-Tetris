@@ -84,6 +84,8 @@ namespace REKFramework
 
 		bool IsCollideBottom();
 
+		void RemoveFullLines();
+
 		void SetTimers();
 	};
 
