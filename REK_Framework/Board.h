@@ -25,6 +25,8 @@ namespace REKFramework
 		void NewTetromino();
 		void Update();
 
+		bool IsGameOver() const;
+
 		void MoveTetrominoToTheLeft();
 		void MoveTetrominoToTheRight();
 		void RotateTetrominoToLeftIfPossible();
@@ -38,6 +40,8 @@ namespace REKFramework
 		const Uint8 NB_COLUMNS = 10;
 		const Uint8 NB_ROWS = 18;
 		const int BORDER_THICKNESS = 5;
+
+		bool gameOver;
 
 		InputTimer MoveTetrominoToLeftOrRightTimer;
 		Timer TetrominoMovingDownTimer;
@@ -85,6 +89,7 @@ namespace REKFramework
 		bool IsCollideBottom();
 
 		void RemoveFullLines();
+		bool isGameOverInternal();
 
 		void SetTimers();
 	};

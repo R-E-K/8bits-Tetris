@@ -26,6 +26,8 @@ namespace REKFramework
 		bool MustDestroyGameMenuOnSelect() const;
 		bool MustDestroyGameMenuOnBack() const;
 
+		GameMenuItemEnum GetLastItemMenuSelected() const;
+
 	private:
 		std::map<Uint8, GameMenuItemEnum> gameMenuItems;
 		GameMenuItemEnum selectedItem;

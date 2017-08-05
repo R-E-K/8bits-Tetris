@@ -112,6 +112,11 @@ namespace REKFramework
 		return GameMenuLevel == 0;
 	}
 
+	GameMenuItemEnum GameMenu::GetLastItemMenuSelected() const
+	{
+		return selectedItem;
+	}
+
 	std::shared_ptr<SDL_Texture> GameMenu::CreateBackground(SDL_Rect& gameMenuPosition) const
 	{
 		gameMenuPosition.x = backgroundPositionX;

@@ -45,11 +45,23 @@ namespace REKFramework
 
 			if (boardGame != nullptr)
 			{
-				boardGame->Update();
+				if (!boardGame->IsGameOver())
+				{
+					boardGame->Update();
+				}
+
 				boardGame->Draw();
 			}
 
 			HandleGameMenu();
+
+			if (boardGame != nullptr)
+			{
+				if (boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
+				{
+					gameContextMngr->ExecuteStartButtonAction();
+				}
+			}
 
 			//Update the surface
 			//SDL_UpdateWindowSurface(window); // software rendering : Not good
@@ -146,6 +158,7 @@ namespace REKFramework
 
 	void Game::HandleGameMenu()
 	{
+
 		if (gameContextMngr != nullptr && GameContextManager::CurrentGameContext == GameContextEnum::MENU)
 		{
 			if (gameMenu == nullptr)
@@ -159,10 +172,22 @@ namespace REKFramework
 
 		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && gameMenu != nullptr)
 		{
+
 			gameMenu.reset();
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
 
-			if (boardGame == nullptr)
+			if (boardGame != nullptr && boardGame->IsGameOver())
+			{
+				// We leave menu after game over and restart a new game
+				if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
+				{
+					boardGame.reset();
+					boardGame = nullptr;
+					boardGame = std::make_shared<Board>();
+					gameContextMngr->SetBoardGame(boardGame);
+				}
+			}
+			else if (boardGame == nullptr)
 			{
 				boardGame = std::make_shared<Board>();
 				gameContextMngr->SetBoardGame(boardGame);

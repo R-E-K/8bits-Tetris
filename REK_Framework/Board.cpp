@@ -10,6 +10,8 @@ namespace REKFramework
 		backgroundTextureWidth = (SCREEN_HEIGHT * (85.0 / 100.0)) / NB_ROWS;
 		backgroundTextureHeight = (SCREEN_HEIGHT * (85.0 / 100.0)) / NB_ROWS;
 
+		gameOver = false;
+
 		SetBorderBackground();
 		SetTexturesBackground();
 		SetTetrominosTextures();
@@ -37,6 +39,11 @@ namespace REKFramework
 		TetrominoShapeEnum selectedShape = RandomlySelectTetrominoType();
 		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
 		SetTetrominoStartPosition(selectedShape);
+
+		if (isGameOverInternal())
+		{
+			gameOver = true;
+		}
 	}
 
 	void Board::Update()
@@ -69,6 +76,11 @@ namespace REKFramework
 				NewTetromino();
 			}
 		});
+	}
+
+	bool Board::IsGameOver() const
+	{
+		return gameOver;
 	}
 
 	void Board::MoveTetrominoToTheLeft()
@@ -499,6 +511,35 @@ namespace REKFramework
 			TetrominoColorEnum::NONE
 		});
 
+	}
+
+	bool Board::isGameOverInternal()
+	{
+		auto shapeToCheck = CurrentTetromino->GetTetrominoCurrentShape();
+		bool isGameOver = false;
+
+		int tetrominoTileX = TetrominoPositionX - 1;
+		int tetrominoTileY = TetrominoPositionY - 1;
+
+		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
+		{
+			tetrominoTileY++;
+
+			tetrominoTileX = TetrominoPositionX - 1;
+			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
+			{
+				tetrominoTileX++;
+
+				if(shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
+					&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+				{
+					isGameOver = true;
+					break;
+				}
+			}
+		}
+
+		return isGameOver;
 	}
 
 	bool Board::IsCollideBottom()
