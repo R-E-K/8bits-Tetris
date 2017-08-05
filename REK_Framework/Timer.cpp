@@ -9,12 +9,14 @@ namespace REKFramework
 	Timer::Timer()
 	{
 		lastTime = 0;
+		_firstTimeDelay = 0;
 	}
 
 	Timer::Timer(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
 		lastTime = 0;
+		_firstTimeDelay = 0;
 	}
 
 	Timer::~Timer()
@@ -26,6 +28,11 @@ namespace REKFramework
 		if (!GameContextManager::IsGamePaused())
 		{
 			currentTime = SDL_GetTicks();
+
+			if (lastTime == 0)
+			{
+				lastTime = SDL_GetTicks() + _firstTimeDelay;
+			}
 
 			if (currentTime - lastTime >= _inputRepeatFrequency)
 			{
@@ -39,5 +46,10 @@ namespace REKFramework
 	void Timer::SetRepeatFrequency(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
+	}
+
+	void Timer::SetFirstTimeDelay(int firstTimeDelay)
+	{
+		_firstTimeDelay = firstTimeDelay;
 	}
 }

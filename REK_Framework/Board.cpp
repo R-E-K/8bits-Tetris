@@ -40,6 +40,7 @@ namespace REKFramework
 
 	void Board::Update()
 	{
+		// Need to be draw here to have the last shape
 		DrawCurrentTetrominosOnBoard();
 
 		TetrominoMovingDownTimer.Execute([&]()
