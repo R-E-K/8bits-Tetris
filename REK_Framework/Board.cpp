@@ -74,6 +74,8 @@ namespace REKFramework
 				RemoveFullLines();
 
 				NewTetromino();
+
+				MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 			}
 		});
 	}
@@ -447,8 +449,15 @@ namespace REKFramework
 					}
 				}
 
+				// Bottom collision
+				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
+					&& tetrominoTileY >= NB_ROWS)
+				{
+					isRotatable = false;
+				}
+
 				// Others pieces collision
-				if (tetrominoTileX > 0 && tetrominoTileX < NB_COLUMNS)
+				if (tetrominoTileX > 0 && tetrominoTileX < NB_COLUMNS && tetrominoTileY < NB_ROWS)
 				{
 					if (CurrentTetromino->GetTetrominoCurrentShape()[i][j] == static_cast<int>(TetrominoColorEnum::NONE)
 						&& logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != TetrominoColorEnum::NONE)
@@ -605,6 +614,7 @@ namespace REKFramework
 	{
 		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
 		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
+		MoveTetrominoToLeftOrRightTimer.SetFirstTimeDelay(200);
 
 		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
 	}

@@ -7,6 +7,7 @@ namespace REKFramework
 	{
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
+		_firstTimeDelay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency)
@@ -15,6 +16,7 @@ namespace REKFramework
 		_startHoldInputDownDelay = 0;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
+		_firstTimeDelay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency, int startHoldInputDownDelay)
@@ -23,6 +25,7 @@ namespace REKFramework
 		_startHoldInputDownDelay = startHoldInputDownDelay;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
+		_firstTimeDelay = 0;
 	}
 
 	InputTimer::~InputTimer()
@@ -55,6 +58,10 @@ namespace REKFramework
 		}
 		else if (!IsHoldInputDown)
 		{
+			if (InputDownLastTime == 0)
+			{
+				InputDownLastTime = SDL_GetTicks() + _firstTimeDelay;
+			}
 			// If not safety threshold, it will be repeated continously
 			if (currentTime - InputDownLastTime >= SAFETY_THRESHOLD_MS)
 			{
@@ -75,4 +82,13 @@ namespace REKFramework
 		_startHoldInputDownDelay = startHoldInputDownDelay;
 	}
 
+	void InputTimer::SetFirstTimeDelay(int firstTimeDelay)
+	{
+		_firstTimeDelay = firstTimeDelay;
+	}
+
+	void InputTimer::SetDelay(int delay)
+	{
+		InputDownLastTime = SDL_GetTicks() + delay;
+	}
 }
