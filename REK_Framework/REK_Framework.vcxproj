@@ -158,6 +158,7 @@
     <ClCompile Include="DrawGameButtonLabelService.cpp" />
     <ClCompile Include="DrawPictureManager.cpp" />
     <ClCompile Include="DrawTextService.cpp" />
+    <ClCompile Include="EntitiesConsts.cpp" />
     <ClCompile Include="ErrorMessageManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameContextManager.cpp" />
@@ -169,6 +170,9 @@
     <ClCompile Include="InputKeyboardManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputTimer.cpp" />
+    <ClCompile Include="LevelComponent.cpp" />
+    <ClCompile Include="LinesRemovedCounterComponent.cpp" />
+    <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SDLDeletersFunctor.cpp" />
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -180,6 +184,7 @@
     <ClInclude Include="DrawGameButtonLabelService.h" />
     <ClInclude Include="DrawPictureManager.h" />
     <ClInclude Include="DrawTextService.h" />
+    <ClInclude Include="EntitiesConsts.h" />
     <ClInclude Include="ErrorMessageManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameContextEnum.h" />
@@ -193,7 +198,10 @@
     <ClInclude Include="InputKeyboardManager.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputTimer.h" />
+    <ClInclude Include="LevelComponent.h" />
+    <ClInclude Include="LinesRemovedCounterComponent.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SDLDeletersFunctor.h" />
     <ClInclude Include="SDLMainObjectsProvider.h" />
     <ClInclude Include="SoundManager.h" />

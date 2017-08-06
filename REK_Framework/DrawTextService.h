@@ -13,10 +13,10 @@ namespace REKFramework
 
 		~DrawTextService();
 
-		void DrawText(std::string const& itemMenuName, int x, int y);
-		void DrawTextWithSize(std::string const& itemMenuName, int x, int y, int textSize);
-		void DrawTextWithColor(std::string const& itemMenuName, int x, int y, SDL_Color& color);
-		void DrawTextWithSizeAndColor(std::string const& itemMenuName, int x, int y, int textSize, SDL_Color& color);
+		void DrawText(std::string const& text, int x, int y) const;
+		void DrawTextWithSize(std::string const& text, int x, int y, int textSize) const;
+		static void DrawTextWithColor(std::string const& text, int x, int y, SDL_Color color);
+		static void DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color);
 	private:
 		SDL_Color defaultClr;
 	};

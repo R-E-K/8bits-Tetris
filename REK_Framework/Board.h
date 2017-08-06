@@ -5,12 +5,16 @@
 #include "SDLDeletersFunctor.h"
 #include "window.h"
 #include "SDLMainObjectsProvider.h"
+#include "EntitiesConsts.h"
 #include "TetrominoColorEnum.h"
 #include "TetrominoShapeEnum.h"
 #include "Tetromino.h"
 #include <stack>
 #include "InputTimer.h"
 #include "Timer.h"
+#include "LevelComponent.h"
+#include "LinesRemovedCounterComponent.h"
+#include "ScoreComponent.h"
 
 namespace REKFramework
 {
@@ -37,14 +41,16 @@ namespace REKFramework
 
 	private:
 
-		const Uint8 NB_COLUMNS = 10;
-		const Uint8 NB_ROWS = 18;
-		const int BORDER_THICKNESS = 5;
+		LevelComponent _levelComponent;
+		LinesRemovedCounterComponent _linesRemovedCounterComponent;
+		ScoreComponent _scoreComponent;
 
 		bool gameOver;
 
 		InputTimer MoveTetrominoToLeftOrRightTimer;
 		Timer TetrominoMovingDownTimer;
+		const int MoveDownTimerDefaultFrequency = 1000;
+		int MoveDownTimerFrequency;
 
 		std::stack<int> TetrominoTileXPrevious;
 		std::stack<int> TetrominoTileYPrevious;
@@ -92,6 +98,9 @@ namespace REKFramework
 		bool isGameOverInternal();
 
 		void SetTimers();
+
+		void CheckLevel(int nbLinesJustRemoved);
+		void UpdateScore(int nbLinesJustRemoved);
 	};
 
 }

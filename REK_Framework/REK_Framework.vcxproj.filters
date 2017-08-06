@@ -59,6 +59,16 @@
       <Filter>sources\core</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="LevelComponent.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitiesConsts.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="LinesRemovedCounterComponent.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -135,6 +145,16 @@
       <Filter>sources\core</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="LevelComponent.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntitiesConsts.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="LinesRemovedCounterComponent.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

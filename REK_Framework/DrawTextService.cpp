@@ -19,22 +19,22 @@ namespace REKFramework
 
 	}
 
-	void DrawTextService::DrawText(std::string const& itemMenuName, int x, int y)
+	void DrawTextService::DrawText(std::string const& text, int x, int y) const
 	{
-		DrawTextWithSizeAndColor(itemMenuName, x, y, 24, defaultClr);
+		DrawTextWithSizeAndColor(text, x, y, 24, defaultClr);
 	}
 
-	void DrawTextService::DrawTextWithSize(std::string const& itemMenuName, int x, int y, int textSize)
+	void DrawTextService::DrawTextWithSize(std::string const& text, int x, int y, int textSize) const
 	{
-		DrawTextWithSizeAndColor(itemMenuName, x, y, textSize, defaultClr);
+		DrawTextWithSizeAndColor(text, x, y, textSize, defaultClr);
 	}
 
-	void DrawTextService::DrawTextWithColor(std::string const& itemMenuName, int x, int y, SDL_Color& color)
+	void DrawTextService::DrawTextWithColor(std::string const& text, int x, int y, SDL_Color color)
 	{
-		DrawTextWithSizeAndColor(itemMenuName, x, y, 24, color);
+		DrawTextWithSizeAndColor(text, x, y, 24, color);
 	}
 
-	void DrawTextService::DrawTextWithSizeAndColor(std::string const& itemMenuName, int x, int y, int textSize, SDL_Color& color)
+	void DrawTextService::DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color)
 	{
 		auto fontMenu = std::unique_ptr<TTF_Font, SdlDeleter>(
 			TTF_OpenFont("resources/fonts/Minecraft.ttf", textSize)
@@ -42,7 +42,7 @@ namespace REKFramework
 			);
 
 		auto textSurface = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			TTF_RenderText_Solid(fontMenu.get(), itemMenuName.c_str(), color)
+			TTF_RenderText_Solid(fontMenu.get(), text.c_str(), color)
 			,SdlDeleter()
 			);
 
