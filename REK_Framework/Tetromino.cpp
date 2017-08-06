@@ -13,7 +13,7 @@ namespace REKFramework
 
 		RotateTimer.SetInputRepeatFrequency(500);
 		RotateTimer.SetStartHoldInputDownDelay(500);
-		RotateTimer.SetFirstTimeDelay(200);
+		RotateTimer.SetDelay(200);
 	}
 
 	Tetromino::~Tetromino()

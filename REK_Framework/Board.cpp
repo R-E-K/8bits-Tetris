@@ -40,6 +40,9 @@ namespace REKFramework
 		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
 		SetTetrominoStartPosition(selectedShape);
 
+		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
+		TetrominoMovingDownTimer.SetDelay(200);
+
 		if (isGameOverInternal())
 		{
 			gameOver = true;
@@ -74,8 +77,6 @@ namespace REKFramework
 				RemoveFullLines();
 
 				NewTetromino();
-
-				MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 			}
 		});
 	}
@@ -614,7 +615,7 @@ namespace REKFramework
 	{
 		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
 		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
-		MoveTetrominoToLeftOrRightTimer.SetFirstTimeDelay(200);
+		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 
 		TetrominoMovingDownTimer.SetRepeatFrequency(1000);
 	}

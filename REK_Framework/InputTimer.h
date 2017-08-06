@@ -15,7 +15,6 @@ namespace REKFramework
 		void Execute(std::function<void()> function);
 		void SetInputRepeatFrequency(int inputRepeatFrequency);
 		void SetStartHoldInputDownDelay(int startHoldInputDownDelay);
-		void SetFirstTimeDelay(int firstTimeDelay);
 		void SetDelay(int delay);
 
 	private:
@@ -31,7 +30,7 @@ namespace REKFramework
 
 		int _startHoldInputDownDelay;
 		int _inputRepeatFrequency;
-		int _firstTimeDelay;
+		int _delay;
 	};
 }
 

@@ -9,18 +9,23 @@ namespace REKFramework
 	Timer::Timer()
 	{
 		lastTime = 0;
-		_firstTimeDelay = 0;
+		_delay = 0;
 	}
 
 	Timer::Timer(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
 		lastTime = 0;
-		_firstTimeDelay = 0;
+		_delay = 0;
 	}
 
 	Timer::~Timer()
 	{
+	}
+
+	int Timer::GetRepeatFrequency() const
+	{
+		return _inputRepeatFrequency;
 	}
 
 	void Timer::Execute(std::function<void()> function)
@@ -29,15 +34,18 @@ namespace REKFramework
 		{
 			currentTime = SDL_GetTicks();
 
-			if (lastTime == 0)
+			if (_delay < currentTime)
 			{
-				lastTime = SDL_GetTicks() + _firstTimeDelay;
-			}
+				if (lastTime == 0)
+				{
+					lastTime = SDL_GetTicks();
+				}
 
-			if (currentTime - lastTime >= _inputRepeatFrequency)
-			{
-				function();
-				lastTime = SDL_GetTicks();
+				if (currentTime - lastTime >= _inputRepeatFrequency)
+				{
+					function();
+					lastTime = SDL_GetTicks();
+				}
 			}
 		}
 			
@@ -48,8 +56,8 @@ namespace REKFramework
 		_inputRepeatFrequency = inputRepeatFrequency;
 	}
 
-	void Timer::SetFirstTimeDelay(int firstTimeDelay)
+	void Timer::SetDelay(int delay)
 	{
-		_firstTimeDelay = firstTimeDelay;
+		_delay = SDL_GetTicks() + delay;
 	}
 }

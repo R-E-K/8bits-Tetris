@@ -7,7 +7,7 @@ namespace REKFramework
 	{
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_firstTimeDelay = 0;
+		_delay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency)
@@ -16,7 +16,7 @@ namespace REKFramework
 		_startHoldInputDownDelay = 0;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_firstTimeDelay = 0;
+		_delay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency, int startHoldInputDownDelay)
@@ -25,7 +25,7 @@ namespace REKFramework
 		_startHoldInputDownDelay = startHoldInputDownDelay;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_firstTimeDelay = 0;
+		_delay = 0;
 	}
 
 	InputTimer::~InputTimer()
@@ -36,39 +36,42 @@ namespace REKFramework
 	{
 		currentTime = SDL_GetTicks();
 
-		// Check at 20 ms. If less, gamepad inputs aren't recognized continously
-		// Maybe a SDL bug, because if an another key is down, gamepad input is recognized continously
-		IsHoldInputDown = (currentTime - InputDownLastTime <= HOLD_THRESHOLD_MS);
-
-		if (IsHoldInputDown)
+		if (_delay < currentTime)
 		{
-			if (!IsStartingHoldInputDown)
+			// Check at 20 ms. If less, gamepad inputs aren't recognized continously
+			// Maybe a SDL bug, because if an another key is down, gamepad input is recognized continously
+			IsHoldInputDown = (currentTime - InputDownLastTime <= HOLD_THRESHOLD_MS);
+
+			if (IsHoldInputDown)
 			{
-				if (currentTime - InputDownHoldTime >= _inputRepeatFrequency)
+				if (!IsStartingHoldInputDown)
 				{
-					function();
-					InputDownHoldTime = currentTime;
+					if (currentTime - InputDownHoldTime >= _inputRepeatFrequency)
+					{
+						function();
+						InputDownHoldTime = currentTime;
+					}
+				}
+				else
+				{
+					IsStartingHoldInputDown = false;
+					InputDownHoldTime = currentTime + _startHoldInputDownDelay;
 				}
 			}
-			else
+			else if (!IsHoldInputDown)
 			{
-				IsStartingHoldInputDown = false;
-				InputDownHoldTime = currentTime + _startHoldInputDownDelay;
+				if (InputDownLastTime == 0)
+				{
+					InputDownLastTime = SDL_GetTicks();
+				}
+				// If not safety threshold, it will be repeated continously
+				if (currentTime - InputDownLastTime >= SAFETY_THRESHOLD_MS)
+				{
+					function();
+					IsStartingHoldInputDown = true;
+				}
+				InputDownLastTime = currentTime;
 			}
-		}
-		else if (!IsHoldInputDown)
-		{
-			if (InputDownLastTime == 0)
-			{
-				InputDownLastTime = SDL_GetTicks() + _firstTimeDelay;
-			}
-			// If not safety threshold, it will be repeated continously
-			if (currentTime - InputDownLastTime >= SAFETY_THRESHOLD_MS)
-			{
-				function();
-				IsStartingHoldInputDown = true;
-			}
-			InputDownLastTime = currentTime;
 		}
 	}
 
@@ -82,13 +85,8 @@ namespace REKFramework
 		_startHoldInputDownDelay = startHoldInputDownDelay;
 	}
 
-	void InputTimer::SetFirstTimeDelay(int firstTimeDelay)
-	{
-		_firstTimeDelay = firstTimeDelay;
-	}
-
 	void InputTimer::SetDelay(int delay)
 	{
-		InputDownLastTime = SDL_GetTicks() + delay;
+		_delay = SDL_GetTicks() + delay;
 	}
 }

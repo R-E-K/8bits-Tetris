@@ -11,15 +11,17 @@ namespace REKFramework
 		Timer(int inputRepeatFrequency);
 		~Timer();
 
+		int GetRepeatFrequency() const;
+
 		void Execute(std::function<void()> function);
 		void SetRepeatFrequency(int inputRepeatFrequency);
-		void SetFirstTimeDelay(int firstTimeDelay);
+		void SetDelay(int delay);
 
 	private:
 		int currentTime;
 		int lastTime;
 		int _inputRepeatFrequency;
-		int _firstTimeDelay;
+		int _delay;
 	};
 
 }
