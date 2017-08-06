@@ -331,17 +331,17 @@ namespace REKFramework
 		// Generate a number between 0 and 99
 		int rng = rand() % 100;
 
-		if (rng < 5)
+		if (rng < 10)
 			return TetrominoShapeEnum::I;
-		else if (rng < 20)
+		else if (rng < 25)
 			return TetrominoShapeEnum::J;
-		else if (rng < 35)
+		else if (rng < 40)
 			return TetrominoShapeEnum::L;
-		else if (rng < 50)
+		else if (rng < 55)
 			return TetrominoShapeEnum::O;
-		else if (rng < 65)
+		else if (rng < 70)
 			return TetrominoShapeEnum::S;
-		else if (rng < 80)
+		else if (rng < 85)
 			return TetrominoShapeEnum::T;
 		else if (rng < 100)
 			return TetrominoShapeEnum::Z;
