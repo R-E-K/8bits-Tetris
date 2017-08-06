@@ -36,6 +36,7 @@ namespace REKFramework
 		void SetAxisMotion();
 
 		void CheckInputNotHold();
+		void CheckReleaseInput();
 
 		void CheckGamepadInput() const;
 		void CheckGamepadAxisMotion() const;

@@ -92,4 +92,15 @@ namespace REKFramework
 			break;
 		}
 	}
+
+	void InputKeyboardManager::CheckReleaseInput(SDL_Scancode scan) const
+	{
+		switch (scan)
+		{
+		case SDL_SCANCODE_S:
+		case SDL_SCANCODE_DOWN:
+			gameContextMngr->ExecuteDPadDownButtonReleaseAction();
+			break;
+		}
+	}
 }

@@ -43,7 +43,7 @@ namespace REKFramework
 				CheckInputNotHold();
 				break;
 			case SDL_KEYUP:
-				canCheckKeyboardInput = false;
+				CheckReleaseInput();
 				break;
 			case SDL_CONTROLLERBUTTONDOWN:
 				SetPressedButton();
@@ -168,6 +168,19 @@ namespace REKFramework
 				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);
 				canCheckKeyboardInput = true;
 			}
+		}
+	}
+
+	void InputManager::CheckReleaseInput()
+	{
+		if (PressedInput != nullptr &&
+			&PressedInput->key != nullptr &&
+			&PressedInput->key.keysym != nullptr &&
+			&PressedInput->key.keysym.scancode != nullptr)
+		{
+
+			keyboardManager->CheckReleaseInput(PressedInput->key.keysym.scancode);
+			canCheckKeyboardInput = false;
 		}
 	}
 

@@ -13,6 +13,7 @@ namespace REKFramework
 
 		void CheckInputHold() const;
 		void CheckInputNotHold(SDL_Scancode scan) const;
+		void CheckReleaseInput(SDL_Scancode scan) const;
 	private:
 		std::shared_ptr<GameContextManager> gameContextMngr;
 	};
