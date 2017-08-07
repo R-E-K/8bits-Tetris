@@ -64,8 +64,8 @@ namespace REKFramework
 	void LinesRemovedCounterComponent::DrawBorder() const
 	{
 		SDL_Rect backgroundTilePosition;
-		backgroundTilePosition.x = (SCREEN_WIDTH / 8) - EntitiesConsts::BORDER_THICKNESS;
-		backgroundTilePosition.y = SCREEN_HEIGHT * (20.0 / 100.0) - EntitiesConsts::BORDER_THICKNESS; // Start at 20% from top
+		backgroundTilePosition.x = (SCREEN_WIDTH / 6) - EntitiesConsts::BORDER_THICKNESS;
+		backgroundTilePosition.y = SCREEN_HEIGHT * (15.0 / 100.0) - EntitiesConsts::BORDER_THICKNESS; // Start at 20% from top
 		backgroundTilePosition.w = _backgroundTextureWidth + (EntitiesConsts::BORDER_THICKNESS * 2);
 		backgroundTilePosition.h = _backgroundTextureHeight + (EntitiesConsts::BORDER_THICKNESS * 2);
 
@@ -77,8 +77,8 @@ namespace REKFramework
 	void LinesRemovedCounterComponent::DrawBackground() const
 	{
 		SDL_Rect backgroundTilePosition;
-		backgroundTilePosition.x = (SCREEN_WIDTH / 8);
-		backgroundTilePosition.y = SCREEN_HEIGHT * (20.0 / 100.0); // Start at 20% from top
+		backgroundTilePosition.x = (SCREEN_WIDTH / 6);
+		backgroundTilePosition.y = SCREEN_HEIGHT * (15.0 / 100.0); // Start at 20% from top
 		backgroundTilePosition.w = _backgroundTextureWidth;
 		backgroundTilePosition.h = _backgroundTextureHeight;
 
@@ -92,8 +92,8 @@ namespace REKFramework
 		SDL_Color color = { 255, 255, 255 };
 
 		DrawTextService::DrawTextWithSizeAndColor("Lines"
-			, (SCREEN_WIDTH / 8) + (_backgroundTextureWidth * (5.0 / 100.0))
-			, SCREEN_HEIGHT * (19.5 / 100.0) + (_backgroundTextureHeight * (5.0 / 100.0))
+			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (5.0 / 100.0))
+			, SCREEN_HEIGHT * (14.5 / 100.0) + (_backgroundTextureHeight * (5.0 / 100.0))
 			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);
 	}
@@ -103,8 +103,8 @@ namespace REKFramework
 		SDL_Color color = { 50, 50, 255 };
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_countLinesRemoved)
-			, (SCREEN_WIDTH / 8) + (_backgroundTextureWidth * (66.0 / 100.0))
-			, SCREEN_HEIGHT * (19.5 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
+			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (66.0 / 100.0))
+			, SCREEN_HEIGHT * (14.5 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
 			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);
 	}

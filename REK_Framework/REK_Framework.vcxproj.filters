@@ -58,7 +58,6 @@
     <ClCompile Include="InputTimer.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="LevelComponent.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
@@ -68,7 +67,15 @@
     <ClCompile Include="LinesRemovedCounterComponent.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp" />
+    <ClCompile Include="Timer.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="NextTetrominoComponent.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -144,7 +151,6 @@
     <ClInclude Include="InputTimer.h">
       <Filter>sources\core</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h" />
     <ClInclude Include="LevelComponent.h">
       <Filter>sources\entities</Filter>
     </ClInclude>
@@ -154,7 +160,15 @@
     <ClInclude Include="LinesRemovedCounterComponent.h">
       <Filter>sources\entities</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreComponent.h" />
+    <ClInclude Include="Timer.h">
+      <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="NextTetrominoComponent.h">
+      <Filter>sources\entities</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

@@ -15,6 +15,7 @@
 #include "LevelComponent.h"
 #include "LinesRemovedCounterComponent.h"
 #include "ScoreComponent.h"
+#include "NextTetrominoComponent.h"
 
 namespace REKFramework
 {
@@ -43,7 +44,8 @@ namespace REKFramework
 
 		LevelComponent _levelComponent;
 		LinesRemovedCounterComponent _linesRemovedCounterComponent;
-		ScoreComponent _scoreComponent;
+		ScoreComponent _scoreAndNextTetrominoComponent;
+		std::unique_ptr<NextTetrominoComponent> _nextTetrominoComponent;
 
 		bool gameOver;
 

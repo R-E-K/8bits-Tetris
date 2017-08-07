@@ -30,6 +30,11 @@ namespace REKFramework
 		return Color;
 	}
 
+	TetrominoShapeEnum Tetromino::GetShape() const
+	{
+		return Shape;
+	}
+
 	void Tetromino::RotateLeft()
 	{
 		RotateTimer.Execute([&]()
@@ -54,6 +59,11 @@ namespace REKFramework
 			ShapeIndex++;
 			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
 		});
+	}
+
+	void Tetromino::SetRotateTimerDelay(int delay)
+	{
+		RotateTimer.SetDelay(delay);
 	}
 
 	std::vector<std::vector<int>> Tetromino::GetNextShape()

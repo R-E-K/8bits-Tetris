@@ -20,7 +20,13 @@ namespace REKFramework
 		InitLogicalTetrominosArray();
 		SetTimers();
 
-		NewTetromino();
+		TetrominoShapeEnum selectedShape = RandomlySelectTetrominoType();
+		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
+		SetTetrominoStartPosition(selectedShape);
+		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
+		TetrominoMovingDownTimer.SetDelay(200);
+
+		_nextTetrominoComponent = std::make_unique<NextTetrominoComponent>(RandomlySelectTetrominoType());
 	}
 
 
@@ -37,17 +43,19 @@ namespace REKFramework
 
 		_levelComponent.Draw();
 		_linesRemovedCounterComponent.Draw();
-		_scoreComponent.Draw();
+		_scoreAndNextTetrominoComponent.Draw();
+		_nextTetrominoComponent->Draw();
 	}
 
 	void Board::NewTetromino()
 	{
-		TetrominoShapeEnum selectedShape = RandomlySelectTetrominoType();
-		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
-		SetTetrominoStartPosition(selectedShape);
+		CurrentTetromino = _nextTetrominoComponent->PopTetromino();
+		_nextTetrominoComponent->SetTetromino(RandomlySelectTetrominoType());
+		SetTetrominoStartPosition(CurrentTetromino->GetShape());
 
 		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 		TetrominoMovingDownTimer.SetDelay(200);
+		CurrentTetromino->SetRotateTimerDelay(200);
 
 		if (isGameOverInternal())
 		{
@@ -646,11 +654,11 @@ namespace REKFramework
 	{
 		if (nbLinesJustRemoved > 0)
 		{
-			_scoreComponent.UpdateScore(_levelComponent.GetLevel(), nbLinesJustRemoved);
+			_scoreAndNextTetrominoComponent.UpdateScore(_levelComponent.GetLevel(), nbLinesJustRemoved);
 		}
 		else
 		{
-			_scoreComponent.UpdateScore(_levelComponent.GetLevel());
+			_scoreAndNextTetrominoComponent.UpdateScore(_levelComponent.GetLevel());
 		}
 	}
 }

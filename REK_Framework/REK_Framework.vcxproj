@@ -172,6 +172,7 @@
     <ClCompile Include="InputTimer.cpp" />
     <ClCompile Include="LevelComponent.cpp" />
     <ClCompile Include="LinesRemovedCounterComponent.cpp" />
+    <ClCompile Include="NextTetrominoComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="SDLDeletersFunctor.cpp" />
     <ClCompile Include="SDLMainObjectsProvider.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="InputTimer.h" />
     <ClInclude Include="LevelComponent.h" />
     <ClInclude Include="LinesRemovedCounterComponent.h" />
+    <ClInclude Include="NextTetrominoComponent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="SDLDeletersFunctor.h" />
