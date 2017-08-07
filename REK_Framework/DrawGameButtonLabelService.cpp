@@ -15,7 +15,7 @@ namespace REKFramework
 		
 	}
 
-	void DrawGameButtonLabelService::DrawWithLabel(std::string const& imagePathFile, std::string const& label, int x, int y) const
+	void DrawGameButtonLabelService::DrawWithLabel(std::string const& imagePathFile, std::string const& label, int x, int y, int width, int height) const
 	{
 		auto buttonImg = ImageLoader::GetImage(imagePathFile);
 		auto buttonTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
@@ -26,14 +26,13 @@ namespace REKFramework
 		SDL_Rect itemMenuPosition;
 		itemMenuPosition.x = x;
 		itemMenuPosition.y = y;
-		itemMenuPosition.w = 32;
-		itemMenuPosition.h = 32;
+		itemMenuPosition.w = height; // It's a square
+		itemMenuPosition.h = height;
 
 		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), buttonTexture.get(), nullptr, &itemMenuPosition);
 
-		x = itemMenuPosition.x + 40;
-		y = itemMenuPosition.y + 7;
+		x = itemMenuPosition.x + height + (height / 4);
 
-		drawTextSrvc->DrawText(label, x, y);
+		DrawTextService::DrawTextWithSizeAndColor(label, x, y, height, { 255, 255, 255 });
 	}
 }

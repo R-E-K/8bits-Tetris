@@ -107,8 +107,8 @@ namespace REKFramework
 
 		DrawTextService::DrawTextWithSizeAndColor("Score"
 			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0))
-			, SCREEN_HEIGHT * (2.0 / 100.0) + (_backgroundTextureHeight * (5.0 / 100.0))
-			, _backgroundTextureHeight * (40.0 / 100.0)
+			, SCREEN_HEIGHT * (1.5 / 100.0)
+			, _backgroundTextureHeight * (60.0 / 100.0)
 			, color);
 	}
 
@@ -118,8 +118,8 @@ namespace REKFramework
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_score)
 			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0))
-			, SCREEN_HEIGHT * (2.0 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
-			, _backgroundTextureHeight * (50.0 / 100.0)
+			, SCREEN_HEIGHT * (1.5 / 100.0) + (_backgroundTextureHeight * (45.0 / 100.0))
+			, _backgroundTextureHeight * (70.0 / 100.0)
 			, color);
 	}
 }

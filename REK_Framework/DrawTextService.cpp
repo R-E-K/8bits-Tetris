@@ -37,7 +37,7 @@ namespace REKFramework
 	void DrawTextService::DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color)
 	{
 		auto fontMenu = std::unique_ptr<TTF_Font, SdlDeleter>(
-			TTF_OpenFont("resources/fonts/Minecraft.ttf", textSize)
+			TTF_OpenFont("resources/fonts/ARCADECLASSIC.ttf", textSize)
 			,SdlDeleter()
 			);
 

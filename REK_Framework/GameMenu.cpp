@@ -117,12 +117,15 @@ namespace REKFramework
 		return selectedItem;
 	}
 
-	std::shared_ptr<SDL_Texture> GameMenu::CreateBackground(SDL_Rect& gameMenuPosition) const
+	std::shared_ptr<SDL_Texture> GameMenu::CreateBackground(SDL_Rect& gameMenuPosition)
 	{
 		gameMenuPosition.x = backgroundPositionX;
 		gameMenuPosition.y = backgroundPositionY;
 		gameMenuPosition.w = (SCREEN_WIDTH / 2);
 		gameMenuPosition.h = (SCREEN_HEIGHT / 1.5);
+
+		backgroundTextureWidth = gameMenuPosition.w;
+		backgroundTextureHeight = gameMenuPosition.h;
 
 		auto backgroundSurface = std::unique_ptr<SDL_Surface, SdlDeleter>(
 			SDL_CreateRGBSurface(0, gameMenuPosition.w, gameMenuPosition.h, 32, 0, 0, 0, 0)
@@ -157,28 +160,32 @@ namespace REKFramework
 
 	void GameMenu::DrawItemsMenu() const
 	{
-		int x = backgroundPositionX + 20;
-		int y = backgroundPositionY + 20;
+		int x = backgroundPositionX + (backgroundTextureWidth / 15);
+		int y = backgroundPositionY + (backgroundTextureHeight / 15);
 
 		DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
-		y += 40;
+		y += (backgroundTextureHeight / 8);
 		DrawItemMenu("Credits", GameMenuItemEnum::CREDITS, x, y);
-		y += 40;
+		y += (backgroundTextureHeight / 8);
 		DrawItemMenu("Quit game", GameMenuItemEnum::QUITGAME, x, y);
 	}
 
 	void GameMenu::DrawItemMenu(std::string const& itemMenuName, GameMenuItemEnum gameMenuItem, int x, int y) const
 	{
-		SDL_Color textColorSelected = { 255, 255, 0 };
+		SDL_Color textColorSelected;
 
 		if (selectedItem == gameMenuItem)
 		{
-			drawTextSrvc->DrawTextWithColor(itemMenuName, x, y, textColorSelected);
+			textColorSelected = { 255, 255, 0 };
 		}
 		else
 		{
-			drawTextSrvc->DrawText(itemMenuName, x, y);
+			textColorSelected = { 255, 255, 255 };
 		}
+
+		DrawTextService::DrawTextWithSizeAndColor(itemMenuName, x, y
+			, (backgroundTextureHeight / 15)
+			, textColorSelected);
 	}
 
 	void GameMenu::DrawCredits()
@@ -187,35 +194,45 @@ namespace REKFramework
 		background = CreateBackground(gameMenuPosition);
 		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
 
-		int x = backgroundPositionX + 40;
-		int y = backgroundPositionY + 40;
+		int x = backgroundPositionX + (backgroundTextureWidth / 10);
+		int y = backgroundPositionY + (backgroundTextureHeight / 10);
 
-		drawTextSrvc->DrawText("Game made by", x, y);
 
-		y += 50;
+		DrawTextService::DrawTextWithSizeAndColor("Game made by", x, y
+			, (backgroundTextureHeight / 10)
+			, { 255, 255, 255 });
 
-		drawTextSrvc->DrawTextWithSize("REK", x, y, 72);
+		y += (backgroundTextureHeight / 4);
+
+		DrawTextService::DrawTextWithSizeAndColor("REK", x, y
+			, (backgroundTextureHeight / 5)
+			, { 255, 255, 255 });
 
 		AddBackButton();
 	}
 
 	void GameMenu::AddBackButton() const
 	{
+
 		int textureWidth, textureHeight;
 		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
-		int x = backgroundPositionX + (textureWidth - (textureWidth / 3.5));
-		int y = backgroundPositionY + (textureHeight - (textureHeight / 8));
+		int x = backgroundPositionX + (backgroundTextureWidth - (backgroundTextureWidth / 3.5));
+		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::BButton, "Back", x, y);
+		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::BButton, "Back", x, y
+			, (backgroundTextureWidth / 18)
+			, (backgroundTextureHeight / 18));
 	}
 
 	void GameMenu::AddValidButton() const
 	{
 		int textureWidth, textureHeight;
 		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
-		int x = backgroundPositionX + 5;
-		int y = backgroundPositionY + (textureHeight - (textureHeight / 8));
+		int x = backgroundPositionX + (backgroundTextureWidth / 15);
+		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::AButton, "Select", x, y);
+		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::AButton, "Select", x, y
+			, (backgroundTextureWidth / 18)
+			, (backgroundTextureHeight / 18));
 	}
 }

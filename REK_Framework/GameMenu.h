@@ -41,8 +41,10 @@ namespace REKFramework
 		std::shared_ptr<SDL_Texture> background;
 		int backgroundPositionX;
 		int backgroundPositionY;
+		int backgroundTextureWidth;
+		int backgroundTextureHeight;
 
-		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition) const;
+		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition);
 		void DrawMainMenu();
 		void DrawItemsMenu() const;
 		void DrawItemMenu(std::string const& itemMenuName, GameMenuItemEnum gameMenuItem, int x, int y) const;

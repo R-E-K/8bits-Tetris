@@ -93,8 +93,8 @@ namespace REKFramework
 
 		DrawTextService::DrawTextWithSizeAndColor("Lines"
 			, (SCREEN_WIDTH / 8) + (_backgroundTextureWidth * (5.0 / 100.0))
-			, SCREEN_HEIGHT * (20.0 / 100.0) + (_backgroundTextureHeight * (5.0 / 100.0))
-			, _backgroundTextureHeight * (40.0 / 100.0)
+			, SCREEN_HEIGHT * (19.5 / 100.0) + (_backgroundTextureHeight * (5.0 / 100.0))
+			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);
 	}
 
@@ -103,9 +103,9 @@ namespace REKFramework
 		SDL_Color color = { 50, 50, 255 };
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_countLinesRemoved)
-			, (SCREEN_WIDTH / 8) + (_backgroundTextureWidth * (70.0 / 100.0))
-			, SCREEN_HEIGHT * (20.0 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
-			, _backgroundTextureHeight * (40.0 / 100.0)
+			, (SCREEN_WIDTH / 8) + (_backgroundTextureWidth * (66.0 / 100.0))
+			, SCREEN_HEIGHT * (19.5 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
+			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);
 	}
 }

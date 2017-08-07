@@ -63,7 +63,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawBButton();
 			break;
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
@@ -99,7 +98,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawYButton();
 			break;
 		}
 	}
@@ -154,7 +152,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawDPadUpButton();
 			break;
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
@@ -196,7 +193,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawLeftStickButton();
 			break;
 		}
 	}
@@ -206,7 +202,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawRightStickButton();
 			break;
 		}
 	}
@@ -229,7 +224,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawBackButton();
 			break;
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
@@ -252,7 +246,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawLTButton();
 			break;
 		}
 	}
@@ -262,7 +255,6 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			DrawPictureMngr->DrawRTButton();
 			break;
 		}
 	}
