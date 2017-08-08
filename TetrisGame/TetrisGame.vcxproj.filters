@@ -9,10 +9,139 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="sources\core">
+      <UniqueIdentifier>{db0c1884-2ca3-4316-9650-55a170a6c89b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\entities">
+      <UniqueIdentifier>{61186def-30c1-4aa3-81a9-ea3a68e14058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\graphics">
+      <UniqueIdentifier>{823f543a-321c-4bc5-abba-1fca29be1928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\input">
+      <UniqueIdentifier>{18c2f69d-58c2-43be-96d3-c624d8c03d68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\menu">
+      <UniqueIdentifier>{0158812e-d053-4adc-8a00-7bd865f23c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sources\sounds">
+      <UniqueIdentifier>{b6206ed8-f5b8-40a0-b206-4c0fb305ea1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\TetrisGame\main.cpp">
+    <ClCompile Include="Board.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="DrawGameButtonLabelService.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawPictureManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawTextService.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitiesConsts.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ErrorMessageManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameContextManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverScreen.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GamepadButtonsFilePathConsts.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GamepadConfiguration.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputGamepadManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputKeyboardManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputTimer.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelComponent.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LinesRemovedCounterComponent.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="NextTetrominoComponent.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLDeletersFunctor.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLMainObjectsProvider.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetromino.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="DrawGameButtonLabelService.h" />
+    <ClInclude Include="DrawPictureManager.h" />
+    <ClInclude Include="DrawTextService.h" />
+    <ClInclude Include="EntitiesConsts.h" />
+    <ClInclude Include="ErrorMessageManager.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameContextEnum.h" />
+    <ClInclude Include="GameContextManager.h" />
+    <ClInclude Include="GameMenu.h" />
+    <ClInclude Include="GameMenuItemEnum.h" />
+    <ClInclude Include="GameOverScreen.h" />
+    <ClInclude Include="GamepadButtonsFilePathConsts.h" />
+    <ClInclude Include="GamepadConfiguration.h" />
+    <ClInclude Include="ImageLoader.h" />
+    <ClInclude Include="InputGamepadManager.h" />
+    <ClInclude Include="InputKeyboardManager.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InputTimer.h" />
+    <ClInclude Include="LevelComponent.h" />
+    <ClInclude Include="LinesRemovedCounterComponent.h" />
+    <ClInclude Include="NextTetrominoComponent.h" />
+    <ClInclude Include="ScoreComponent.h" />
+    <ClInclude Include="SDLDeletersFunctor.h" />
+    <ClInclude Include="SDLMainObjectsProvider.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Tetromino.h" />
+    <ClInclude Include="TetrominoColorEnum.h" />
+    <ClInclude Include="TetrominoShapeEnum.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
 </Project>

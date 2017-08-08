@@ -33,7 +33,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -125,11 +125,12 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile />
     </Link>
     <Lib>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -154,66 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="DrawGameButtonLabelService.cpp" />
-    <ClCompile Include="DrawPictureManager.cpp" />
-    <ClCompile Include="DrawTextService.cpp" />
-    <ClCompile Include="EntitiesConsts.cpp" />
-    <ClCompile Include="ErrorMessageManager.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameContextManager.cpp" />
-    <ClCompile Include="GameMenu.cpp" />
-    <ClCompile Include="GameOverScreen.cpp" />
-    <ClCompile Include="GamepadButtonsFilePathConsts.cpp" />
-    <ClCompile Include="GamepadConfiguration.cpp" />
-    <ClCompile Include="ImageLoader.cpp" />
-    <ClCompile Include="InputGamepadManager.cpp" />
-    <ClCompile Include="InputKeyboardManager.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="InputTimer.cpp" />
-    <ClCompile Include="LevelComponent.cpp" />
-    <ClCompile Include="LinesRemovedCounterComponent.cpp" />
-    <ClCompile Include="NextTetrominoComponent.cpp" />
-    <ClCompile Include="ScoreComponent.cpp" />
-    <ClCompile Include="SDLDeletersFunctor.cpp" />
-    <ClCompile Include="SDLMainObjectsProvider.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="Tetromino.cpp" />
-    <ClCompile Include="Timer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="DrawGameButtonLabelService.h" />
-    <ClInclude Include="DrawPictureManager.h" />
-    <ClInclude Include="DrawTextService.h" />
-    <ClInclude Include="EntitiesConsts.h" />
-    <ClInclude Include="ErrorMessageManager.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameContextEnum.h" />
-    <ClInclude Include="GameContextManager.h" />
-    <ClInclude Include="GameMenu.h" />
-    <ClInclude Include="GameMenuItemEnum.h" />
-    <ClInclude Include="GameOverScreen.h" />
-    <ClInclude Include="GamepadButtonsFilePathConsts.h" />
-    <ClInclude Include="GamepadConfiguration.h" />
-    <ClInclude Include="ImageLoader.h" />
-    <ClInclude Include="InputGamepadManager.h" />
-    <ClInclude Include="InputKeyboardManager.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="InputTimer.h" />
-    <ClInclude Include="LevelComponent.h" />
-    <ClInclude Include="LinesRemovedCounterComponent.h" />
-    <ClInclude Include="NextTetrominoComponent.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="ScoreComponent.h" />
-    <ClInclude Include="SDLDeletersFunctor.h" />
-    <ClInclude Include="SDLMainObjectsProvider.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="Tetromino.h" />
-    <ClInclude Include="TetrominoColorEnum.h" />
-    <ClInclude Include="TetrominoShapeEnum.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

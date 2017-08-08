@@ -1,38 +1,44 @@
 #pragma once
-#include "../REK_Framework/Game.h"
-#include "../REK_Framework/SDLDeletersFunctor.h"
+#include <SDL2/SDL.h>
 #include <memory>
 #include <ctime>
+#include "Game.h"
 
-void GameExecution();
-void ExitSDL();
-
-int main(int argc, char* args[])
+namespace REKFramework
 {
-	// Init Randomness
-	srand(time(nullptr));
+	void GameExecution();
+	void ExitSDL();
 
-	GameExecution();
-	ExitSDL();
-	
-	return 0;
-}
+	#ifdef __cplusplus
+		extern "C"
+	#endif
+	int main(int argc, char *argv[])
+	{
+		// Init Randomness
+		srand(time(nullptr));
 
-void GameExecution()
-{
-	auto game = std::make_unique<REKFramework::Game>();
-	game->Execute();
-}
+		GameExecution();
+		ExitSDL();
 
-void ExitSDL()
-{
-	SDL_DestroyRenderer(REKFramework::SDLMainObjectsProvider::GetRendererRawPointer());
-	SDL_DestroyWindow(REKFramework::SDLMainObjectsProvider::GetWindowRawPointer());
+		return 0;
+	}
 
-	//Quit SDL subsystems
+	void GameExecution()
+	{
+		auto game = std::make_unique<Game>();
+		game->Execute();
+	}
 
-	TTF_Quit();
-	IMG_Quit();
+	void ExitSDL()
+	{
+		SDL_DestroyRenderer(SDLMainObjectsProvider::GetRendererRawPointer());
+		SDL_DestroyWindow(SDLMainObjectsProvider::GetWindowRawPointer());
 
-	SDL_Quit();
+		//Quit SDL subsystems
+
+		TTF_Quit();
+		IMG_Quit();
+
+		SDL_Quit();
+	}
 }
