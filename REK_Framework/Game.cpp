@@ -1,7 +1,5 @@
 #pragma once
 #include "Game.h"
-#include <SDL2/SDL_mixer.h>
-#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {
@@ -24,6 +22,8 @@ namespace REKFramework
 
 		gameMenu = nullptr;
 		boardGame = nullptr;
+		_gameOverScreen = nullptr;
+		
 	}
 
 
@@ -60,8 +60,18 @@ namespace REKFramework
 			{
 				if (boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
 				{
-					gameContextMngr->ExecuteStartButtonAction();
+					GameContextManager::CurrentGameContext = GameContextEnum::GAMEOVER;
 				}
+			}
+
+			if (GameContextManager::CurrentGameContext == GameContextEnum::GAMEOVER)
+			{
+				if (_gameOverScreen == nullptr)
+				{
+					_gameOverScreen = std::make_unique<GameOverScreen>();
+				}
+				
+				_gameOverScreen->Draw();
 			}
 
 			//Update the surface

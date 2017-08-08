@@ -76,6 +76,7 @@
     <ClCompile Include="NextTetrominoComponent.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
+    <ClCompile Include="GameOverScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="NextTetrominoComponent.h">
       <Filter>sources\entities</Filter>
     </ClInclude>
+    <ClInclude Include="GameOverScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="REK_Framework.rc" />

@@ -22,7 +22,7 @@ namespace REKFramework
 
 	bool GameContextManager::IsGamePaused()
 	{
-		return CurrentGameContext == GameContextEnum::MENU;
+		return CurrentGameContext == GameContextEnum::MENU || CurrentGameContext == GameContextEnum::GAMEOVER;
 	}
 
 	void GameContextManager::SetGameMenu(std::shared_ptr<GameMenu> gMenu)
@@ -216,6 +216,9 @@ namespace REKFramework
 		case GameContextEnum::MENU:
 			CloseGameMenu();
 			break;
+		case GameContextEnum::GAMEOVER:
+			CurrentGameContext = GameContextEnum::MENU;
+			break;
 		}
 	}
 
@@ -263,7 +266,12 @@ namespace REKFramework
 	{
 		switch (CurrentGameContext)
 		{
+		// Need to check for menu context too if, for example :
+		// You hold down in game. At the same time, you press start to open the menu and then, you release down
+		// The Timer of the falling tetromino absolutely need to be reset. If it's not, it will down very fast
+		// when you exit menu and you have to press down again to reset it.
 		case GameContextEnum::INGAME:
+		case GameContextEnum::MENU:
 			if (boardGame != nullptr)
 			{
 				boardGame->MoveTetrominoDownRelease();

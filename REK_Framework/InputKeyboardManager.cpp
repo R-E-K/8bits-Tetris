@@ -37,7 +37,7 @@ namespace REKFramework
 			gameContextMngr->ExecuteDPadRightButtonAction();
 		}
 
-		if (PressedKeys[SDL_SCANCODE_SPACE] || PressedKeys[SDL_SCANCODE_RETURN])
+		if (PressedKeys[SDL_SCANCODE_SPACE] || PressedKeys[SDL_SCANCODE_RETURN] || PressedKeys[SDL_SCANCODE_Z])
 		{
 			gameContextMngr->ExecuteAButtonAction();
 		}
@@ -47,7 +47,7 @@ namespace REKFramework
 			gameContextMngr->ExecuteBButtonAction();
 		}
 
-		if (PressedKeys[SDL_SCANCODE_1])
+		if (PressedKeys[SDL_SCANCODE_X])
 		{
 			gameContextMngr->ExecuteXButtonAction();
 		}
@@ -55,6 +55,11 @@ namespace REKFramework
 		if (PressedKeys[SDL_SCANCODE_2])
 		{
 			gameContextMngr->ExecuteYButtonAction();
+		}
+
+		if (PressedKeys[SDL_SCANCODE_ESCAPE])
+		{
+			gameContextMngr->ExecuteStartButtonAction();
 		}
 
 		// etc...

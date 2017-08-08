@@ -1,5 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
+#include "SDLDeletersFunctor.h"
 #include "window.h"
 #include "SDLMainObjectsProvider.h"
 #include "ErrorMessageManager.h"
@@ -8,6 +10,7 @@
 #include "SoundManager.h"
 #include <memory>
 #include "Board.h"
+#include "GameOverScreen.h"
 
 
 namespace REKFramework
@@ -29,6 +32,7 @@ namespace REKFramework
 
 		std::shared_ptr<GameMenu> gameMenu;
 		std::shared_ptr<Board> boardGame;
+		std::unique_ptr<GameOverScreen> _gameOverScreen;
 
 		void Loop(SDL_Event& e);
 		bool Init();

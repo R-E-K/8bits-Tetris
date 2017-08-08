@@ -163,6 +163,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameContextManager.cpp" />
     <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="GameOverScreen.cpp" />
     <ClCompile Include="GamepadButtonsFilePathConsts.cpp" />
     <ClCompile Include="GamepadConfiguration.cpp" />
     <ClCompile Include="ImageLoader.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="GameContextManager.h" />
     <ClInclude Include="GameMenu.h" />
     <ClInclude Include="GameMenuItemEnum.h" />
+    <ClInclude Include="GameOverScreen.h" />
     <ClInclude Include="GamepadButtonsFilePathConsts.h" />
     <ClInclude Include="GamepadConfiguration.h" />
     <ClInclude Include="ImageLoader.h" />

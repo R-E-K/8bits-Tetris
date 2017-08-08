@@ -163,6 +163,8 @@ namespace REKFramework
 					PressedInput->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				||
 				GameContextManager::CurrentGameContext == GameContextEnum::MENU
+				||
+				GameContextManager::CurrentGameContext == GameContextEnum::GAMEOVER
 				)
 			{
 				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);
