@@ -95,7 +95,7 @@ namespace REKFramework
 		else
 		{
 			window = std::shared_ptr<SDL_Window>(
-				SDL_CreateWindow("The best game ever !", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)
+				SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)
 				, SdlDeleter()
 				);
 
