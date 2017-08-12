@@ -1,6 +1,5 @@
 #pragma once
 #include "DrawTextService.h"
-#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {

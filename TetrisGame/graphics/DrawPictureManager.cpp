@@ -1,7 +1,5 @@
 #pragma once
 #include "DrawPictureManager.h"
-#include "GamepadButtonsFilePathConsts.h"
-#include "SDLMainObjectsProvider.h"
 
 namespace REKFramework
 {

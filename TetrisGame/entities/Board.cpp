@@ -1,6 +1,4 @@
 #include "Board.h"
-#include "ImageLoader.h"
-#include <algorithm>
 
 
 namespace REKFramework

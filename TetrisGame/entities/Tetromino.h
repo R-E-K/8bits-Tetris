@@ -2,7 +2,7 @@
 #include "TetrominoColorEnum.h"
 #include <vector>
 #include "TetrominoShapeEnum.h"
-#include "InputTimer.h"
+#include "../core/InputTimer.h"
 
 namespace REKFramework
 {

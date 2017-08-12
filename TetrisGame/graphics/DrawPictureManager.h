@@ -1,6 +1,9 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include "ImageLoader.h"
+#include "../input/GamepadButtonsFilePathConsts.h"
+#include "../core/SDLDeletersFunctor.h"
+#include "../core/SDLMainObjectsProvider.h"
 
 namespace REKFramework
 {

@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <memory>
-#include "SDLDeletersFunctor.h"
+#include "../core/SDLDeletersFunctor.h"
 
 namespace REKFramework
 {

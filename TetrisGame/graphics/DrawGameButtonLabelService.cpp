@@ -1,6 +1,5 @@
 #pragma once
 #include "DrawGameButtonLabelService.h"
-#include "SDLDeletersFunctor.h"
 
 namespace REKFramework
 {

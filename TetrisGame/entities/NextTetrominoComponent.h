@@ -1,11 +1,13 @@
 #pragma once
 #include <memory>
-#include "SDLDeletersFunctor.h"
-#include "window.h"
 #include "EntitiesConsts.h"
-#include "SDLMainObjectsProvider.h"
-#include "DrawTextService.h"
 #include "Tetromino.h"
+#include "../core/window.h"
+#include <SDL2/SDL_render.h>
+#include "../graphics/ImageLoader.h"
+#include "../core/SDLMainObjectsProvider.h"
+#include "../core/SDLDeletersFunctor.h"
+#include "../graphics/DrawTextService.h"
 
 namespace REKFramework
 {

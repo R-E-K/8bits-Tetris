@@ -1,5 +1,4 @@
 #include "NextTetrominoComponent.h"
-#include "ImageLoader.h"
 
 namespace REKFramework
 {

@@ -5,12 +5,13 @@
 #include "window.h"
 #include "SDLMainObjectsProvider.h"
 #include "ErrorMessageManager.h"
-#include "InputManager.h"
-#include "GamepadConfiguration.h"
-#include "SoundManager.h"
 #include <memory>
-#include "Board.h"
-#include "GameOverScreen.h"
+#include "../input/InputManager.h"
+#include "../sounds/SoundManager.h"
+#include "../menu/GameMenu.h"
+#include "../entities/Board.h"
+#include "../entities/GameOverScreen.h"
+#include "GameContextManager.h"
 
 
 namespace REKFramework

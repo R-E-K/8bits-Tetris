@@ -2,20 +2,21 @@
 #include <SDL2/SDL.h>
 #include <memory>
 #include <vector>
-#include "SDLDeletersFunctor.h"
-#include "window.h"
-#include "SDLMainObjectsProvider.h"
 #include "EntitiesConsts.h"
 #include "TetrominoColorEnum.h"
 #include "TetrominoShapeEnum.h"
 #include "Tetromino.h"
 #include <stack>
-#include "InputTimer.h"
-#include "Timer.h"
 #include "LevelComponent.h"
 #include "LinesRemovedCounterComponent.h"
 #include "ScoreComponent.h"
 #include "NextTetrominoComponent.h"
+#include <algorithm>
+#include "../core/window.h"
+#include "../core/SDLDeletersFunctor.h"
+#include "../core/SDLMainObjectsProvider.h"
+#include "../graphics/ImageLoader.h"
+#include "../core/Timer.h"
 
 namespace REKFramework
 {

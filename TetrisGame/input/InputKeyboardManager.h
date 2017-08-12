@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include "DrawPictureManager.h"
-#include "GameContextManager.h"
+#include <memory>
+#include "../core/GameContextManager.h"
 
 namespace REKFramework
 {

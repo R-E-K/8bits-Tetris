@@ -2,12 +2,12 @@
 #include "GameMenuItemEnum.h"
 #include <map>
 #include <SDL2/SDL.h>
-#include "window.h"
-#include "SDLMainObjectsProvider.h"
-#include "GamepadButtonsFilePathConsts.h"
-#include "DrawTextService.h"
-#include "DrawGameButtonLabelService.h"
-#include "SoundManager.h"
+#include <memory>
+#include "../sounds/SoundManager.h"
+#include "../graphics/DrawTextService.h"
+#include "../graphics/DrawGameButtonLabelService.h"
+#include "../core/window.h"
+#include "../input/GamepadButtonsFilePathConsts.h"
 
 namespace REKFramework
 {

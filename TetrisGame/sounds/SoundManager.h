@@ -2,7 +2,7 @@
 #include <SDL2/SDL_mixer.h>
 #include <string>
 #include <memory>
-#include "SDLDeletersFunctor.h"
+#include "../core/SDLDeletersFunctor.h"
 
 namespace REKFramework
 {

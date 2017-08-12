@@ -1,9 +1,10 @@
 #pragma once
 #include <SDL2/SDL.h>
-#include "SDLMainObjectsProvider.h"
 #include "ImageLoader.h"
 #include "DrawTextService.h"
 #include <string>
+#include "../core/SDLDeletersFunctor.h"
+#include "../core/SDLMainObjectsProvider.h"
 
 namespace REKFramework
 {

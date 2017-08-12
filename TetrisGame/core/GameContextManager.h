@@ -1,9 +1,9 @@
 #pragma once
 #include "GameContextEnum.h"
 #include <SDL2/SDL.h>
-#include "DrawPictureManager.h"
-#include "GameMenu.h"
-#include "Board.h"
+#include "../menu/GameMenu.h"
+#include "../entities/Board.h"
+#include "../graphics/DrawPictureManager.h"
 
 namespace REKFramework
 {
