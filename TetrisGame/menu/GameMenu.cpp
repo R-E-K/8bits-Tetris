@@ -1,5 +1,7 @@
 #pragma once
 #include "GameMenu.h"
+#include "../core/GameContextManager.h"
+
 
 namespace REKFramework
 {
@@ -31,11 +33,11 @@ namespace REKFramework
 
 	}
 
-	void GameMenu::Draw()
+	void GameMenu::Draw(std::shared_ptr<Board> board)
 	{
 		if (GameMenuLevel == 0)
 		{
-			DrawMainMenu();
+			DrawMainMenu(board);
 		}
 		else
 		{
@@ -105,9 +107,12 @@ namespace REKFramework
 		return (selectedItem == GameMenuItemEnum::PLAY || selectedItem == GameMenuItemEnum::QUITGAME);
 	}
 
-	bool GameMenu::MustDestroyGameMenuOnBack() const
+	bool GameMenu::MustDestroyGameMenuOnBack(std::shared_ptr<Board> board) const
 	{
-		return GameMenuLevel == 0;
+		return GameMenuLevel == 0 
+			&& GameContextManager::CurrentGameContext != GameContextEnum::STARTED
+			&& GameContextManager::CurrentGameContext != GameContextEnum::GAMEOVER
+			&& board != nullptr && !board->IsGameOver();
 	}
 
 	GameMenuItemEnum GameMenu::GetLastItemMenuSelected() const
@@ -144,24 +149,36 @@ namespace REKFramework
 		return background;
 	}
 
-	void GameMenu::DrawMainMenu()
+	void GameMenu::DrawMainMenu(std::shared_ptr<Board> board)
 	{
 		SDL_Rect gameMenuPosition;
 		background = CreateBackground(gameMenuPosition);
 
 		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
 
-		DrawItemsMenu();
+		DrawItemsMenu(board);
 		AddValidButton();
-		AddBackButton();
+
+		if (MustDestroyGameMenuOnBack(board))
+		{
+			AddBackButton();
+		}
 	}
 
-	void GameMenu::DrawItemsMenu() const
+	void GameMenu::DrawItemsMenu(std::shared_ptr<Board> board) const
 	{
 		int x = backgroundPositionX + (backgroundTextureWidth / 15);
 		int y = backgroundPositionY + (backgroundTextureHeight / 15);
 
-		DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
+		if (board != nullptr && !board->IsGameOver())
+		{
+			DrawItemMenu("Resume", GameMenuItemEnum::PLAY, x, y);
+		}
+		else
+		{
+			DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
+		}
+
 		y += (backgroundTextureHeight / 8);
 		DrawItemMenu("Credits", GameMenuItemEnum::CREDITS, x, y);
 		y += (backgroundTextureHeight / 8);

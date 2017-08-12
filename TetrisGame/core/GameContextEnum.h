@@ -6,6 +6,7 @@ namespace REKFramework
 	{
 		MENU = 0,
 		INGAME = 1,
-		GAMEOVER = 2
+		GAMEOVER = 2,
+		STARTED = 3
 	};
 }

@@ -8,6 +8,8 @@
 #include "../graphics/DrawGameButtonLabelService.h"
 #include "../core/window.h"
 #include "../input/GamepadButtonsFilePathConsts.h"
+#include "../core/GameContextEnum.h"
+#include "../entities/Board.h"
 
 namespace REKFramework
 {
@@ -17,14 +19,14 @@ namespace REKFramework
 		GameMenu(std::shared_ptr<SoundManager> soundManager);
 		~GameMenu();
 
-		void Draw();
+		void Draw(std::shared_ptr<Board> board);
 
 		void NavigateDown();
 		void NavigateUp();
 		void SelectItemMenu();
 		void MenuBack();
 		bool MustDestroyGameMenuOnSelect() const;
-		bool MustDestroyGameMenuOnBack() const;
+		bool MustDestroyGameMenuOnBack(std::shared_ptr<Board> board) const;
 
 		GameMenuItemEnum GetLastItemMenuSelected() const;
 
@@ -45,8 +47,8 @@ namespace REKFramework
 		int backgroundTextureHeight;
 
 		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition);
-		void DrawMainMenu();
-		void DrawItemsMenu() const;
+		void DrawMainMenu(std::shared_ptr<Board> board);
+		void DrawItemsMenu(std::shared_ptr<Board> board) const;
 		void DrawItemMenu(std::string const& itemMenuName, GameMenuItemEnum gameMenuItem, int x, int y) const;
 
 		void DrawCredits();

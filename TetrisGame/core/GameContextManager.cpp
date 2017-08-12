@@ -4,7 +4,7 @@
 namespace REKFramework
 {
 	// Static Initialization
-	GameContextEnum GameContextManager::CurrentGameContext = GameContextEnum::MENU;
+	GameContextEnum GameContextManager::CurrentGameContext = GameContextEnum::STARTED;
 
 
 	GameContextManager::GameContextManager()
@@ -45,6 +45,7 @@ namespace REKFramework
 				boardGame->RotateTetrominoToRightIfPossible();
 			}
 			break;
+		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
@@ -64,10 +65,11 @@ namespace REKFramework
 		{
 		case GameContextEnum::INGAME:
 			break;
+		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
-				if (gameMenu->MustDestroyGameMenuOnBack())
+				if (gameMenu->MustDestroyGameMenuOnBack(boardGame))
 				{
 					CloseGameMenu();
 				}
@@ -138,6 +140,7 @@ namespace REKFramework
 				boardGame->MoveTetrominoDown();
 			}
 			break;
+		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
@@ -153,6 +156,7 @@ namespace REKFramework
 		{
 		case GameContextEnum::INGAME:
 			break;
+		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
@@ -228,10 +232,11 @@ namespace REKFramework
 		{
 		case GameContextEnum::INGAME:
 			break;
+		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
 			if (gameMenu != nullptr)
 			{
-				if (gameMenu->MustDestroyGameMenuOnBack())
+				if (gameMenu->MustDestroyGameMenuOnBack(boardGame))
 				{
 					CloseGameMenu();
 				}
