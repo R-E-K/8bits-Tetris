@@ -110,7 +110,7 @@
     <ClCompile Include="menu\GameMenu.cpp">
       <Filter>sources\menu</Filter>
     </ClCompile>
-    <ClCompile Include="BaseTimer.cpp">
+    <ClCompile Include="core\BaseTimer.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
   </ItemGroup>
@@ -211,7 +211,7 @@
     <ClInclude Include="entities\Board.h">
       <Filter>sources\entities</Filter>
     </ClInclude>
-    <ClInclude Include="BaseTimer.h">
+    <ClInclude Include="core\BaseTimer.h">
       <Filter>sources\core</Filter>
     </ClInclude>
   </ItemGroup>
