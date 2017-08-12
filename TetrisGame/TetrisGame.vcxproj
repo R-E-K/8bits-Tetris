@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseTimer.cpp" />
     <ClCompile Include="core\ErrorMessageManager.cpp" />
     <ClCompile Include="core\Game.cpp" />
     <ClCompile Include="core\GameContextManager.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseTimer.h" />
     <ClInclude Include="core\ErrorMessageManager.h" />
     <ClInclude Include="core\Game.h" />
     <ClInclude Include="core\GameContextEnum.h" />

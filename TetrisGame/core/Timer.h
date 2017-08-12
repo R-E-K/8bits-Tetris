@@ -1,10 +1,11 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <functional>
+#include "../BaseTimer.h"
 
 namespace REKFramework
 {
-	class Timer
+	class Timer : public BaseTimer
 	{
 	public:
 		Timer();
@@ -13,15 +14,13 @@ namespace REKFramework
 
 		int GetRepeatFrequency() const;
 
-		void Execute(std::function<void()> function);
+		void Execute(std::function<void()> function) override;
 		void SetRepeatFrequency(int inputRepeatFrequency);
-		void SetDelay(int delay);
+		void SetDelay(int delay) override;
 
 	private:
-		int currentTime;
 		int lastTime;
 		int _inputRepeatFrequency;
-		int _delay;
 	};
 
 }

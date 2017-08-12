@@ -9,14 +9,12 @@ namespace REKFramework
 	Timer::Timer()
 	{
 		lastTime = 0;
-		_delay = 0;
 	}
 
 	Timer::Timer(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
 		lastTime = 0;
-		_delay = 0;
 	}
 
 	Timer::~Timer()
@@ -58,6 +56,6 @@ namespace REKFramework
 
 	void Timer::SetDelay(int delay)
 	{
-		_delay = SDL_GetTicks() + delay;
+		BaseTimer::SetDelay(delay);
 	}
 }

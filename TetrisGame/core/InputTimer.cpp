@@ -7,7 +7,6 @@ namespace REKFramework
 	{
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_delay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency)
@@ -16,7 +15,6 @@ namespace REKFramework
 		_startHoldInputDownDelay = 0;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_delay = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency, int startHoldInputDownDelay)
@@ -25,7 +23,6 @@ namespace REKFramework
 		_startHoldInputDownDelay = startHoldInputDownDelay;
 		InputDownLastTime = 0;
 		InputDownHoldTime = 0;
-		_delay = 0;
 	}
 
 	InputTimer::~InputTimer()
@@ -87,6 +84,6 @@ namespace REKFramework
 
 	void InputTimer::SetDelay(int delay)
 	{
-		_delay = SDL_GetTicks() + delay;
+		BaseTimer::SetDelay(delay);
 	}
 }
