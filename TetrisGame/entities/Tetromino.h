@@ -4,7 +4,7 @@
 #include "TetrominoShapeEnum.h"
 #include "../core/InputTimer.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class Tetromino
 	{

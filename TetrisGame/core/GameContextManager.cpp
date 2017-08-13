@@ -1,7 +1,7 @@
 #pragma once
 #include "GameContextManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	// Static Initialization
 	GameContextEnum GameContextManager::CurrentGameContext = GameContextEnum::STARTED;
@@ -273,8 +273,8 @@ namespace REKFramework
 		switch (CurrentGameContext)
 		{
 		// Need to check for menu context too if, for example :
-		// You hold down in game. At the same time, you press start to open the menu and then, you release down
-		// The Timer of the falling tetromino absolutely need to be reset. If it's not, it will down very fast
+		// You hold down in game. At the same time, you press start to open the menu and then, you release down.
+		// The Timer of the falling tetromino absolutely need to be reset, even in Menu context. If it's not, it will down very fast
 		// when you exit menu and you have to press down again to reset it.
 		case GameContextEnum::INGAME:
 		case GameContextEnum::MENU:

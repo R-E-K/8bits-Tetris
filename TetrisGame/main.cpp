@@ -5,7 +5,7 @@
 #include <ctime>
 #include "core/Game.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	void GameExecution();
 	void ExitSDL();

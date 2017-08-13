@@ -1,7 +1,7 @@
 #pragma once
 #include "InputKeyboardManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	InputKeyboardManager::InputKeyboardManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{

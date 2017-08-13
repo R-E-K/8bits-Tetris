@@ -1,7 +1,7 @@
 #pragma once
 #include "SDLDeletersFunctor.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	void SdlDeleter::operator()(SDL_Window* p) const
 	{

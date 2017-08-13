@@ -2,7 +2,7 @@
 #include <SDL2/SDL_stdinc.h>
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class EntitiesConsts
 	{

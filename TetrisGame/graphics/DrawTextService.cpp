@@ -1,7 +1,7 @@
 #pragma once
 #include "DrawTextService.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	DrawTextService::DrawTextService()
 	{

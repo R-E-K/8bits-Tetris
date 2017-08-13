@@ -5,7 +5,7 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../core/SDLMainObjectsProvider.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class DrawTextService
 	{

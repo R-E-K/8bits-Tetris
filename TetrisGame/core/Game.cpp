@@ -1,7 +1,7 @@
 #pragma once
 #include "Game.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	Game::Game()
 	{

@@ -1,7 +1,7 @@
 #include "Board.h"
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	Board::Board()
 	{

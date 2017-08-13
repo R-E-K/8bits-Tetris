@@ -3,7 +3,7 @@
 #include <memory>
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class SDLMainObjectsProvider
 	{

@@ -1,6 +1,6 @@
 #include "LevelComponent.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	LevelComponent::LevelComponent()
 	{

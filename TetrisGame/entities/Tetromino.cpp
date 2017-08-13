@@ -1,6 +1,6 @@
 #include "Tetromino.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 
 	Tetromino::Tetromino(TetrominoShapeEnum tetrominoShape)

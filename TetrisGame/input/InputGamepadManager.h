@@ -3,7 +3,7 @@
 #include <memory>
 #include "../core/GameContextManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class InputGamepadManager
 	{

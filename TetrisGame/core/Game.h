@@ -14,7 +14,7 @@
 #include "GameContextManager.h"
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class Game
 	{

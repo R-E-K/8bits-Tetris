@@ -3,7 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	// Functor wrapping SDL structs destruction
 	struct SdlDeleter

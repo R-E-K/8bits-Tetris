@@ -3,7 +3,7 @@
 #include "../core/GameContextManager.h"
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager)
 	{

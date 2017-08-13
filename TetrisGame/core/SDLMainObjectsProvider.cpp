@@ -1,7 +1,7 @@
 #pragma once
 #include "SDLMainObjectsProvider.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::renderer;
 	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::window;

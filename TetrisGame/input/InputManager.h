@@ -6,7 +6,7 @@
 #include <algorithm>
 #include "GamepadConfiguration.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class InputManager
 	{

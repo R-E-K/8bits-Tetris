@@ -9,7 +9,7 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../graphics/DrawTextService.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class NextTetrominoComponent
 	{

@@ -1,6 +1,6 @@
 #include "SoundManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	SoundManager::SoundManager()
 	{

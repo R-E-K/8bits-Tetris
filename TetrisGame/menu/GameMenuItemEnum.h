@@ -1,6 +1,6 @@
 #pragma once
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	enum class GameMenuItemEnum
 	{

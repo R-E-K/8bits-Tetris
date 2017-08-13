@@ -4,7 +4,7 @@
 #include "../entities/Board.h"
 #include "../menu/GameMenu.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class GameContextManager
 	{

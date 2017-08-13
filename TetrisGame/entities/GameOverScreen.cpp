@@ -1,6 +1,6 @@
 #include "GameOverScreen.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	GameOverScreen::GameOverScreen()
 	{

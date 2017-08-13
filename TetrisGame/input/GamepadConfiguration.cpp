@@ -2,7 +2,7 @@
 #include "GamepadConfiguration.h"
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	GamepadConfiguration::GamepadConfiguration()
 	{

@@ -3,7 +3,7 @@
 #include <functional>
 #include "BaseTimer.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class InputTimer : public BaseTimer
 	{

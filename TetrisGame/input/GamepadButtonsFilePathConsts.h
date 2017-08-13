@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class GamepadButtonsFilePathConsts
 	{

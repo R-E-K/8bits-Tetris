@@ -11,7 +11,7 @@
 #include "../core/GameContextEnum.h"
 #include "../entities/Board.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class GameMenu
 	{

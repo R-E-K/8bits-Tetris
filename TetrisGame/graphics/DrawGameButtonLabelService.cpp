@@ -1,7 +1,7 @@
 #pragma once
 #include "DrawGameButtonLabelService.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	DrawGameButtonLabelService::DrawGameButtonLabelService()
 	{

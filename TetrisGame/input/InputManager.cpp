@@ -2,7 +2,7 @@
 #include "InputManager.h"
 
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	InputManager::InputManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{

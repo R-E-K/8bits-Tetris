@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	static const char* GAMEPAD_BUTTON_FILEPATH_A = "resources/xbox360pad/360_A.png";
 	static const char* GAMEPAD_BUTTON_FILEPATH_B = "resources/xbox360pad/360_B.png";

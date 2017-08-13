@@ -1,7 +1,7 @@
 #pragma once
 #include "InputGamepadManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	InputGamepadManager::InputGamepadManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{

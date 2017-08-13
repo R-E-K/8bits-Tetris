@@ -1,7 +1,7 @@
 #include "BaseTimer.h"
 #include <SDL2/SDL.h>
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 
 	BaseTimer::BaseTimer()

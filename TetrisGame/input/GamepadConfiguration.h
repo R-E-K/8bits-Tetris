@@ -4,7 +4,7 @@
 #include <memory>
 #include "../core/SDLDeletersFunctor.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class GamepadConfiguration
 	{

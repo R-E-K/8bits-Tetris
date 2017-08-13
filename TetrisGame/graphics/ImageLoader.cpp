@@ -1,7 +1,7 @@
 #pragma once
 #include "ImageLoader.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	ImageLoader::ImageLoader()
 	{

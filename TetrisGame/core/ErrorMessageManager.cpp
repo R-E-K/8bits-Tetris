@@ -1,7 +1,7 @@
 #pragma once
 #include "ErrorMessageManager.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	ErrorMessageManager::ErrorMessageManager()
 	{

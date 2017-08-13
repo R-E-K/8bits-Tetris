@@ -1,6 +1,6 @@
 #include "GamepadButtonsFilePathConsts.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	const std::string GamepadButtonsFilePathConsts::AButton = "resources/xbox360pad/360_A.png";
 	const std::string GamepadButtonsFilePathConsts::BButton = "resources/xbox360pad/360_B.png";

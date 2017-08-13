@@ -18,7 +18,7 @@
 #include "../graphics/ImageLoader.h"
 #include "../core/Timer.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 
 	class Board

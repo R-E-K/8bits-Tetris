@@ -7,7 +7,7 @@
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/DrawTextService.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class ScoreComponent
 	{

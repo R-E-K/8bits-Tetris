@@ -1,6 +1,6 @@
 #include "EntitiesConsts.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 
 	const Uint8 EntitiesConsts::NB_COLUMNS = 10;

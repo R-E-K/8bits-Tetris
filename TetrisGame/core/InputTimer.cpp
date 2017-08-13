@@ -1,6 +1,6 @@
 #include "InputTimer.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 
 	InputTimer::InputTimer()

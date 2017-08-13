@@ -1,6 +1,6 @@
 #include "LinesRemovedCounterComponent.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	LinesRemovedCounterComponent::LinesRemovedCounterComponent()
 	{

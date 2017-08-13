@@ -1,6 +1,6 @@
 #include "ScoreComponent.h"
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	ScoreComponent::ScoreComponent()
 	{

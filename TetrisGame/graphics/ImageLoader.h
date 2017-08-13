@@ -5,7 +5,7 @@
 #include "../core/SDLDeletersFunctor.h"
 #include <string>
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	class ImageLoader
 	{

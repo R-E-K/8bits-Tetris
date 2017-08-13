@@ -1,6 +1,6 @@
 #pragma once
 
-namespace REKFramework
+namespace REKTetrisGame
 {
 	//Screen dimension constants
 	const int SCREEN_WIDTH = 1024;
