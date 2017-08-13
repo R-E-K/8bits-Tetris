@@ -80,9 +80,6 @@
     <ClCompile Include="graphics\DrawGameButtonLabelService.cpp">
       <Filter>sources\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="graphics\DrawPictureManager.cpp">
-      <Filter>sources\graphics</Filter>
-    </ClCompile>
     <ClCompile Include="graphics\DrawTextService.cpp">
       <Filter>sources\graphics</Filter>
     </ClCompile>
@@ -170,9 +167,6 @@
       <Filter>sources\entities</Filter>
     </ClInclude>
     <ClInclude Include="graphics\DrawGameButtonLabelService.h">
-      <Filter>sources\graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="graphics\DrawPictureManager.h">
       <Filter>sources\graphics</Filter>
     </ClInclude>
     <ClInclude Include="graphics\DrawTextService.h">

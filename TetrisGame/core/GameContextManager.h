@@ -2,7 +2,6 @@
 #include "GameContextEnum.h"
 #include <SDL2/SDL.h>
 #include "../entities/Board.h"
-#include "../graphics/DrawPictureManager.h"
 #include "../menu/GameMenu.h"
 
 namespace REKFramework
@@ -44,8 +43,6 @@ namespace REKFramework
 	private:
 		std::shared_ptr<GameMenu> gameMenu;
 		std::shared_ptr<Board> boardGame;
-
-		std::unique_ptr<DrawPictureManager> DrawPictureMngr;
 
 		void CloseGameMenu();
 

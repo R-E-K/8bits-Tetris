@@ -165,6 +165,8 @@ namespace REKFramework
 				GameContextManager::CurrentGameContext == GameContextEnum::MENU
 				||
 				GameContextManager::CurrentGameContext == GameContextEnum::GAMEOVER
+				||
+				GameContextManager::CurrentGameContext == GameContextEnum::STARTED
 				)
 			{
 				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);

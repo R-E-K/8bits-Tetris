@@ -168,7 +168,6 @@
     <ClCompile Include="entities\Tetromino.cpp" />
     <ClCompile Include="menu\GameMenu.cpp" />
     <ClCompile Include="graphics\DrawGameButtonLabelService.cpp" />
-    <ClCompile Include="graphics\DrawPictureManager.cpp" />
     <ClCompile Include="graphics\DrawTextService.cpp" />
     <ClCompile Include="graphics\ImageLoader.cpp" />
     <ClCompile Include="input\GamepadButtonsFilePathConsts.cpp" />
@@ -203,7 +202,6 @@
     <ClInclude Include="menu\GameMenu.h" />
     <ClInclude Include="menu\GameMenuItemEnum.h" />
     <ClInclude Include="graphics\DrawGameButtonLabelService.h" />
-    <ClInclude Include="graphics\DrawPictureManager.h" />
     <ClInclude Include="graphics\DrawTextService.h" />
     <ClInclude Include="graphics\ImageLoader.h" />
     <ClInclude Include="input\GamepadButtonFilePathConsts.h" />

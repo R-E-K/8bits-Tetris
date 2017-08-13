@@ -9,8 +9,6 @@ namespace REKFramework
 
 	GameContextManager::GameContextManager()
 	{
-		DrawPictureMngr = std::make_unique<DrawPictureManager>();
-
 		gameMenu = nullptr;
 	}
 
@@ -218,7 +216,10 @@ namespace REKFramework
 			CurrentGameContext = GameContextEnum::MENU;
 			break;
 		case GameContextEnum::MENU:
-			CloseGameMenu();
+			if (boardGame == nullptr || !boardGame->IsGameOver())
+			{
+				CloseGameMenu();
+			}
 			break;
 		case GameContextEnum::GAMEOVER:
 			CurrentGameContext = GameContextEnum::MENU;

@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <functional>
-#include "../BaseTimer.h"
+#include "BaseTimer.h"
 
 namespace REKFramework
 {

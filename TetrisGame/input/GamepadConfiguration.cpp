@@ -18,6 +18,7 @@ namespace REKFramework
 
 	void GamepadConfiguration::PlugGamepad()
 	{
+		// The game is one player only, so we only check for first plugged gamepad
 		if (SDL_IsGameController(0))
 		{
 			gamepad = std::unique_ptr<SDL_GameController, SdlDeleter>(SDL_GameControllerOpen(0), SdlDeleter());

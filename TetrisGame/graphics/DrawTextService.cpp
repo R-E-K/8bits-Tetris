@@ -18,16 +18,6 @@ namespace REKFramework
 
 	}
 
-	void DrawTextService::DrawText(std::string const& text, int x, int y) const
-	{
-		DrawTextWithSizeAndColor(text, x, y, 24, defaultClr);
-	}
-
-	void DrawTextService::DrawTextWithSize(std::string const& text, int x, int y, int textSize) const
-	{
-		DrawTextWithSizeAndColor(text, x, y, textSize, defaultClr);
-	}
-
 	void DrawTextService::DrawTextWithColor(std::string const& text, int x, int y, SDL_Color color)
 	{
 		DrawTextWithSizeAndColor(text, x, y, 24, color);
