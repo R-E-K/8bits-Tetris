@@ -46,6 +46,15 @@ namespace REKTetrisGame
 				}
 			}
 		}
+		else
+		{
+			// Keep the same difference time between current time and last execution time
+			// When the game is paused
+			// Unless, the timer will be executed to fast when leaving pause
+			int difference = currentTime - lastTime;
+			currentTime = SDL_GetTicks();
+			lastTime = currentTime - difference;
+		}
 			
 	}
 
