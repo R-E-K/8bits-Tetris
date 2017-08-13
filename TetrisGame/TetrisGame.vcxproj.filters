@@ -110,7 +110,7 @@
     <ClCompile Include="core\BaseTimer.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
+    <ClCompile Include="entities\Component.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -211,7 +211,7 @@
     <ClInclude Include="core\BaseTimer.h">
       <Filter>sources\core</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="entities\Component.h">
       <Filter>sources\entities</Filter>
     </ClInclude>
   </ItemGroup>

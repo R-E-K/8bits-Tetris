@@ -150,7 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="entities\Component.cpp" />
     <ClCompile Include="core\BaseTimer.cpp" />
     <ClCompile Include="core\ErrorMessageManager.cpp" />
     <ClCompile Include="core\Game.cpp" />
@@ -180,7 +180,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Component.h" />
+    <ClInclude Include="entities\Component.h" />
     <ClInclude Include="core\BaseTimer.h" />
     <ClInclude Include="core\ErrorMessageManager.h" />
     <ClInclude Include="core\Game.h" />
