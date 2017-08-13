@@ -1,6 +1,5 @@
 #include "Component.h"
 
-
 namespace REKTetrisGame
 {
 	Component::Component(double widthPercent, double HeightPercent)

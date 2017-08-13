@@ -8,7 +8,7 @@
 #include "../core/SDLMainObjectsProvider.h"
 #include "../core/SDLDeletersFunctor.h"
 #include "../graphics/DrawTextService.h"
-#include "../Component.h"
+#include "Component.h"
 
 namespace REKTetrisGame
 {
