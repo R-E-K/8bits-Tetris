@@ -2,16 +2,22 @@
 
 namespace REKTetrisGame
 {
-	LevelComponent::LevelComponent()
+	//LevelComponent::LevelComponent()
+	//{
+	//	_level = 1;
+
+	//	_backgroundTextureWidth = (SCREEN_HEIGHT * (20.0 / 100.0));
+	//	_backgroundTextureHeight = (SCREEN_HEIGHT * (10.0 / 100.0));
+
+	//	//LoadTextures();
+	//}
+
+	LevelComponent::LevelComponent(double widthPercent, double HeightPercent)
+		: Component(widthPercent, HeightPercent)
 	{
+		Component::LoadTextures();
 		_level = 1;
-
-		_backgroundTextureWidth = (SCREEN_HEIGHT * (20.0 / 100.0));
-		_backgroundTextureHeight = (SCREEN_HEIGHT * (10.0 / 100.0));
-
-		LoadTextures();
 	}
-
 
 	LevelComponent::~LevelComponent()
 	{
@@ -20,9 +26,7 @@ namespace REKTetrisGame
 
 	void LevelComponent::Draw() const
 	{
-		DrawBorder();
-		DrawBackground();
-		DrawTitle();
+		Component::Draw();
 		DrawLevelCounter();
 	}
 
@@ -38,31 +42,6 @@ namespace REKTetrisGame
 	int LevelComponent::GetLevel() const
 	{
 		return _level;
-	}
-
-	void LevelComponent::LoadTextures()
-	{
-		auto darkLight = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, _backgroundTextureWidth, _backgroundTextureHeight, 32, 0, 0, 0, 0)
-			, SdlDeleter());
-
-		SDL_FillRect(darkLight.get(), nullptr, SDL_MapRGB(darkLight->format, 171, 171, 171));
-
-		_backgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
-			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), darkLight.get()),
-			SdlDeleter()
-			);
-
-		auto surfaceBorder = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, _backgroundTextureWidth * EntitiesConsts::NB_COLUMNS, _backgroundTextureHeight, 32, 0, 0, 0, 0)
-			, SdlDeleter());
-
-		SDL_FillRect(surfaceBorder.get(), nullptr, SDL_MapRGB(surfaceBorder->format, 0, 0, 0));
-
-		_borderBackgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
-			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), surfaceBorder.get()),
-			SdlDeleter()
-			);
 	}
 
 	void LevelComponent::DrawBorder() const

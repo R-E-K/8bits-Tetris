@@ -2,14 +2,11 @@
 
 namespace REKTetrisGame
 {
-	LinesRemovedCounterComponent::LinesRemovedCounterComponent()
+	LinesRemovedCounterComponent::LinesRemovedCounterComponent(double widthPercent, double HeightPercent)
+		: Component(widthPercent, HeightPercent)
 	{
+		LinesRemovedCounterComponent::LoadTextures();
 		_countLinesRemoved = 0;
-
-		_backgroundTextureWidth = (SCREEN_HEIGHT * (20.0 / 100.0));
-		_backgroundTextureHeight = (SCREEN_HEIGHT * (10.0 / 100.0));
-
-		LoadTextures();
 	}
 
 
@@ -20,9 +17,7 @@ namespace REKTetrisGame
 
 	void LinesRemovedCounterComponent::Draw() const
 	{
-		DrawBorder();
-		DrawBackground();
-		DrawTitle();
+		Component::Draw();
 		DrawLinesRemovedCounter();
 	}
 

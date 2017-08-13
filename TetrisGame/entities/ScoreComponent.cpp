@@ -2,13 +2,12 @@
 
 namespace REKTetrisGame
 {
-	ScoreComponent::ScoreComponent()
+	ScoreComponent::ScoreComponent(double widthPercent, double HeightPercent)
+		: Component(widthPercent, HeightPercent)
 	{
+		_backgroundTextureWidth /= EntitiesConsts::NB_ROWS;
+		ScoreComponent::LoadTextures();
 		_score = 0;
-		_backgroundTextureWidth = (SCREEN_HEIGHT * (85.0 / 100.0)) / EntitiesConsts::NB_ROWS;
-		_backgroundTextureHeight = (SCREEN_HEIGHT * (8.0 / 100.0));
-
-		LoadTextures();
 	}
 
 
@@ -18,9 +17,7 @@ namespace REKTetrisGame
 
 	void ScoreComponent::Draw() const
 	{
-		DrawBorder();
-		DrawBackground();
-		DrawTitle();
+		Component::Draw();
 		DrawScore();
 	}
 

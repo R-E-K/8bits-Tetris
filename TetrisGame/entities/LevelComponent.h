@@ -6,16 +6,17 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/DrawTextService.h"
+#include "../Component.h"
 
 namespace REKTetrisGame
 {
-	class LevelComponent
+	class LevelComponent : public Component
 	{
 	public:
-		LevelComponent();
+		LevelComponent(double widthPercent, double HeightPercent);
 		~LevelComponent();
 
-		void Draw() const;
+		void Draw() const override;
 
 		void DefineLevel(int nbTotalLinesRemoved);
 		int GetLevel() const;
@@ -23,17 +24,9 @@ namespace REKTetrisGame
 	private:
 		int _level;
 
-		int _backgroundTextureWidth;
-		int _backgroundTextureHeight;
-
-		std::unique_ptr<SDL_Texture, SdlDeleter> _borderBackgroundTexture;
-		std::unique_ptr<SDL_Texture, SdlDeleter> _backgroundTexture;
-
-		void LoadTextures();
-
-		void DrawBorder() const;
-		void DrawBackground() const;
-		void DrawTitle() const;
+		void DrawBorder() const override;
+		void DrawBackground() const override;
+		void DrawTitle() const override;
 		void DrawLevelCounter() const;
 	};
 }

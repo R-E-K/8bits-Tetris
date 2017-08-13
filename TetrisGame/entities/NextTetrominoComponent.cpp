@@ -2,13 +2,10 @@
 
 namespace REKTetrisGame
 {
-	NextTetrominoComponent::NextTetrominoComponent(TetrominoShapeEnum tetrominoShapeEnum)
+	NextTetrominoComponent::NextTetrominoComponent(double widthPercent, double HeightPercent, TetrominoShapeEnum tetrominoShapeEnum)
+		: Component(widthPercent, HeightPercent)
 	{
-		_backgroundTextureWidth = (SCREEN_HEIGHT * (20.0 / 100.0));
-		_backgroundTextureHeight = (SCREEN_HEIGHT * (20.0 / 100.0));
-
-		LoadTextures();
-
+		NextTetrominoComponent::LoadTextures();
 		_nextTetromino = std::make_unique<Tetromino>(tetrominoShapeEnum);
 	}
 
@@ -18,9 +15,7 @@ namespace REKTetrisGame
 
 	void NextTetrominoComponent::Draw() const
 	{
-		DrawBorder();
-		DrawBackground();
-		DrawTitle();
+		Component::Draw();
 		DrawNextTetromino();
 	}
 
@@ -46,27 +41,7 @@ namespace REKTetrisGame
 
 	void NextTetrominoComponent::LoadTextures()
 	{
-		auto darkLight = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, _backgroundTextureWidth, _backgroundTextureHeight, 32, 0, 0, 0, 0)
-			, SdlDeleter());
-
-		SDL_FillRect(darkLight.get(), nullptr, SDL_MapRGB(darkLight->format, 171, 171, 171));
-
-		_backgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
-			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), darkLight.get()),
-			SdlDeleter()
-			);
-
-		auto surfaceBorder = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, _backgroundTextureWidth * EntitiesConsts::NB_COLUMNS, _backgroundTextureHeight, 32, 0, 0, 0, 0)
-			, SdlDeleter());
-
-		SDL_FillRect(surfaceBorder.get(), nullptr, SDL_MapRGB(surfaceBorder->format, 0, 0, 0));
-
-		_borderBackgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
-			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), surfaceBorder.get()),
-			SdlDeleter()
-			);
+		Component::LoadTextures();
 
 		TetrominosTextures.resize(7);
 		TetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");

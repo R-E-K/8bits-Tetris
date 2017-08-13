@@ -43,9 +43,9 @@ namespace REKTetrisGame
 
 	private:
 
-		LevelComponent _levelComponent;
-		LinesRemovedCounterComponent _linesRemovedCounterComponent;
-		ScoreComponent _scoreAndNextTetrominoComponent;
+		std::unique_ptr<LevelComponent> _levelComponent;
+		std::unique_ptr<LinesRemovedCounterComponent> _linesRemovedCounterComponent;
+		std::unique_ptr<ScoreComponent> _scoreComponent;
 		std::unique_ptr<NextTetrominoComponent> _nextTetrominoComponent;
 
 		bool gameOver;

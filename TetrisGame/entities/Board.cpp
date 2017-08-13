@@ -24,7 +24,10 @@ namespace REKTetrisGame
 		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 		TetrominoMovingDownTimer.SetDelay(200);
 
-		_nextTetrominoComponent = std::make_unique<NextTetrominoComponent>(RandomlySelectTetrominoType());
+		_levelComponent = std::make_unique<LevelComponent>(20.0, 10.0);
+		_linesRemovedCounterComponent = std::make_unique<LinesRemovedCounterComponent>(20.0, 10.0);
+		_scoreComponent = std::make_unique<ScoreComponent>(85.0, 8.0);
+		_nextTetrominoComponent = std::make_unique<NextTetrominoComponent>(20.0, 20.0, RandomlySelectTetrominoType());
 	}
 
 
@@ -39,9 +42,9 @@ namespace REKTetrisGame
 		DrawTetrominos();
 		DrawCurrentTetrominosOnBoard();
 
-		_levelComponent.Draw();
-		_linesRemovedCounterComponent.Draw();
-		_scoreAndNextTetrominoComponent.Draw();
+		_levelComponent->Draw();
+		_linesRemovedCounterComponent->Draw();
+		_scoreComponent->Draw();
 		_nextTetrominoComponent->Draw();
 	}
 
@@ -640,10 +643,10 @@ namespace REKTetrisGame
 	{
 		if (nbLinesJustRemoved > 0)
 		{
-			_linesRemovedCounterComponent.AddNumberOfLinesRemovedToCounter(nbLinesJustRemoved);
-			_levelComponent.DefineLevel(_linesRemovedCounterComponent.GetLinesRemovedCounter());
+			_linesRemovedCounterComponent->AddNumberOfLinesRemovedToCounter(nbLinesJustRemoved);
+			_levelComponent->DefineLevel(_linesRemovedCounterComponent->GetLinesRemovedCounter());
 
-			MoveDownTimerFrequency = MoveDownTimerDefaultFrequency - ((_levelComponent.GetLevel() - 1) * 100);
+			MoveDownTimerFrequency = MoveDownTimerDefaultFrequency - ((_levelComponent->GetLevel() - 1) * 100);
 			TetrominoMovingDownTimer.SetRepeatFrequency(MoveDownTimerFrequency);
 		}
 	}
@@ -652,11 +655,11 @@ namespace REKTetrisGame
 	{
 		if (nbLinesJustRemoved > 0)
 		{
-			_scoreAndNextTetrominoComponent.UpdateScore(_levelComponent.GetLevel(), nbLinesJustRemoved);
+			_scoreComponent->UpdateScore(_levelComponent->GetLevel(), nbLinesJustRemoved);
 		}
 		else
 		{
-			_scoreAndNextTetrominoComponent.UpdateScore(_levelComponent.GetLevel());
+			_scoreComponent->UpdateScore(_levelComponent->GetLevel());
 		}
 	}
 }

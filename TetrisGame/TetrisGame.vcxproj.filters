@@ -110,6 +110,9 @@
     <ClCompile Include="core\BaseTimer.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>sources\entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -207,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="core\BaseTimer.h">
       <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>sources\entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,16 +6,17 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/DrawTextService.h"
+#include "../Component.h"
 
 namespace REKTetrisGame
 {
-	class LinesRemovedCounterComponent
+	class LinesRemovedCounterComponent : public Component
 	{
 	public:
-		LinesRemovedCounterComponent();
+		LinesRemovedCounterComponent(double widthPercent, double HeightPercent);
 		~LinesRemovedCounterComponent();
 
-		void Draw() const;
+		void Draw() const override;
 
 		void AddNumberOfLinesRemovedToCounter(int nbLinesRemoved);
 		int GetLinesRemovedCounter() const;
@@ -23,17 +24,11 @@ namespace REKTetrisGame
 	private:
 		int _countLinesRemoved;
 
-		int _backgroundTextureWidth;
-		int _backgroundTextureHeight;
+		void LoadTextures() override;
 
-		std::unique_ptr<SDL_Texture, SdlDeleter> _borderBackgroundTexture;
-		std::unique_ptr<SDL_Texture, SdlDeleter> _backgroundTexture;
-
-		void LoadTextures();
-
-		void DrawBorder() const;
-		void DrawBackground() const;
-		void DrawTitle() const;
+		void DrawBorder() const override;
+		void DrawBackground() const override;
+		void DrawTitle() const override;
 		void DrawLinesRemovedCounter() const;
 	};
 }
