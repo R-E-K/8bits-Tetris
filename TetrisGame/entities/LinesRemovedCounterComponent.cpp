@@ -37,7 +37,7 @@ namespace REKTetrisGame
 			SDL_CreateRGBSurface(0, _backgroundTextureWidth, _backgroundTextureHeight, 32, 0, 0, 0, 0)
 			, SdlDeleter());
 
-		SDL_FillRect(darkLight.get(), nullptr, SDL_MapRGB(darkLight->format, 171, 171, 171));
+		SDL_FillRect(darkLight.get(), nullptr, SDL_MapRGB(darkLight->format, 0x86, 0xA6, 0xC3));
 
 		_backgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
 			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), darkLight.get()),

@@ -70,7 +70,8 @@ namespace REKTetrisGame
 			{
 				if (_gameOverScreen == nullptr)
 				{
-					_gameOverScreen = std::make_unique<GameOverScreen>();
+					auto gamepadConfig = inputMngr->GetGamepadConfiguration();
+					_gameOverScreen = std::make_unique<GameOverScreen>(gamepadConfig);
 				}
 				
 				_gameOverScreen->Draw();
@@ -124,33 +125,40 @@ namespace REKTetrisGame
 					else
 					{
 						// Init screen with light grey all over the surface
-						SDL_SetRenderDrawColor(renderer.get(), 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
-
+						SDL_SetRenderDrawColor(renderer.get(), 0x44, 0x87, 0xC5, SDL_ALPHA_OPAQUE);
 						SDL_RenderSetLogicalSize(renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
 
-						gameContextMngr = std::make_shared<GameContextManager>();
-
-						inputMngr = std::make_unique<InputManager>(gameContextMngr);
-
-
-						// SDL_ttf
-						if (TTF_Init() != 0)
+						// About mouse cursor
+						if (SDL_ShowCursor(SDL_DISABLE) < 0)
 						{
-							ErrorMessageManager::WriteErrorMessageToConsole("Could not load SDL_ttf, SDL_Error : ");
+							ErrorMessageManager::WriteErrorMessageToConsole("Cannot hide mouse cursor! SDL_Error : ");
 							isInitOk = false;
 						}
 						else
 						{
-							soundMngr = std::make_shared<SoundManager>();
-							if (soundMngr->Init() < 0)
+							gameContextMngr = std::make_shared<GameContextManager>();
+							inputMngr = std::make_unique<InputManager>(gameContextMngr);
+
+
+							// SDL_ttf
+							if (TTF_Init() != 0)
 							{
-								ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");
+								ErrorMessageManager::WriteErrorMessageToConsole("Could not load SDL_ttf, SDL_Error : ");
 								isInitOk = false;
 							}
+							else
+							{
+								soundMngr = std::make_shared<SoundManager>();
+								if (soundMngr->Init() < 0)
+								{
+									ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");
+									isInitOk = false;
+								}
 
-							soundMngr->PlayMusic("resources/songs/Disasterpeace_Forgotten.ogg", 2000);
+								soundMngr->PlayMusic("resources/songs/Disasterpeace_Forgotten.ogg", 2000);
 
-							SetSDLMainObjectsToProvider();
+								SetSDLMainObjectsToProvider();
+							}
 						}
 					}
 				}

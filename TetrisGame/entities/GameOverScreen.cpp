@@ -2,14 +2,16 @@
 
 namespace REKTetrisGame
 {
-	GameOverScreen::GameOverScreen()
+	GameOverScreen::GameOverScreen(std::shared_ptr<GamepadConfiguration> gamepadConfiguration)
 	{
-		_backgroundTextureRect.w = SCREEN_WIDTH / 1.5;
+		_backgroundTextureRect.w = SCREEN_WIDTH / 1.35;
 		_backgroundTextureRect.h = SCREEN_HEIGHT / 3;
-		_backgroundTextureRect.x = (SCREEN_WIDTH / 6); //- (_backgroundTextureRect.w * 2);
-		_backgroundTextureRect.y = (SCREEN_HEIGHT / 6); // -(_backgroundTextureRect.h * 4);
+		_backgroundTextureRect.x = (SCREEN_WIDTH / 6);
+		_backgroundTextureRect.y = (SCREEN_HEIGHT / 6);
 
 		LoadTextures();
+
+		_gamepadConfiguration = gamepadConfiguration;
 	}
 
 
@@ -59,10 +61,20 @@ namespace REKTetrisGame
 			, _backgroundTextureRect.h * (50.0 / 100.0)
 			, color);
 
-		DrawTextService::DrawTextWithSizeAndColor("Press Start to continue"
+		std::string messageGameOver;
+		if (_gamepadConfiguration->IsGamepadPlugged())
+		{
+			messageGameOver = "Press Start to continue";
+		}
+		else
+		{
+			messageGameOver = "Press Esc key to continue";
+		}
+
+		DrawTextService::DrawTextWithSizeAndColor(messageGameOver
 			, _backgroundTextureRect.x + (_backgroundTextureRect.w * (5.0 / 100.0))
 			, _backgroundTextureRect.y + (_backgroundTextureRect.h * (60.0 / 100.0))
-			, _backgroundTextureRect.h * (20.0 / 100.0)
+			, _backgroundTextureRect.h * (18.0 / 100.0)
 			, color);
 	}
 }

@@ -6,13 +6,14 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/DrawTextService.h"
+#include "../input/GamepadConfiguration.h"
 
 namespace REKTetrisGame
 {
 	class GameOverScreen
 	{
 	public:
-		GameOverScreen();
+		GameOverScreen(std::shared_ptr<GamepadConfiguration> gamepadConfiguration);
 		~GameOverScreen();
 
 		void Draw() const;
@@ -21,6 +22,8 @@ namespace REKTetrisGame
 
 		std::unique_ptr<SDL_Texture, SdlDeleter> _backgroundTexture;
 		SDL_Rect _backgroundTextureRect;
+
+		std::shared_ptr<GamepadConfiguration> _gamepadConfiguration;
 
 		void LoadTextures();
 

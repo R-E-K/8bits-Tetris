@@ -52,14 +52,16 @@ namespace REKTetrisGame
 
 	void ScoreComponent::SaveScoreIfBest() const
 	{
-		// Open score file and delete previous score with "std::ofstream::out | std::ofstream::trunc"
-		std::ofstream scoreFile ("system.rek", std::ofstream::out | std::ofstream::trunc);
+		if (_score == _bestScore)
+		{
+			// Open score file and delete previous score with "std::ofstream::out | std::ofstream::trunc"
+			std::ofstream scoreFile("system.rek", std::ofstream::out | std::ofstream::trunc);
 
-		auto cryptedScore = EncryptDecryptManager::EncryptDecryptString(std::to_string(_score));
+			auto cryptedScore = EncryptDecryptManager::EncryptDecryptString(std::to_string(_score));
 
-		scoreFile << cryptedScore;
-		scoreFile.close();
-
+			scoreFile << cryptedScore;
+			scoreFile.close();
+		}
 	}
 
 	void ScoreComponent::InitBestScore()
