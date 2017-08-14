@@ -12,6 +12,7 @@
 #include "../entities/Board.h"
 #include "../entities/GameOverScreen.h"
 #include "GameContextManager.h"
+#include "GameConfiguration.h"
 
 
 namespace REKTetrisGame
@@ -27,6 +28,7 @@ namespace REKTetrisGame
 		std::shared_ptr<SDL_Window> window;
 		std::shared_ptr<SDL_Renderer> renderer;
 
+		std::shared_ptr<GameConfiguration> _gameConfiguration;
 		std::shared_ptr<GameContextManager> gameContextMngr;
 		std::unique_ptr<InputManager> inputMngr;
 		std::shared_ptr<SoundManager> soundMngr;

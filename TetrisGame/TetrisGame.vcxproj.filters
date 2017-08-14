@@ -116,6 +116,9 @@
     <ClCompile Include="graphics\WindowConfiguration.cpp">
       <Filter>sources\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="core\GameConfiguration.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -219,6 +222,9 @@
     </ClInclude>
     <ClInclude Include="graphics\WindowConfiguration.h">
       <Filter>sources\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GameConfiguration.h">
+      <Filter>sources\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

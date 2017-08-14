@@ -5,7 +5,7 @@
 
 namespace REKTetrisGame
 {
-	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager)
+	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager, std::shared_ptr<GameConfiguration> gameConfiguration)
 	{
 		gameMenuItems.clear();
 		gameMenuItems[0] = GameMenuItemEnum::PLAY;
@@ -24,6 +24,7 @@ namespace REKTetrisGame
 		DrawGameButtonLabelSrvc = std::make_unique<DrawGameButtonLabelService>();
 
 		soundMngr = soundManager;
+		_gameConfiguration = gameConfiguration;
 
 		backgroundPositionX = (SCREEN_WIDTH / 4);
 		backgroundPositionY = (SCREEN_HEIGHT / 8);
@@ -78,6 +79,7 @@ namespace REKTetrisGame
 		case GameMenuItemEnum::PLAY:
 			break;
 		case GameMenuItemEnum::FULLSCREEN:
+			_gameConfiguration->ToggleFullscreenConfig();
 			WindowConfiguration::ToggleFullScreen();
 			break;
 		case GameMenuItemEnum::CREDITS:
