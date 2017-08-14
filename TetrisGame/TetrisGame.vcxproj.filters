@@ -113,6 +113,9 @@
     <ClCompile Include="entities\Component.cpp">
       <Filter>sources\entities</Filter>
     </ClCompile>
+    <ClCompile Include="graphics\WindowConfiguration.cpp">
+      <Filter>sources\graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -213,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="entities\Component.h">
       <Filter>sources\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics\WindowConfiguration.h">
+      <Filter>sources\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@ namespace REKTetrisGame
 	{
 		PLAY = 0,
 		CREDITS = 1,
-		QUITGAME = 2
+		QUITGAME = 2,
+		FULLSCREEN = 3
 	};
 }

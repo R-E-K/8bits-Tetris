@@ -95,7 +95,7 @@ namespace REKTetrisGame
 		else
 		{
 			window = std::shared_ptr<SDL_Window>(
-				SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN)
+				SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_FULLSCREEN_DESKTOP)
 				, SdlDeleter()
 				);
 
@@ -120,6 +120,8 @@ namespace REKTetrisGame
 				{
 					// Init screen with light grey all over the surface
 					SDL_SetRenderDrawColor(renderer.get(), 0xCC, 0xCC, 0xCC, SDL_ALPHA_OPAQUE);
+
+					SDL_RenderSetLogicalSize(renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
 
 					gameContextMngr = std::make_shared<GameContextManager>();
 

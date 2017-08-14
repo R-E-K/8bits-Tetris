@@ -10,6 +10,7 @@
 #include "../input/GamepadButtonsFilePathConsts.h"
 #include "../core/GameContextEnum.h"
 #include "../entities/Board.h"
+#include "../graphics/WindowConfiguration.h"
 
 namespace REKTetrisGame
 {

@@ -178,6 +178,7 @@
     <ClCompile Include="input\InputManager.cpp" />
     <ClCompile Include="sounds\SoundManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="graphics\WindowConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="entities\Component.h" />
@@ -213,6 +214,7 @@
     <ClInclude Include="input\InputKeyboardManager.h" />
     <ClInclude Include="input\InputManager.h" />
     <ClInclude Include="sounds\SoundManager.h" />
+    <ClInclude Include="graphics\WindowConfiguration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

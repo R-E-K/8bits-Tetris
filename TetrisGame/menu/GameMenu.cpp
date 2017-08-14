@@ -9,8 +9,9 @@ namespace REKTetrisGame
 	{
 		gameMenuItems.clear();
 		gameMenuItems[0] = GameMenuItemEnum::PLAY;
-		gameMenuItems[1] = GameMenuItemEnum::CREDITS;
-		gameMenuItems[2] = GameMenuItemEnum::QUITGAME;
+		gameMenuItems[1] = GameMenuItemEnum::FULLSCREEN;
+		gameMenuItems[2] = GameMenuItemEnum::CREDITS;
+		gameMenuItems[3] = GameMenuItemEnum::QUITGAME;
 
 		GameMenuLevel = 0;
 
@@ -75,6 +76,9 @@ namespace REKTetrisGame
 		switch (selectedItem)
 		{
 		case GameMenuItemEnum::PLAY:
+			break;
+		case GameMenuItemEnum::FULLSCREEN:
+			WindowConfiguration::ToggleFullScreen();
 			break;
 		case GameMenuItemEnum::CREDITS:
 			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
@@ -177,6 +181,16 @@ namespace REKTetrisGame
 		else
 		{
 			DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
+		}
+
+		y += (backgroundTextureHeight / 8);
+		if (WindowConfiguration::IsFullScreen())
+		{
+			DrawItemMenu("Set  windowed", GameMenuItemEnum::FULLSCREEN, x, y);
+		}
+		else
+		{
+			DrawItemMenu("Set  fullscreen", GameMenuItemEnum::FULLSCREEN, x, y);
 		}
 
 		y += (backgroundTextureHeight / 8);
