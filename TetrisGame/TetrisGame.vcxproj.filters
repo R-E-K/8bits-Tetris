@@ -119,6 +119,9 @@
     <ClCompile Include="core\GameConfiguration.cpp">
       <Filter>sources\core</Filter>
     </ClCompile>
+    <ClCompile Include="input\KeyboardKeysFilePathConsts.cpp">
+      <Filter>sources\input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -184,9 +187,6 @@
     <ClInclude Include="graphics\ImageLoader.h">
       <Filter>sources\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="input\GamepadButtonFilePathConsts.h">
-      <Filter>sources\input</Filter>
-    </ClInclude>
     <ClInclude Include="input\GamepadButtonsFilePathConsts.h">
       <Filter>sources\input</Filter>
     </ClInclude>
@@ -225,6 +225,9 @@
     </ClInclude>
     <ClInclude Include="core\GameConfiguration.h">
       <Filter>sources\core</Filter>
+    </ClInclude>
+    <ClInclude Include="input\KeyboardKeysFilePathConsts.h">
+      <Filter>sources\input</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,13 +12,17 @@
 #include "../entities/Board.h"
 #include "../graphics/WindowConfiguration.h"
 #include "../core/GameConfiguration.h"
+#include "../input/KeyboardKeysFilePathConsts.h"
+#include "../input/GamepadConfiguration.h"
 
 namespace REKTetrisGame
 {
 	class GameMenu
 	{
 	public:
-		GameMenu(std::shared_ptr<SoundManager> soundManager, std::shared_ptr<GameConfiguration> gameConfiguration);
+		GameMenu(std::shared_ptr<SoundManager> soundManager
+			, std::shared_ptr<GameConfiguration> gameConfiguration
+			, std::shared_ptr<GamepadConfiguration> gamepadConfiguration);
 		~GameMenu();
 
 		void Draw(std::shared_ptr<Board> board);
@@ -42,6 +46,7 @@ namespace REKTetrisGame
 		std::unique_ptr<DrawGameButtonLabelService> DrawGameButtonLabelSrvc;
 		std::shared_ptr<SoundManager> soundMngr;
 		std::shared_ptr<GameConfiguration> _gameConfiguration;
+		std::shared_ptr<GamepadConfiguration> _gamepadConfiguration;
 
 		std::shared_ptr<SDL_Texture> background;
 		int backgroundPositionX;

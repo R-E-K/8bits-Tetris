@@ -38,6 +38,11 @@ namespace REKTetrisGame
 		}
 	}
 
+	bool GamepadConfiguration::IsGamepadPlugged() const
+	{
+		return gamepad != nullptr;
+	}
+
 	void GamepadConfiguration::DisplayDebugInformations() const
 	{
 		std::cout << "Gamepad controller informations : " << std::endl;

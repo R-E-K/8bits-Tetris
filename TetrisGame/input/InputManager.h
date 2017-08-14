@@ -15,12 +15,13 @@ namespace REKTetrisGame
 		~InputManager();
 
 		void CheckInput(SDL_Event& e, bool& quitGame);
+		std::shared_ptr<GamepadConfiguration> GetGamepadConfiguration() const;
 
 	private:
 		std::unique_ptr<SDL_Event> PressedInput;
 		std::unique_ptr<InputKeyboardManager> keyboardManager;
 		std::unique_ptr<InputGamepadManager> gamepadManager;
-		std::unique_ptr<GamepadConfiguration> gamepadCnfg;
+		std::shared_ptr<GamepadConfiguration> gamepadCnfg;
 		std::shared_ptr<GameContextManager> gameContextMngr;
 
 		std::vector<Uint8> gamepadButtonsPressedState;

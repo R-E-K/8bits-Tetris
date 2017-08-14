@@ -5,7 +5,9 @@
 
 namespace REKTetrisGame
 {
-	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager, std::shared_ptr<GameConfiguration> gameConfiguration)
+	GameMenu::GameMenu(std::shared_ptr<SoundManager> soundManager
+		, std::shared_ptr<GameConfiguration> gameConfiguration
+		, std::shared_ptr<GamepadConfiguration> gamepadConfiguration)
 	{
 		gameMenuItems.clear();
 		gameMenuItems[0] = GameMenuItemEnum::PLAY;
@@ -25,6 +27,7 @@ namespace REKTetrisGame
 
 		soundMngr = soundManager;
 		_gameConfiguration = gameConfiguration;
+		_gamepadConfiguration = gamepadConfiguration;
 
 		backgroundPositionX = (SCREEN_WIDTH / 4);
 		backgroundPositionY = (SCREEN_HEIGHT / 8);
@@ -250,9 +253,11 @@ namespace REKTetrisGame
 		int x = backgroundPositionX + (backgroundTextureWidth - (backgroundTextureWidth / 3.5));
 		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::BButton, "Back", x, y
-			, (backgroundTextureWidth / 18)
-			, (backgroundTextureHeight / 18));
+		DrawGameButtonLabelSrvc->DrawWithLabel(
+			(_gamepadConfiguration->IsGamepadPlugged()) ? GamepadButtonsFilePathConsts::BButton : KeyboardKeysFilePathConsts::BackspaceKey
+			, "Back", x, y
+			, (backgroundTextureWidth / 16)
+			, (backgroundTextureHeight / 16));
 	}
 
 	void GameMenu::AddValidButton() const
@@ -262,8 +267,10 @@ namespace REKTetrisGame
 		int x = backgroundPositionX + (backgroundTextureWidth / 15);
 		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(GamepadButtonsFilePathConsts::AButton, "Select", x, y
-			, (backgroundTextureWidth / 18)
-			, (backgroundTextureHeight / 18));
+		DrawGameButtonLabelSrvc->DrawWithLabel(
+			(_gamepadConfiguration->IsGamepadPlugged()) ? GamepadButtonsFilePathConsts::AButton : KeyboardKeysFilePathConsts::EnterKey
+			, "Select", x, y
+			, (backgroundTextureWidth / 16)
+			, (backgroundTextureHeight / 16));
 	}
 }

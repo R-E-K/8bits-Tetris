@@ -9,7 +9,7 @@ namespace REKTetrisGame
 		PressedInput = nullptr;
 		keyboardManager = std::make_unique<InputKeyboardManager>(gameContextManager);
 		gamepadManager = std::make_unique<InputGamepadManager>(gameContextManager);
-		gamepadCnfg = std::make_unique<GamepadConfiguration>();
+		gamepadCnfg = std::make_shared<GamepadConfiguration>();
 
 		gameContextMngr = gameContextManager;
 
@@ -76,6 +76,11 @@ namespace REKTetrisGame
 			keyboardManager->CheckInputHold();
 
 		CheckGamepadInput();
+	}
+
+	std::shared_ptr<GamepadConfiguration> InputManager::GetGamepadConfiguration() const
+	{
+		return gamepadCnfg;
 	}
 
 	void InputManager::SetPressedButton()

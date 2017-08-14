@@ -186,7 +186,8 @@ namespace REKTetrisGame
 		{
 			if (gameMenu == nullptr)
 			{
-				gameMenu = std::make_shared<GameMenu>(soundMngr, _gameConfiguration);
+				auto gamepadConfig = inputMngr->GetGamepadConfiguration();
+				gameMenu = std::make_shared<GameMenu>(soundMngr, _gameConfiguration, gamepadConfig);
 				gameContextMngr->SetGameMenu(gameMenu);
 				soundMngr->PlaySound("resources/sounds/MenuClick.wav", 1);
 			}

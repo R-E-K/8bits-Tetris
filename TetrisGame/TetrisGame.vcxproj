@@ -168,6 +168,7 @@
     <ClCompile Include="entities\ScoreComponent.cpp" />
     <ClCompile Include="entities\Tetromino.cpp" />
     <ClCompile Include="core\GameConfiguration.cpp" />
+    <ClCompile Include="input\KeyboardKeysFilePathConsts.cpp" />
     <ClCompile Include="menu\GameMenu.cpp" />
     <ClCompile Include="graphics\DrawGameButtonLabelService.cpp" />
     <ClCompile Include="graphics\DrawTextService.cpp" />
@@ -204,12 +205,12 @@
     <ClInclude Include="entities\TetrominoColorEnum.h" />
     <ClInclude Include="entities\TetrominoShapeEnum.h" />
     <ClInclude Include="core\GameConfiguration.h" />
+    <ClInclude Include="input\KeyboardKeysFilePathConsts.h" />
     <ClInclude Include="menu\GameMenu.h" />
     <ClInclude Include="menu\GameMenuItemEnum.h" />
     <ClInclude Include="graphics\DrawGameButtonLabelService.h" />
     <ClInclude Include="graphics\DrawTextService.h" />
     <ClInclude Include="graphics\ImageLoader.h" />
-    <ClInclude Include="input\GamepadButtonFilePathConsts.h" />
     <ClInclude Include="input\GamepadButtonsFilePathConsts.h" />
     <ClInclude Include="input\GamepadConfiguration.h" />
     <ClInclude Include="input\InputGamepadManager.h" />
