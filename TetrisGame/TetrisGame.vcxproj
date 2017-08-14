@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="utils\EncryptDecryptManager.cpp" />
     <ClCompile Include="entities\Component.cpp" />
     <ClCompile Include="core\BaseTimer.cpp" />
     <ClCompile Include="core\ErrorMessageManager.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="graphics\WindowConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="utils\EncryptDecryptManager.h" />
     <ClInclude Include="entities\Component.h" />
     <ClInclude Include="core\BaseTimer.h" />
     <ClInclude Include="core\ErrorMessageManager.h" />

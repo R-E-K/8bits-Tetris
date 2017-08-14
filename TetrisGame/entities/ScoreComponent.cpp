@@ -1,4 +1,5 @@
 #include "ScoreComponent.h"
+#include "../utils/EncryptDecryptManager.h"
 
 namespace REKTetrisGame
 {
@@ -52,20 +53,26 @@ namespace REKTetrisGame
 	void ScoreComponent::SaveScoreIfBest() const
 	{
 		// Open score file and delete previous score with "std::ofstream::out | std::ofstream::trunc"
-		std::ofstream scoreFile ("score.txt", std::ofstream::out | std::ofstream::trunc);
-		scoreFile << _score;
+		std::ofstream scoreFile ("system.rek", std::ofstream::out | std::ofstream::trunc);
+
+		auto cryptedScore = EncryptDecryptManager::EncryptDecryptString(std::to_string(_score));
+
+		scoreFile << cryptedScore;
 		scoreFile.close();
 
 	}
 
 	void ScoreComponent::InitBestScore()
 	{
-		std::string savedScore;
-		std::ifstream scoreFile("score.txt");
+		std::string cryptedSavedScore;
+		std::ifstream scoreFile("system.rek");
 		if (scoreFile.is_open())
 		{
-			std::getline(scoreFile, savedScore);
-			_bestScore = std::stoi(savedScore);
+			std::getline(scoreFile, cryptedSavedScore);
+
+			auto decryptedScore = EncryptDecryptManager::EncryptDecryptString(cryptedSavedScore);
+
+			_bestScore = std::stoi(decryptedScore);
 		}
 		else
 		{

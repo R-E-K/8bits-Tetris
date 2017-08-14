@@ -27,6 +27,9 @@
     <Filter Include="sources\sounds">
       <UniqueIdentifier>{b6206ed8-f5b8-40a0-b206-4c0fb305ea1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sources\utils">
+      <UniqueIdentifier>{c2fe286d-f262-42a1-8280-24a1aa01ee54}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="input\KeyboardKeysFilePathConsts.cpp">
       <Filter>sources\input</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\EncryptDecryptManager.cpp">
+      <Filter>sources\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,6 +234,9 @@
     </ClInclude>
     <ClInclude Include="input\KeyboardKeysFilePathConsts.h">
       <Filter>sources\input</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\EncryptDecryptManager.h">
+      <Filter>sources\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
