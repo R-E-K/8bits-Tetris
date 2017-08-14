@@ -562,6 +562,7 @@ namespace REKTetrisGame
 				if(shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
 					&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 				{
+					_scoreComponent->SaveScoreIfBest();
 					isGameOver = true;
 					break;
 				}

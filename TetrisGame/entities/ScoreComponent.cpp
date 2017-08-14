@@ -8,6 +8,7 @@ namespace REKTetrisGame
 		_backgroundTextureWidth /= EntitiesConsts::NB_ROWS;
 		ScoreComponent::LoadTextures();
 		_score = 0;
+		InitBestScore();
 	}
 
 
@@ -24,6 +25,7 @@ namespace REKTetrisGame
 	void ScoreComponent::UpdateScore(int level)
 	{
 		_score += level * 100;
+		UpdateBestScore();
 	}
 
 	void ScoreComponent::UpdateScore(int level, int nbLinesJustRemoved)
@@ -42,6 +44,42 @@ namespace REKTetrisGame
 		case 4:
 			_score += (10000 * level) * nbLinesJustRemoved;
 			break;
+		}
+
+		UpdateBestScore();
+	}
+
+	void ScoreComponent::SaveScoreIfBest() const
+	{
+		// Open score file and delete previous score with "std::ofstream::out | std::ofstream::trunc"
+		std::ofstream scoreFile ("score.txt", std::ofstream::out | std::ofstream::trunc);
+		scoreFile << _score;
+		scoreFile.close();
+
+	}
+
+	void ScoreComponent::InitBestScore()
+	{
+		std::string savedScore;
+		std::ifstream scoreFile("score.txt");
+		if (scoreFile.is_open())
+		{
+			std::getline(scoreFile, savedScore);
+			_bestScore = std::stoi(savedScore);
+		}
+		else
+		{
+			_bestScore = 0;
+		}
+
+		scoreFile.close();
+	}
+
+	void ScoreComponent::UpdateBestScore()
+	{
+		if (_score > _bestScore)
+		{
+			_bestScore = _score;
 		}
 	}
 
@@ -102,9 +140,15 @@ namespace REKTetrisGame
 	{
 		SDL_Color color = { 255, 255, 255 };
 
-		DrawTextService::DrawTextWithSizeAndColor("Score"
+		DrawTextService::DrawTextWithSizeAndColor("Best"
 			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0))
 			, SCREEN_HEIGHT * (1.5 / 100.0)
+			, _backgroundTextureHeight * (60.0 / 100.0)
+			, color);
+
+		DrawTextService::DrawTextWithSizeAndColor("Score"
+			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0))
+			, SCREEN_HEIGHT * (1.5 / 100.0) + _backgroundTextureHeight * (50.0 / 100.0)
 			, _backgroundTextureHeight * (60.0 / 100.0)
 			, color);
 	}
@@ -112,11 +156,19 @@ namespace REKTetrisGame
 	void ScoreComponent::DrawScore() const
 	{
 		SDL_Color color = { 50, 50, 255 };
+		SDL_Color colorBestScore = { 255, 50, 50 };
+		SDL_Color colorNewbestScore = { 50, 255, 50 };
+
+		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_bestScore)
+			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0)) + (_backgroundTextureHeight * (45.0 / 100.0) * 5)
+			, SCREEN_HEIGHT * (1.5 / 100.0)
+			, _backgroundTextureHeight * (60.0 / 100.0)
+			, (_score < _bestScore) ? colorBestScore : colorNewbestScore);
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_score)
-			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0))
-			, SCREEN_HEIGHT * (1.5 / 100.0) + (_backgroundTextureHeight * (45.0 / 100.0))
-			, _backgroundTextureHeight * (70.0 / 100.0)
+			, (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth + (_backgroundTextureWidth * (30.0 / 100.0)) + (_backgroundTextureHeight * (45.0 / 100.0) * 5)
+			, SCREEN_HEIGHT * (1.5 / 100.0) + _backgroundTextureHeight * (50.0 / 100.0)
+			, _backgroundTextureHeight * (60.0 / 100.0)
 			, color);
 	}
 }

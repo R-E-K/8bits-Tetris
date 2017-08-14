@@ -7,6 +7,8 @@
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/DrawTextService.h"
 #include "Component.h"
+#include <iostream>
+#include <fstream>
 
 namespace REKTetrisGame
 {
@@ -19,8 +21,15 @@ namespace REKTetrisGame
 		void Draw() const override;
 		void UpdateScore(int level);
 		void UpdateScore(int level, int nbLinesJustRemoved);
+
+		void SaveScoreIfBest() const;
 	private:
 		int _score;
+		int _bestScore;
+
+		void InitBestScore();
+
+		void UpdateBestScore();
 
 		void LoadTextures() override;
 
