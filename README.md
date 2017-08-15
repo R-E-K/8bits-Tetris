@@ -6,6 +6,8 @@ Font in the game : Upheaval by Brian Kent (http://www.dafont.com/fr/upheaval.fon
 
 Everything else is done by myself.
 
+![Alt text](screenshot1.png?raw=true "")
+
 # How to play (Keyboard / Gamepad)
 Menu selection : Enter / A
 
