@@ -37,7 +37,7 @@ namespace REKTetrisGame
 			gameContextMngr->ExecuteDPadRightButtonAction();
 		}
 
-		if (PressedKeys[SDL_SCANCODE_SPACE] || PressedKeys[SDL_SCANCODE_RETURN] || PressedKeys[SDL_SCANCODE_Z])
+		if (PressedKeys[SDL_SCANCODE_SPACE] || PressedKeys[SDL_SCANCODE_RETURN] || PressedKeys[SDL_SCANCODE_C])
 		{
 			gameContextMngr->ExecuteAButtonAction();
 		}
