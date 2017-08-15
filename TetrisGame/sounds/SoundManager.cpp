@@ -9,7 +9,7 @@ namespace REKTetrisGame
 		currentSoundChannels[1] = nullptr;
 
 		MusicVolume = MIX_MAX_VOLUME;
-		SoundVolume = MIX_MAX_VOLUME * 0.75;
+		SoundVolume = MIX_MAX_VOLUME;
 	}
 
 
