@@ -232,14 +232,44 @@ namespace REKTetrisGame
 		int y = backgroundPositionY + (backgroundTextureHeight / 10);
 
 
-		DrawTextService::DrawTextWithSizeAndColor("Game made by", x, y
-			, (backgroundTextureHeight / 10)
+		DrawTextService::DrawTextWithSizeAndColor("Code, design, music", x, y
+			, (backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 4);
+		y += (backgroundTextureHeight / 12);
 
-		DrawTextService::DrawTextWithSizeAndColor("REK", x, y
-			, (backgroundTextureHeight / 5)
+		DrawTextService::DrawTextWithSizeAndColor("and sounds : REK", x, y
+			, (backgroundTextureHeight / 15)
+			, { 255, 255, 255 });
+
+		y += (backgroundTextureHeight / 8);
+
+		DrawTextService::DrawTextWithSizeAndColor("Font : Upheaval", x, y
+			, (backgroundTextureHeight / 15)
+			, { 255, 255, 255 });
+
+		y += (backgroundTextureHeight / 12);
+
+		DrawTextService::DrawTextWithSizeAndColor("by Brian Kent", x, y
+			, (backgroundTextureHeight / 15)
+			, { 255, 255, 255 });
+
+		y += (backgroundTextureHeight / 8);
+
+		DrawTextService::DrawTextWithSizeAndColor("Source code and more", x, y
+			, (backgroundTextureHeight / 15)
+			, { 255, 255, 255 });
+
+		y += (backgroundTextureHeight / 12);
+
+		DrawTextService::DrawTextWithSizeAndColor("infos on", x, y
+			, (backgroundTextureHeight / 15)
+			, { 255, 255, 255 });
+
+		y += (backgroundTextureHeight / 12);
+
+		DrawTextService::DrawTextWithSizeAndColor("github.com/R-E-K", x, y
+			, (backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
 		AddBackButton();
