@@ -155,7 +155,7 @@ namespace REKTetrisGame
 									isInitOk = false;
 								}
 
-								soundMngr->PlayMusic("resources/songs/Disasterpeace_Forgotten.ogg", 2000);
+								soundMngr->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
 
 								SetSDLMainObjectsToProvider();
 							}

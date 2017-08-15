@@ -38,7 +38,7 @@ namespace REKTetrisGame
 		Mix_VolumeMusic(MusicVolume);
 		Mix_Volume(1, SoundVolume);
 
-		Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1024);
+		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 		return 0;
 	}
 
