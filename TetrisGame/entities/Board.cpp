@@ -23,6 +23,7 @@ namespace REKTetrisGame
 		SetTetrominoStartPosition(selectedShape);
 		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
 		TetrominoMovingDownTimer.SetDelay(200);
+		CurrentTetromino->SetRotateTimerDelay(200);
 
 		_levelComponent = std::make_unique<LevelComponent>(20.0, 10.0);
 		_linesRemovedCounterComponent = std::make_unique<LinesRemovedCounterComponent>(20.0, 10.0);
