@@ -1,7 +1,7 @@
-# 8bits-Tetris
+# Download Game
+https://github.com/R-E-K/8bits-Tetris/raw/master/Tetris-8bits.zip
 
-Download the game : https://github.com/R-E-K/8bits-Tetris/raw/master/Tetris-8bits.zip
-
+# General informations
 Another Tetris Game in 8bit style. Playable on keyboard or with XInput Gamepad (Pad Xbox 360, Pad Xbox One)
 
 Font used in the game : Upheaval by Brian Kent (http://www.dafont.com/fr/upheaval.font)
