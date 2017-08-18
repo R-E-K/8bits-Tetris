@@ -2,7 +2,7 @@
 
 Another Tetris Game in 8bit style. Playable on keyboard or with XInput Gamepad (Pad Xbox 360, Pad Xbox One)
 
-Font in the game : Upheaval by Brian Kent (http://www.dafont.com/fr/upheaval.font)
+Font used in the game : Upheaval by Brian Kent (http://www.dafont.com/fr/upheaval.font)
 
 Everything else is done by myself. The purpose of making this game was to learn C++.
 
