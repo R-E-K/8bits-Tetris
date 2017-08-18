@@ -21,3 +21,9 @@ Rotate tetromino to left : X / X
 Rotate tetromino to right : C / A
 
 Moving down tetromino faster : Down Arrow / Down
+
+# Dev Dependencies
+- SDL2 (2.0.5) => https://www.libsdl.org/download-2.0.php
+- SDL2 Image (2.0.1) => https://www.libsdl.org/projects/SDL_image/
+- SDL2 Mixer (2.0.1) => https://www.libsdl.org/projects/SDL_mixer/
+- SDL2 TTF (2.0.14) => https://www.libsdl.org/projects/SDL_ttf/
