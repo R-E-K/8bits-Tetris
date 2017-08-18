@@ -1,6 +1,6 @@
 # 8bits-Tetris
 
-Download : https://github.com/R-E-K/8bits-Tetris/raw/master/Tetris-8bits.zip
+Download the game : https://github.com/R-E-K/8bits-Tetris/raw/master/Tetris-8bits.zip
 
 Another Tetris Game in 8bit style. Playable on keyboard or with XInput Gamepad (Pad Xbox 360, Pad Xbox One)
 
