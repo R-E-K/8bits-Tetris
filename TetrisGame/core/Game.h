@@ -13,6 +13,7 @@
 #include "../entities/GameOverScreen.h"
 #include "GameContextManager.h"
 #include "GameConfiguration.h"
+#include "../utils/FileManager.h"
 
 
 namespace REKTetrisGame
@@ -39,6 +40,7 @@ namespace REKTetrisGame
 
 		void Loop(SDL_Event& e);
 		bool Init();
+		bool AreAllAssetsExists();
 
 		void SetSDLMainObjectsToProvider() const;
 

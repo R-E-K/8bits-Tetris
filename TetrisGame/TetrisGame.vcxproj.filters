@@ -128,6 +128,9 @@
     <ClCompile Include="utils\EncryptDecryptManager.cpp">
       <Filter>sources\utils</Filter>
     </ClCompile>
+    <ClCompile Include="utils\FileManager.cpp">
+      <Filter>sources\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -236,6 +239,9 @@
       <Filter>sources\input</Filter>
     </ClInclude>
     <ClInclude Include="utils\EncryptDecryptManager.h">
+      <Filter>sources\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\FileManager.h">
       <Filter>sources\utils</Filter>
     </ClInclude>
   </ItemGroup>

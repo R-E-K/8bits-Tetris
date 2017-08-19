@@ -92,7 +92,7 @@ namespace REKTetrisGame
 		//Initialize SDL
 		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) < 0)
 		{
-			ErrorMessageManager::WriteErrorMessageToConsole("SDL could not initialize! SDL_Error : ");
+			ErrorMessageManager::WriteErrorMessageToMessageBox("SDL could not be initialized. Application will be closed.");
 			isInitOk = false;
 		}
 		else
@@ -107,7 +107,7 @@ namespace REKTetrisGame
 
 				if (_window == nullptr)
 				{
-					ErrorMessageManager::WriteErrorMessageToConsole("Window could not be created! SDL_Error : ");
+					ErrorMessageManager::WriteErrorMessageToMessageBox("Window could not be created. Application will be closed.");
 					isInitOk = false;
 				}
 				else
@@ -119,7 +119,7 @@ namespace REKTetrisGame
 
 					if (_renderer == nullptr)
 					{
-						ErrorMessageManager::WriteErrorMessageToConsole("Renderer could not be created! SDL_Error : ");
+						ErrorMessageManager::WriteErrorMessageToMessageBox("Renderer could not be created. Application will be closed.");
 						isInitOk = false;
 					}
 					else
@@ -131,7 +131,7 @@ namespace REKTetrisGame
 						// About mouse cursor
 						if (SDL_ShowCursor(SDL_DISABLE) < 0)
 						{
-							ErrorMessageManager::WriteErrorMessageToConsole("Cannot hide mouse cursor! SDL_Error : ");
+							ErrorMessageManager::WriteErrorMessageToMessageBox("Cannot hide mouse cursor. Application will be closed.");
 							isInitOk = false;
 						}
 						else
@@ -143,7 +143,7 @@ namespace REKTetrisGame
 							// SDL_ttf
 							if (TTF_Init() != 0)
 							{
-								ErrorMessageManager::WriteErrorMessageToConsole("Could not load SDL_ttf, SDL_Error : ");
+								ErrorMessageManager::WriteErrorMessageToMessageBox("Could not load SDL2_ttf. Application will be closed.");
 								isInitOk = false;
 							}
 							else
@@ -151,13 +151,21 @@ namespace REKTetrisGame
 								_soundManager = std::make_shared<SoundManager>();
 								if (_soundManager->Init() < 0)
 								{
-									ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");
+									ErrorMessageManager::WriteErrorMessageToMessageBox("Could not Init SDL2_Mixer with OGG format. Application will be closed.");
 									isInitOk = false;
 								}
 
-								_soundManager->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
+								if (!AreAllAssetsExists())
+								{
+									ErrorMessageManager::WriteErrorMessageToMessageBox("All assets are not present in resources folder, you need to redownload the game. Application will be closed. END END END");
+									isInitOk = false;
+								}
+								else
+								{
+									_soundManager->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
 
-								SetSDLMainObjectsToProvider();
+									SetSDLMainObjectsToProvider();
+								}
 							}
 						}
 					}
@@ -166,6 +174,24 @@ namespace REKTetrisGame
 		}
 
 		return isInitOk;
+	}
+
+	bool Game::AreAllAssetsExists()
+	{
+		std::vector<std::string> fileNames;
+		fileNames.push_back("config.txt");
+		bool allAssetsExists = true;
+
+		for (auto filename : fileNames)
+		{
+			if (!FileManager::IsFileExists(filename))
+			{
+				allAssetsExists = false;
+				break;
+			}
+		}
+
+		return allAssetsExists;
 	}
 
 	void Game::Run()
