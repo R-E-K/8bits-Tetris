@@ -27,7 +27,7 @@ namespace REKTetrisGame
 	void GameExecution()
 	{
 		auto game = std::make_unique<Game>();
-		game->Execute();
+		game->Run();
 	}
 
 	void ExitSDL()

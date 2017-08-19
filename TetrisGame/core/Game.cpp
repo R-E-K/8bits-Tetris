@@ -168,7 +168,7 @@ namespace REKTetrisGame
 		return isInitOk;
 	}
 
-	void Game::Execute()
+	void Game::Run()
 	{
 		if (Init())
 		{

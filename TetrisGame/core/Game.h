@@ -23,7 +23,7 @@ namespace REKTetrisGame
 		Game();
 		~Game();
 		
-		void Execute();
+		void Run();
 	private:
 		std::shared_ptr<SDL_Window> _window;
 		std::shared_ptr<SDL_Renderer> _renderer;
