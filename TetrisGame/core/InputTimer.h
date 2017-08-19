@@ -23,10 +23,10 @@ namespace REKTetrisGame
 		const int SAFETY_THRESHOLD_MS = 50;
 		const int HOLD_THRESHOLD_MS = 20;
 
-		int InputDownLastTime;
-		int InputDownHoldTime;
-		bool IsHoldInputDown;
-		bool IsStartingHoldInputDown;
+		int _inputDownLastTime;
+		int _inputDownHoldTime;
+		bool _isHoldInputDown;
+		bool _isStartingHoldInputDown;
 
 		int _startHoldInputDownDelay;
 		int _inputRepeatFrequency;

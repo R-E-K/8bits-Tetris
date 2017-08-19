@@ -21,11 +21,11 @@ namespace REKTetrisGame
 		void PlaySound(std::string const& filepath, int channel);
 
 	private:
-		std::unique_ptr<Mix_Music, SdlDeleter> currentMusic;
+		std::unique_ptr<Mix_Music, SdlDeleter> _currentMusic;
 
 		// The sound need to be in RAM to be played
 		// So we stock it or it will be deleted at the end of PlaySound()
-		std::unique_ptr<Mix_Chunk, SdlDeleter> currentSoundChannels[2];
+		std::unique_ptr<Mix_Chunk, SdlDeleter> _currentSoundChannels[2];
 	};
 
 }

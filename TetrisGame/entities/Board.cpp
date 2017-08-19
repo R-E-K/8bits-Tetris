@@ -6,11 +6,11 @@ namespace REKTetrisGame
 	Board::Board()
 	{
 		// It will be a square
-		backgroundTextureWidth = (SCREEN_HEIGHT * (85.0 / 100.0)) / EntitiesConsts::NB_ROWS;
-		backgroundTextureHeight = (SCREEN_HEIGHT * (85.0 / 100.0)) / EntitiesConsts::NB_ROWS;
+		_backgroundTextureWidth = (SCREEN_HEIGHT * (85.0 / 100.0)) / EntitiesConsts::NB_ROWS;
+		_backgroundTextureHeight = (SCREEN_HEIGHT * (85.0 / 100.0)) / EntitiesConsts::NB_ROWS;
 
-		gameOver = false;
-		MoveDownTimerFrequency = MoveDownTimerDefaultFrequency;
+		_gameOver = false;
+		_moveDownTimerFrequency = MOVE_DOWN_TIMER_DEFAULT_FREQUENCY;
 
 		SetBorderBackground();
 		SetTexturesBackground();
@@ -19,11 +19,11 @@ namespace REKTetrisGame
 		SetTimers();
 
 		TetrominoShapeEnum selectedShape = RandomlySelectTetrominoType();
-		CurrentTetromino = std::make_unique<Tetromino>(selectedShape);
+		_currentTetromino = std::make_unique<Tetromino>(selectedShape);
 		SetTetrominoStartPosition(selectedShape);
-		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
-		TetrominoMovingDownTimer.SetDelay(200);
-		CurrentTetromino->SetRotateTimerDelay(200);
+		_moveTetrominoToLeftOrRightTimer.SetDelay(200);
+		_tetrominoMovingDownTimer.SetDelay(200);
+		_currentTetromino->SetRotateTimerDelay(200);
 
 		_levelComponent = std::make_unique<LevelComponent>(20.0, 10.0);
 		_linesRemovedCounterComponent = std::make_unique<LinesRemovedCounterComponent>(20.0, 10.0);
@@ -51,17 +51,17 @@ namespace REKTetrisGame
 
 	void Board::NewTetromino()
 	{
-		CurrentTetromino = _nextTetrominoComponent->PopTetromino();
+		_currentTetromino = _nextTetrominoComponent->PopTetromino();
 		_nextTetrominoComponent->SetTetromino(RandomlySelectTetrominoType());
-		SetTetrominoStartPosition(CurrentTetromino->GetShape());
+		SetTetrominoStartPosition(_currentTetromino->GetShape());
 
-		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
-		TetrominoMovingDownTimer.SetDelay(200);
-		CurrentTetromino->SetRotateTimerDelay(200);
+		_moveTetrominoToLeftOrRightTimer.SetDelay(200);
+		_tetrominoMovingDownTimer.SetDelay(200);
+		_currentTetromino->SetRotateTimerDelay(200);
 
 		if (isGameOverInternal())
 		{
-			gameOver = true;
+			_gameOver = true;
 		}
 	}
 
@@ -71,24 +71,24 @@ namespace REKTetrisGame
 		// Need to be draw here to have the last shape
 		DrawCurrentTetrominosOnBoard();
 
-		TetrominoMovingDownTimer.Execute([&]()
+		_tetrominoMovingDownTimer.Execute([&]()
 		{
 			if (!IsCollideBottom())
 			{
-				TetrominoPositionY++;
+				_tetrominoPositionY++;
 			}
 			else
 			{
 				// Clear Stacks
 				// Unfortunately, extension methods don't exist in C++
-				while (!TetrominoTileXPrevious.empty())
+				while (!_tetrominoTileXPrevious.empty())
 				{
-					TetrominoTileXPrevious.pop();
+					_tetrominoTileXPrevious.pop();
 				}
 
-				while (!TetrominoTileYPrevious.empty())
+				while (!_tetrominoTileYPrevious.empty())
 				{
-					TetrominoTileYPrevious.pop();
+					_tetrominoTileYPrevious.pop();
 				}
 
 				RemoveFullLines();
@@ -100,27 +100,27 @@ namespace REKTetrisGame
 
 	bool Board::IsGameOver() const
 	{
-		return gameOver;
+		return _gameOver;
 	}
 
 	void Board::MoveTetrominoToTheLeft()
 	{
-		if (CanMoveToLeft(CurrentTetromino->GetTetrominoCurrentShape()))
+		if (CanMoveToLeft(_currentTetromino->GetTetrominoCurrentShape()))
 		{
-			MoveTetrominoToLeftOrRightTimer.Execute([&]()
+			_moveTetrominoToLeftOrRightTimer.Execute([&]()
 			{
-				TetrominoPositionX--;
+				_tetrominoPositionX--;
 			});
 		}
 	}
 
 	void Board::MoveTetrominoToTheRight()
 	{
-		if (CanMoveToRight(CurrentTetromino->GetTetrominoCurrentShape()))
+		if (CanMoveToRight(_currentTetromino->GetTetrominoCurrentShape()))
 		{
-			MoveTetrominoToLeftOrRightTimer.Execute([&]()
+			_moveTetrominoToLeftOrRightTimer.Execute([&]()
 			{
-				TetrominoPositionX++;
+				_tetrominoPositionX++;
 			});
 		}
 	}
@@ -129,7 +129,7 @@ namespace REKTetrisGame
 	{
 		if (CanRotateLeft())
 		{
-			CurrentTetromino->RotateLeft();
+			_currentTetromino->RotateLeft();
 		}
 	}
 
@@ -137,41 +137,41 @@ namespace REKTetrisGame
 	{
 		if (CanRotateRight())
 		{
-			CurrentTetromino->RotateRight();
+			_currentTetromino->RotateRight();
 		}
 	}
 
 	void Board::MoveTetrominoDown()
 	{
-		TetrominoMovingDownTimer.SetRepeatFrequency(50);
+		_tetrominoMovingDownTimer.SetRepeatFrequency(50);
 	}
 
 	void Board::MoveTetrominoDownRelease()
 	{
-		TetrominoMovingDownTimer.SetRepeatFrequency(MoveDownTimerFrequency);
+		_tetrominoMovingDownTimer.SetRepeatFrequency(_moveDownTimerFrequency);
 	}
 
 	void Board::SetTexturesBackground()
 	{
 		auto surfaceLight = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, backgroundTextureWidth, backgroundTextureHeight, 32, 0, 0, 0, 0)
+			SDL_CreateRGBSurface(0, _backgroundTextureWidth, _backgroundTextureHeight, 32, 0, 0, 0, 0)
 			, SdlDeleter());
 
 		SDL_FillRect(surfaceLight.get(), nullptr, SDL_MapRGB(surfaceLight->format, 215, 215, 215));
 
-		lightBackgroundTexture = std::shared_ptr<SDL_Texture>(
+		_lightBackgroundTexture = std::shared_ptr<SDL_Texture>(
 			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), surfaceLight.get()),
 			SdlDeleter()
 			);
 
 
 		auto darkLight = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, backgroundTextureWidth, backgroundTextureHeight, 32, 0, 0, 0, 0)
+			SDL_CreateRGBSurface(0, _backgroundTextureWidth, _backgroundTextureHeight, 32, 0, 0, 0, 0)
 			, SdlDeleter());
 
 		SDL_FillRect(darkLight.get(), nullptr, SDL_MapRGB(darkLight->format, 171, 171, 171));
 
-		darkBackgroundTexture = std::shared_ptr<SDL_Texture>(
+		_darkBackgroundTexture = std::shared_ptr<SDL_Texture>(
 			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), darkLight.get()),
 			SdlDeleter()
 			);
@@ -180,12 +180,12 @@ namespace REKTetrisGame
 	void Board::SetBorderBackground()
 	{
 		auto surfaceBorder = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			SDL_CreateRGBSurface(0, backgroundTextureWidth * EntitiesConsts::NB_COLUMNS, backgroundTextureHeight * EntitiesConsts::NB_ROWS, 32, 0, 0, 0, 0)
+			SDL_CreateRGBSurface(0, _backgroundTextureWidth * EntitiesConsts::NB_COLUMNS, _backgroundTextureHeight * EntitiesConsts::NB_ROWS, 32, 0, 0, 0, 0)
 			, SdlDeleter());
 
 		SDL_FillRect(surfaceBorder.get(), nullptr, SDL_MapRGB(surfaceBorder->format, 0, 0, 0));
 
-		borderBackgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
+		_borderBackgroundTexture = std::unique_ptr<SDL_Texture, SdlDeleter>(
 			SDL_CreateTextureFromSurface(SDLMainObjectsProvider::GetRendererRawPointer(), surfaceBorder.get()),
 			SdlDeleter()
 			);
@@ -203,67 +203,67 @@ namespace REKTetrisGame
 
 	void Board::SetTetrominosTextures()
 	{
-		TetrominosTextures.resize(7);
-		TetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");
-		TetrominosTextures[1] = GetTetrominoTexture("resources/graphics/tetrominos/brown.png");
-		TetrominosTextures[2] = GetTetrominoTexture("resources/graphics/tetrominos/green.png");
-		TetrominosTextures[3] = GetTetrominoTexture("resources/graphics/tetrominos/orange.png");
-		TetrominosTextures[4] = GetTetrominoTexture("resources/graphics/tetrominos/purple.png");
-		TetrominosTextures[5] = GetTetrominoTexture("resources/graphics/tetrominos/red.png");
-		TetrominosTextures[6] = GetTetrominoTexture("resources/graphics/tetrominos/yellow.png");
+		_tetrominosTextures.resize(7);
+		_tetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");
+		_tetrominosTextures[1] = GetTetrominoTexture("resources/graphics/tetrominos/brown.png");
+		_tetrominosTextures[2] = GetTetrominoTexture("resources/graphics/tetrominos/green.png");
+		_tetrominosTextures[3] = GetTetrominoTexture("resources/graphics/tetrominos/orange.png");
+		_tetrominosTextures[4] = GetTetrominoTexture("resources/graphics/tetrominos/purple.png");
+		_tetrominosTextures[5] = GetTetrominoTexture("resources/graphics/tetrominos/red.png");
+		_tetrominosTextures[6] = GetTetrominoTexture("resources/graphics/tetrominos/yellow.png");
 	}
 
 	void Board::InitLogicalTetrominosArray()
 	{
 		// Set up sizes. (HEIGHT x WIDTH)
-		logicalTetrominosArray.resize(EntitiesConsts::NB_ROWS);
+		_logicalTetrominosArray.resize(EntitiesConsts::NB_ROWS);
 		for (int i = 0; i < EntitiesConsts::NB_ROWS; ++i)
-			logicalTetrominosArray[i].resize(EntitiesConsts::NB_COLUMNS);
+			_logicalTetrominosArray[i].resize(EntitiesConsts::NB_COLUMNS);
 
 		for (int i = 0; i < EntitiesConsts::NB_ROWS; i++)
 		{
 			for (int j = 0; j < EntitiesConsts::NB_COLUMNS; j++)
 			{
-				logicalTetrominosArray[i][j] = TetrominoColorEnum::NONE;
+				_logicalTetrominosArray[i][j] = TetrominoColorEnum::NONE;
 			}
 		}
 	}
 
 	void Board::DrawCurrentTetrominosOnBoard()
 	{
-		if (!TetrominoTileXPrevious.empty())
+		if (!_tetrominoTileXPrevious.empty())
 		{
-			for (int i = 0; i < TetrominoTileYPrevious.size(); i++) // Y Axis
+			for (int i = 0; i < _tetrominoTileYPrevious.size(); i++) // Y Axis
 			{
-				int x = TetrominoTileXPrevious.top();
-				TetrominoTileXPrevious.pop();
+				int x = _tetrominoTileXPrevious.top();
+				_tetrominoTileXPrevious.pop();
 
-				int y = TetrominoTileYPrevious.top();
-				TetrominoTileYPrevious.pop();
+				int y = _tetrominoTileYPrevious.top();
+				_tetrominoTileYPrevious.pop();
 
-				logicalTetrominosArray[y][x] = TetrominoColorEnum::NONE;
+				_logicalTetrominosArray[y][x] = TetrominoColorEnum::NONE;
 			}
 		}
 
-		auto Tetromino = CurrentTetromino->GetTetrominoCurrentShape();
+		auto Tetromino = _currentTetromino->GetTetrominoCurrentShape();
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < Tetromino.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX - 1;
+			tetrominoTileX = _tetrominoPositionX - 1;
 			for (int j = 0; j < Tetromino[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
 
 				if (Tetromino[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 				{
-					logicalTetrominosArray[tetrominoTileY][tetrominoTileX] = CurrentTetromino->GetColor();
-					TetrominoTileYPrevious.push(tetrominoTileY);
-					TetrominoTileXPrevious.push(tetrominoTileX);
+					_logicalTetrominosArray[tetrominoTileY][tetrominoTileX] = _currentTetromino->GetColor();
+					_tetrominoTileYPrevious.push(tetrominoTileY);
+					_tetrominoTileXPrevious.push(tetrominoTileX);
 				}
 			}
 		}
@@ -272,41 +272,41 @@ namespace REKTetrisGame
 	void Board::DrawBorder() const
 	{
 		SDL_Rect backgroundTilePosition;
-		backgroundTilePosition.x = (SCREEN_WIDTH / 2) - ((backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + backgroundTextureWidth - EntitiesConsts::BORDER_THICKNESS;
+		backgroundTilePosition.x = (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2) + _backgroundTextureWidth - EntitiesConsts::BORDER_THICKNESS;
 		backgroundTilePosition.y = SCREEN_HEIGHT * (12.0 / 100.0) - EntitiesConsts::BORDER_THICKNESS; // Start at 10% from top
-		backgroundTilePosition.w = (backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) + (EntitiesConsts::BORDER_THICKNESS * 2);
-		backgroundTilePosition.h = (backgroundTextureHeight * EntitiesConsts::NB_ROWS) + (EntitiesConsts::BORDER_THICKNESS * 2);
+		backgroundTilePosition.w = (_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) + (EntitiesConsts::BORDER_THICKNESS * 2);
+		backgroundTilePosition.h = (_backgroundTextureHeight * EntitiesConsts::NB_ROWS) + (EntitiesConsts::BORDER_THICKNESS * 2);
 
 		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer()
-			, borderBackgroundTexture.get()
+			, _borderBackgroundTexture.get()
 			, nullptr, &backgroundTilePosition);
 	}
 
 	void Board::DrawBackground() const
 	{
-		int backgroundTileXInitPosition = (SCREEN_WIDTH / 2) - ((backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2);
+		int backgroundTileXInitPosition = (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2);
 
 		SDL_Rect backgroundTilePosition;
-		backgroundTilePosition.x = backgroundTileXInitPosition - backgroundTextureWidth;
-		backgroundTilePosition.y = SCREEN_HEIGHT * (12.0 / 100.0) - backgroundTextureHeight; // Start at 10% from top
-		backgroundTilePosition.w = backgroundTextureWidth;
-		backgroundTilePosition.h = backgroundTextureHeight;
+		backgroundTilePosition.x = backgroundTileXInitPosition - _backgroundTextureWidth;
+		backgroundTilePosition.y = SCREEN_HEIGHT * (12.0 / 100.0) - _backgroundTextureHeight; // Start at 10% from top
+		backgroundTilePosition.w = _backgroundTextureWidth;
+		backgroundTilePosition.h = _backgroundTextureHeight;
 
 		bool isLight;
 
 		for (int i = 0; i < EntitiesConsts::NB_ROWS; i++)
 		{
-			backgroundTilePosition.y += backgroundTextureHeight;
+			backgroundTilePosition.y += _backgroundTextureHeight;
 			backgroundTilePosition.x = backgroundTileXInitPosition;
 
 			// First column is always light
 			isLight = true;
 			for (int j = 0; j < EntitiesConsts::NB_COLUMNS; j++)
 			{
-				backgroundTilePosition.x += backgroundTextureWidth;
+				backgroundTilePosition.x += _backgroundTextureWidth;
 
 				SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer()
-					, isLight ? lightBackgroundTexture.get() : darkBackgroundTexture.get()
+					, isLight ? _lightBackgroundTexture.get() : _darkBackgroundTexture.get()
 					, nullptr, &backgroundTilePosition);
 
 				isLight = !isLight;
@@ -316,27 +316,27 @@ namespace REKTetrisGame
 
 	void Board::DrawTetrominos() const
 	{
-		int backgroundTileXInitPosition = (SCREEN_WIDTH / 2) - ((backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2);
+		int backgroundTileXInitPosition = (SCREEN_WIDTH / 2) - ((_backgroundTextureWidth * EntitiesConsts::NB_COLUMNS) / 2);
 
 		SDL_Rect backgroundTilePosition;
-		backgroundTilePosition.x = backgroundTileXInitPosition - backgroundTextureWidth;
-		backgroundTilePosition.y = SCREEN_HEIGHT * (12.0 / 100.0) - backgroundTextureHeight; // Start at 10% from top
-		backgroundTilePosition.w = backgroundTextureWidth;
-		backgroundTilePosition.h = backgroundTextureHeight;
+		backgroundTilePosition.x = backgroundTileXInitPosition - _backgroundTextureWidth;
+		backgroundTilePosition.y = SCREEN_HEIGHT * (12.0 / 100.0) - _backgroundTextureHeight; // Start at 10% from top
+		backgroundTilePosition.w = _backgroundTextureWidth;
+		backgroundTilePosition.h = _backgroundTextureHeight;
 
 		for (int i = 0; i < EntitiesConsts::NB_ROWS; i++)
 		{
-			backgroundTilePosition.y += backgroundTextureHeight;
+			backgroundTilePosition.y += _backgroundTextureHeight;
 			backgroundTilePosition.x = backgroundTileXInitPosition;
 
 			for (int j = 0; j < EntitiesConsts::NB_COLUMNS; j++)
 			{
-				backgroundTilePosition.x += backgroundTextureWidth;
+				backgroundTilePosition.x += _backgroundTextureWidth;
 
-				if (logicalTetrominosArray[i][j] != TetrominoColorEnum::NONE)
+				if (_logicalTetrominosArray[i][j] != TetrominoColorEnum::NONE)
 				{
 					SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer()
-						, TetrominosTextures[static_cast<int>(logicalTetrominosArray[i][j])].get()
+						, _tetrominosTextures[static_cast<int>(_logicalTetrominosArray[i][j])].get()
 						, nullptr, &backgroundTilePosition);
 				}
 			}
@@ -366,15 +366,15 @@ namespace REKTetrisGame
 
 	void Board::SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape)
 	{
-		TetrominoPositionY = 0;
+		_tetrominoPositionY = 0;
 
 		if (tetrominoShape == TetrominoShapeEnum::O)
 		{
-			TetrominoPositionX = 4;
+			_tetrominoPositionX = 4;
 		}
 		else
 		{
-			TetrominoPositionX = 3;
+			_tetrominoPositionX = 3;
 		}
 	}
 
@@ -382,14 +382,14 @@ namespace REKTetrisGame
 	{
 		bool isMovable = true;
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX - 1;
+			tetrominoTileX = _tetrominoPositionX - 1;
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
@@ -397,7 +397,7 @@ namespace REKTetrisGame
 				{
 					// Left collision
 					if (tetrominoTileX <= 0 ||
-						logicalTetrominosArray[tetrominoTileY][tetrominoTileX - 1] != TetrominoColorEnum::NONE)
+						_logicalTetrominosArray[tetrominoTileY][tetrominoTileX - 1] != TetrominoColorEnum::NONE)
 					{
 						isMovable = false;
 					}
@@ -414,14 +414,14 @@ namespace REKTetrisGame
 	{
 		bool isMovable = true;
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX + shapeToCheck[i].size();
+			tetrominoTileX = _tetrominoPositionX + shapeToCheck[i].size();
 			for (int j = shapeToCheck[i].size() - 1; j >= 0; j--) // X Axis
 			{
 				tetrominoTileX--;
@@ -429,7 +429,7 @@ namespace REKTetrisGame
 				{
 					// Right collision
 					if (tetrominoTileX >= EntitiesConsts::NB_COLUMNS - 1 ||
-						logicalTetrominosArray[tetrominoTileY][tetrominoTileX + 1] != TetrominoColorEnum::NONE)
+						_logicalTetrominosArray[tetrominoTileY][tetrominoTileX + 1] != TetrominoColorEnum::NONE)
 					{
 						isMovable = false;
 					}
@@ -445,21 +445,21 @@ namespace REKTetrisGame
 	{
 		bool isRotatable = true;
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX - 1;
+			tetrominoTileX = _tetrominoPositionX - 1;
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
 
 				// Left and right collision
 				if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
-					&& CurrentTetromino->GetTetrominoCurrentShape()[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
+					&& _currentTetromino->GetTetrominoCurrentShape()[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 				{
 					if (tetrominoTileX - j < 0 || tetrominoTileX >= EntitiesConsts::NB_COLUMNS - 1)
 					{
@@ -477,8 +477,8 @@ namespace REKTetrisGame
 				// Others pieces collision
 				if (tetrominoTileX > 0 && tetrominoTileX < EntitiesConsts::NB_COLUMNS && tetrominoTileY < EntitiesConsts::NB_ROWS)
 				{
-					if (CurrentTetromino->GetTetrominoCurrentShape()[i][j] == static_cast<int>(TetrominoColorEnum::NONE)
-						&& logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != TetrominoColorEnum::NONE)
+					if (_currentTetromino->GetTetrominoCurrentShape()[i][j] == static_cast<int>(TetrominoColorEnum::NONE)
+						&& _logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != TetrominoColorEnum::NONE)
 					{
 						isRotatable = false;
 					}
@@ -491,17 +491,17 @@ namespace REKTetrisGame
 
 	bool Board::CanRotateLeft() const
 	{
-		return CanRotate(CurrentTetromino->GetPreviousShape());
+		return CanRotate(_currentTetromino->GetPreviousShape());
 	}
 
 	bool Board::CanRotateRight() const
 	{
-		return CanRotate(CurrentTetromino->GetNextShape());
+		return CanRotate(_currentTetromino->GetNextShape());
 	}
 
 	void Board::RemoveFullLines()
 	{
-		int countLines = logicalTetrominosArray.size();
+		int countLines = _logicalTetrominosArray.size();
 
 		// Searching for full lines
 		auto iteratorRemoveFullLines = [](std::vector<TetrominoColorEnum> line) -> bool
@@ -518,14 +518,14 @@ namespace REKTetrisGame
 		};
 
 		// Call std::remove_if and obtain iterator
-		auto iterator = std::remove_if(logicalTetrominosArray.begin(), logicalTetrominosArray.end(), iteratorRemoveFullLines);
+		auto iterator = std::remove_if(_logicalTetrominosArray.begin(), _logicalTetrominosArray.end(), iteratorRemoveFullLines);
 		// Delete full lines
-		logicalTetrominosArray.erase(iterator, logicalTetrominosArray.end());
+		_logicalTetrominosArray.erase(iterator, _logicalTetrominosArray.end());
 
 
 		// Inserting new empty lines
-		int countLinesRemoved = countLines - logicalTetrominosArray.size();
-		logicalTetrominosArray.insert(logicalTetrominosArray.begin(), countLinesRemoved, {
+		int countLinesRemoved = countLines - _logicalTetrominosArray.size();
+		_logicalTetrominosArray.insert(_logicalTetrominosArray.begin(), countLinesRemoved, {
 			TetrominoColorEnum::NONE,
 			TetrominoColorEnum::NONE,
 			TetrominoColorEnum::NONE,
@@ -545,23 +545,23 @@ namespace REKTetrisGame
 
 	bool Board::isGameOverInternal()
 	{
-		auto shapeToCheck = CurrentTetromino->GetTetrominoCurrentShape();
+		auto shapeToCheck = _currentTetromino->GetTetrominoCurrentShape();
 		bool isGameOver = false;
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX - 1;
+			tetrominoTileX = _tetrominoPositionX - 1;
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
 
 				if(shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
-					&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+					&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 				{
 					_scoreComponent->SaveScoreIfBest();
 					isGameOver = true;
@@ -575,17 +575,17 @@ namespace REKTetrisGame
 
 	bool Board::IsCollideBottom()
 	{
-		auto shapeToCheck = CurrentTetromino->GetTetrominoCurrentShape();
+		auto shapeToCheck = _currentTetromino->GetTetrominoCurrentShape();
 		bool isCollide = false;
 
-		int tetrominoTileX = TetrominoPositionX - 1;
-		int tetrominoTileY = TetrominoPositionY - 1;
+		int tetrominoTileX = _tetrominoPositionX - 1;
+		int tetrominoTileY = _tetrominoPositionY - 1;
 
 		for (int i = 0; i < shapeToCheck.size(); i++) // Y Axis
 		{
 			tetrominoTileY++;
 
-			tetrominoTileX = TetrominoPositionX - 1;
+			tetrominoTileX = _tetrominoPositionX - 1;
 			for (int j = 0; j < shapeToCheck[i].size(); j++) // X Axis
 			{
 				tetrominoTileX++;
@@ -604,7 +604,7 @@ namespace REKTetrisGame
 
 						// Si pas de tuile de tétromino en dessous et tuile du plateau est pleine
 						if (i == shapeToCheck.size() - 1
-							&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+							&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 						{
 							// Alors isCollide = true;
 							isCollide = true;
@@ -614,7 +614,7 @@ namespace REKTetrisGame
 						{
 							// Si tuile du tétromino en dessous est vide et tuile du plateau est pleine
 							if (shapeToCheck[i + 1][j] == static_cast<int>(TetrominoColorEnum::NONE)
-								&& logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
+								&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 							{
 								// Alors isCollide = true;
 								isCollide = true;
@@ -634,11 +634,11 @@ namespace REKTetrisGame
 
 	void Board::SetTimers()
 	{
-		MoveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
-		MoveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
-		MoveTetrominoToLeftOrRightTimer.SetDelay(200);
+		_moveTetrominoToLeftOrRightTimer.SetInputRepeatFrequency(150);
+		_moveTetrominoToLeftOrRightTimer.SetStartHoldInputDownDelay(500);
+		_moveTetrominoToLeftOrRightTimer.SetDelay(200);
 
-		TetrominoMovingDownTimer.SetRepeatFrequency(MoveDownTimerDefaultFrequency);
+		_tetrominoMovingDownTimer.SetRepeatFrequency(MOVE_DOWN_TIMER_DEFAULT_FREQUENCY);
 	}
 
 	void Board::CheckLevel(int nbLinesJustRemoved)
@@ -648,8 +648,8 @@ namespace REKTetrisGame
 			_linesRemovedCounterComponent->AddNumberOfLinesRemovedToCounter(nbLinesJustRemoved);
 			_levelComponent->DefineLevel(_linesRemovedCounterComponent->GetLinesRemovedCounter());
 
-			MoveDownTimerFrequency = MoveDownTimerDefaultFrequency - ((_levelComponent->GetLevel() - 1) * 100);
-			TetrominoMovingDownTimer.SetRepeatFrequency(MoveDownTimerFrequency);
+			_moveDownTimerFrequency = MOVE_DOWN_TIMER_DEFAULT_FREQUENCY - ((_levelComponent->GetLevel() - 1) * 100);
+			_tetrominoMovingDownTimer.SetRepeatFrequency(_moveDownTimerFrequency);
 		}
 	}
 

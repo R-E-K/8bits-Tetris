@@ -14,7 +14,7 @@ namespace REKTetrisGame
 		virtual void SetDelay(int delay);
 
 	protected:
-		int currentTime;
+		int _currentTime;
 		int _delay;
 	};
 }

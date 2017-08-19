@@ -4,9 +4,9 @@ namespace REKTetrisGame
 {
 	SoundManager::SoundManager()
 	{
-		currentMusic = nullptr;
-		currentSoundChannels[0] = nullptr;
-		currentSoundChannels[1] = nullptr;
+		_currentMusic = nullptr;
+		_currentSoundChannels[0] = nullptr;
+		_currentSoundChannels[1] = nullptr;
 
 		MusicVolume = MIX_MAX_VOLUME;
 		SoundVolume = MIX_MAX_VOLUME;
@@ -44,24 +44,24 @@ namespace REKTetrisGame
 
 	void SoundManager::PlayMusic(std::string const& filepath, int fadeInDuration)
 	{
-		currentMusic = std::unique_ptr<Mix_Music, SdlDeleter>(
+		_currentMusic = std::unique_ptr<Mix_Music, SdlDeleter>(
 			Mix_LoadMUS(filepath.c_str()),
 			SdlDeleter()
 			);
 
-		if (currentMusic != nullptr)
+		if (_currentMusic != nullptr)
 		{
-			Mix_FadeInMusic(currentMusic.get(), -1, fadeInDuration);
+			Mix_FadeInMusic(_currentMusic.get(), -1, fadeInDuration);
 		}
 	}
 
 	void SoundManager::PlaySound(std::string const& filepath, int channel)
 	{
-		currentSoundChannels[channel - 1] = std::unique_ptr<Mix_Chunk, SdlDeleter>(
+		_currentSoundChannels[channel - 1] = std::unique_ptr<Mix_Chunk, SdlDeleter>(
 			Mix_LoadWAV(filepath.c_str()),
 			SdlDeleter()
 			);
 
-		Mix_PlayChannel(channel, currentSoundChannels[channel - 1].get(), 0);
+		Mix_PlayChannel(channel, _currentSoundChannels[channel - 1].get(), 0);
 	}
 }

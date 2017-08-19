@@ -19,7 +19,7 @@ namespace REKTetrisGame
 		void SetDelay(int delay) override;
 
 	private:
-		int lastTime;
+		int _lastTime;
 		int _inputRepeatFrequency;
 	};
 

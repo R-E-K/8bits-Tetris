@@ -6,22 +6,22 @@ namespace REKTetrisGame
 	Game::Game()
 	{
 		//The window we'll be rendering to
-		window = nullptr;
+		_window = nullptr;
 
 		// Engine renderer
-		renderer = nullptr;
+		_renderer = nullptr;
 
 		// The class who manage all input
-		inputMngr = nullptr;
+		_inputManager = nullptr;
 
 		// Handle the game behavior according to the context (In-game, Pause, Menu etc...)
-		gameContextMngr = nullptr;
+		_gameContextManager = nullptr;
 
 		// Manage all sounds
-		soundMngr = nullptr;
+		_soundManager = nullptr;
 
-		gameMenu = nullptr;
-		boardGame = nullptr;
+		_gameMenu = nullptr;
+		_boardGame = nullptr;
 		_gameOverScreen = nullptr;
 
 		_gameConfiguration = nullptr;
@@ -40,27 +40,27 @@ namespace REKTetrisGame
 
 		while (!quitGame)
 		{
-			SDL_RenderClear(renderer.get());
+			SDL_RenderClear(_renderer.get());
 
-			if (inputMngr != nullptr)
-				inputMngr->CheckInput(e, quitGame);
+			if (_inputManager != nullptr)
+				_inputManager->CheckInput(e, quitGame);
 
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				if (!boardGame->IsGameOver())
+				if (!_boardGame->IsGameOver())
 				{
-					boardGame->Update();
+					_boardGame->Update();
 				}
 
-				boardGame->Draw();
+				_boardGame->Draw();
 			}
 
 			HandleGameMenu();
 
 			// Handle Game Over
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				if (boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
+				if (_boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
 				{
 					GameContextManager::CurrentGameContext = GameContextEnum::GAMEOVER;
 				}
@@ -70,7 +70,7 @@ namespace REKTetrisGame
 			{
 				if (_gameOverScreen == nullptr)
 				{
-					auto gamepadConfig = inputMngr->GetGamepadConfiguration();
+					auto gamepadConfig = _inputManager->GetGamepadConfiguration();
 					_gameOverScreen = std::make_unique<GameOverScreen>(gamepadConfig);
 				}
 				
@@ -78,8 +78,8 @@ namespace REKTetrisGame
 			}
 
 			//Update the surface
-			//SDL_UpdateWindowSurface(window); // software rendering : Not good
-			SDL_RenderPresent(renderer.get()); // GPU rendering : Good !
+			//SDL_UpdateWindowSurface(_window); // software rendering : Not good
+			SDL_RenderPresent(_renderer.get()); // GPU rendering : Good !
 
 		}
 	}
@@ -98,26 +98,26 @@ namespace REKTetrisGame
 		else
 		{
 			_gameConfiguration = std::make_shared<GameConfiguration>();
-			if (_gameConfiguration->isConfigFileFound())
+			if (_gameConfiguration->IsConfigFileFound())
 			{
-				window = std::shared_ptr<SDL_Window>(
+				_window = std::shared_ptr<SDL_Window>(
 					SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, _gameConfiguration->GetFullscreenConfig())
 					, SdlDeleter()
 					);
 
-				if (window == nullptr)
+				if (_window == nullptr)
 				{
 					ErrorMessageManager::WriteErrorMessageToConsole("Window could not be created! SDL_Error : ");
 					isInitOk = false;
 				}
 				else
 				{
-					renderer = std::shared_ptr<SDL_Renderer>(
-						SDL_CreateRenderer(window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
+					_renderer = std::shared_ptr<SDL_Renderer>(
+						SDL_CreateRenderer(_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
 						, SdlDeleter()
 						);
 
-					if (renderer == nullptr)
+					if (_renderer == nullptr)
 					{
 						ErrorMessageManager::WriteErrorMessageToConsole("Renderer could not be created! SDL_Error : ");
 						isInitOk = false;
@@ -125,8 +125,8 @@ namespace REKTetrisGame
 					else
 					{
 						// Init screen with light grey all over the surface
-						SDL_SetRenderDrawColor(renderer.get(), 0x44, 0x87, 0xC5, SDL_ALPHA_OPAQUE);
-						SDL_RenderSetLogicalSize(renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
+						SDL_SetRenderDrawColor(_renderer.get(), 0x44, 0x87, 0xC5, SDL_ALPHA_OPAQUE);
+						SDL_RenderSetLogicalSize(_renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
 
 						// About mouse cursor
 						if (SDL_ShowCursor(SDL_DISABLE) < 0)
@@ -136,8 +136,8 @@ namespace REKTetrisGame
 						}
 						else
 						{
-							gameContextMngr = std::make_shared<GameContextManager>();
-							inputMngr = std::make_unique<InputManager>(gameContextMngr);
+							_gameContextManager = std::make_shared<GameContextManager>();
+							_inputManager = std::make_unique<InputManager>(_gameContextManager);
 
 
 							// SDL_ttf
@@ -148,14 +148,14 @@ namespace REKTetrisGame
 							}
 							else
 							{
-								soundMngr = std::make_shared<SoundManager>();
-								if (soundMngr->Init() < 0)
+								_soundManager = std::make_shared<SoundManager>();
+								if (_soundManager->Init() < 0)
 								{
 									ErrorMessageManager::WriteErrorMessageToConsole("Could not Init SDL2_Mixer with OGG format, SDL_Error : ");
 									isInitOk = false;
 								}
 
-								soundMngr->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
+								_soundManager->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
 
 								SetSDLMainObjectsToProvider();
 							}
@@ -179,50 +179,50 @@ namespace REKTetrisGame
 
 	void Game::SetSDLMainObjectsToProvider() const
 	{
-		SDLMainObjectsProvider::renderer = renderer;
-		SDLMainObjectsProvider::window = window;
+		SDLMainObjectsProvider::_renderer = _renderer;
+		SDLMainObjectsProvider::_window = _window;
 	}
 
 	void Game::HandleGameMenu()
 	{
 
-		if (gameContextMngr != nullptr 
+		if (_gameContextManager != nullptr 
 			&& (
 				GameContextManager::CurrentGameContext == GameContextEnum::MENU
 				|| GameContextManager::CurrentGameContext == GameContextEnum::STARTED
 				))
 		{
-			if (gameMenu == nullptr)
+			if (_gameMenu == nullptr)
 			{
-				auto gamepadConfig = inputMngr->GetGamepadConfiguration();
-				gameMenu = std::make_shared<GameMenu>(soundMngr, _gameConfiguration, gamepadConfig);
-				gameContextMngr->SetGameMenu(gameMenu);
-				soundMngr->PlaySound("resources/sounds/MenuClick.wav", 1);
+				auto gamepadConfig = _inputManager->GetGamepadConfiguration();
+				_gameMenu = std::make_shared<GameMenu>(_soundManager, _gameConfiguration, gamepadConfig);
+				_gameContextManager->SetGameMenu(_gameMenu);
+				_soundManager->PlaySound("resources/sounds/MenuClick.wav", 1);
 			}
-			gameMenu->Draw(boardGame);
+			_gameMenu->Draw(_boardGame);
 		}
 
-		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && gameMenu != nullptr)
+		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && _gameMenu != nullptr)
 		{
 
-			gameMenu.reset();
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_gameMenu.reset();
+			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
 
-			if (boardGame != nullptr && boardGame->IsGameOver())
+			if (_boardGame != nullptr && _boardGame->IsGameOver())
 			{
 				// We leave menu after game over and restart a new game
 				if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
 				{
-					boardGame.reset();
-					boardGame = nullptr;
-					boardGame = std::make_shared<Board>();
-					gameContextMngr->SetBoardGame(boardGame);
+					_boardGame.reset();
+					_boardGame = nullptr;
+					_boardGame = std::make_shared<Board>();
+					_gameContextManager->SetBoardGame(_boardGame);
 				}
 			}
-			else if (boardGame == nullptr)
+			else if (_boardGame == nullptr)
 			{
-				boardGame = std::make_shared<Board>();
-				gameContextMngr->SetBoardGame(boardGame);
+				_boardGame = std::make_shared<Board>();
+				_gameContextManager->SetBoardGame(_boardGame);
 			}
 		}
 	}

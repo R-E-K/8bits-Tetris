@@ -16,7 +16,7 @@ namespace REKTetrisGame
 
 		void DrawWithLabel(std::string const& imagePathFile, std::string const& label, int x, int y, int width, int height) const;
 	private:
-		std::unique_ptr<DrawTextService> drawTextSrvc;
+		std::unique_ptr<DrawTextService> _drawTextService;
 	};
 }
 

@@ -9,7 +9,7 @@ namespace REKTetrisGame
 
 	GameContextManager::GameContextManager()
 	{
-		gameMenu = nullptr;
+		_gameMenu = nullptr;
 	}
 
 
@@ -23,14 +23,14 @@ namespace REKTetrisGame
 		return CurrentGameContext == GameContextEnum::MENU || CurrentGameContext == GameContextEnum::GAMEOVER;
 	}
 
-	void GameContextManager::SetGameMenu(std::shared_ptr<GameMenu> gMenu)
+	void GameContextManager::SetGameMenu(std::shared_ptr<GameMenu> gameMenu)
 	{
-		gameMenu = gMenu;
+		_gameMenu = gameMenu;
 	}
 
-	void GameContextManager::SetBoardGame(std::shared_ptr<Board> gBoard)
+	void GameContextManager::SetBoardGame(std::shared_ptr<Board> boardGame)
 	{
-		boardGame = gBoard;
+		_boardGame = boardGame;
 	}
 
 	void GameContextManager::ExecuteAButtonAction()
@@ -38,17 +38,17 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->RotateTetrominoToRightIfPossible();
+				_boardGame->RotateTetrominoToRightIfPossible();
 			}
 			break;
 		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
-			if (gameMenu != nullptr)
+			if (_gameMenu != nullptr)
 			{
-				gameMenu->SelectItemMenu();
-				if (gameMenu->MustDestroyGameMenuOnSelect())
+				_gameMenu->SelectItemMenu();
+				if (_gameMenu->MustDestroyGameMenuOnSelect())
 				{
 					CloseGameMenu();
 				}
@@ -65,15 +65,15 @@ namespace REKTetrisGame
 			break;
 		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
-			if (gameMenu != nullptr)
+			if (_gameMenu != nullptr)
 			{
-				if (gameMenu->MustDestroyGameMenuOnBack(boardGame))
+				if (_gameMenu->MustDestroyGameMenuOnBack(_boardGame))
 				{
 					CloseGameMenu();
 				}
 				else
 				{
-					gameMenu->MenuBack();
+					_gameMenu->MenuBack();
 				}
 			}
 			break;
@@ -85,9 +85,9 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->RotateTetrominoToLeftIfPossible();
+				_boardGame->RotateTetrominoToLeftIfPossible();
 			}
 			break;
 		}
@@ -107,9 +107,9 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->RotateTetrominoToLeftIfPossible();
+				_boardGame->RotateTetrominoToLeftIfPossible();
 			}
 			break;
 		}
@@ -120,9 +120,9 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->RotateTetrominoToRightIfPossible();
+				_boardGame->RotateTetrominoToRightIfPossible();
 			}
 			break;
 		}
@@ -133,16 +133,16 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->MoveTetrominoDown();
+				_boardGame->MoveTetrominoDown();
 			}
 			break;
 		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
-			if (gameMenu != nullptr)
+			if (_gameMenu != nullptr)
 			{
-				gameMenu->NavigateDown();
+				_gameMenu->NavigateDown();
 			}
 			break;
 		}
@@ -156,9 +156,9 @@ namespace REKTetrisGame
 			break;
 		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
-			if (gameMenu != nullptr)
+			if (_gameMenu != nullptr)
 			{
-				gameMenu->NavigateUp();
+				_gameMenu->NavigateUp();
 			}
 			break;
 		}
@@ -169,9 +169,9 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->MoveTetrominoToTheLeft();
+				_boardGame->MoveTetrominoToTheLeft();
 			}
 			break;
 		}
@@ -182,9 +182,9 @@ namespace REKTetrisGame
 		switch (CurrentGameContext)
 		{
 		case GameContextEnum::INGAME:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->MoveTetrominoToTheRight();
+				_boardGame->MoveTetrominoToTheRight();
 			}
 			break;
 		}
@@ -216,7 +216,7 @@ namespace REKTetrisGame
 			CurrentGameContext = GameContextEnum::MENU;
 			break;
 		case GameContextEnum::MENU:
-			if (boardGame == nullptr || !boardGame->IsGameOver())
+			if (_boardGame == nullptr || !_boardGame->IsGameOver())
 			{
 				CloseGameMenu();
 			}
@@ -235,15 +235,15 @@ namespace REKTetrisGame
 			break;
 		case GameContextEnum::STARTED:
 		case GameContextEnum::MENU:
-			if (gameMenu != nullptr)
+			if (_gameMenu != nullptr)
 			{
-				if (gameMenu->MustDestroyGameMenuOnBack(boardGame))
+				if (_gameMenu->MustDestroyGameMenuOnBack(_boardGame))
 				{
 					CloseGameMenu();
 				}
 				else
 				{
-					gameMenu->MenuBack();
+					_gameMenu->MenuBack();
 				}
 			}
 			break;
@@ -278,9 +278,9 @@ namespace REKTetrisGame
 		// when you exit menu and you have to press down again to reset it.
 		case GameContextEnum::INGAME:
 		case GameContextEnum::MENU:
-			if (boardGame != nullptr)
+			if (_boardGame != nullptr)
 			{
-				boardGame->MoveTetrominoDownRelease();
+				_boardGame->MoveTetrominoDownRelease();
 			}
 			break;
 		}
@@ -289,6 +289,6 @@ namespace REKTetrisGame
 	void GameContextManager::CloseGameMenu()
 	{
 		CurrentGameContext = GameContextEnum::INGAME;
-		gameMenu.reset();
+		_gameMenu.reset();
 	}
 }

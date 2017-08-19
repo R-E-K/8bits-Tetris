@@ -20,8 +20,8 @@ namespace REKTetrisGame
 		static SDL_Window* GetWindowRawPointer();
 
 	private:
-		static std::shared_ptr<SDL_Renderer> renderer;
-		static std::shared_ptr<SDL_Window> window;
+		static std::shared_ptr<SDL_Renderer> _renderer;
+		static std::shared_ptr<SDL_Window> _window;
 	};
 }
 

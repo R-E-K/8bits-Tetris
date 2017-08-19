@@ -5,15 +5,15 @@ namespace REKTetrisGame
 
 	Tetromino::Tetromino(TetrominoShapeEnum tetrominoShape)
 	{
-		Shape = tetrominoShape;
+		_shape = tetrominoShape;
 		SetShapes();
 		SetColor();
-		ShapeIndex = 0;
-		CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+		_shapeIndex = 0;
+		_currentTetrominoShape = _tetrominoShapesArray[_shapeIndex];
 
-		RotateTimer.SetInputRepeatFrequency(500);
-		RotateTimer.SetStartHoldInputDownDelay(500);
-		RotateTimer.SetDelay(200);
+		_rotateTimer.SetInputRepeatFrequency(500);
+		_rotateTimer.SetStartHoldInputDownDelay(500);
+		_rotateTimer.SetDelay(200);
 	}
 
 	Tetromino::~Tetromino()
@@ -22,80 +22,80 @@ namespace REKTetrisGame
 
 	std::vector<std::vector<int>> Tetromino::GetTetrominoCurrentShape() const
 	{
-		return CurrentTetrominoShape;
+		return _currentTetrominoShape;
 	}
 
 	TetrominoColorEnum Tetromino::GetColor() const
 	{
-		return Color;
+		return _color;
 	}
 
 	TetrominoShapeEnum Tetromino::GetShape() const
 	{
-		return Shape;
+		return _shape;
 	}
 
 	void Tetromino::RotateLeft()
 	{
-		RotateTimer.Execute([&]()
+		_rotateTimer.Execute([&]()
 		{
-			if (ShapeIndex == 0)
+			if (_shapeIndex == 0)
 			{
-				ShapeIndex = TetrominoShapesArray.size();
+				_shapeIndex = _tetrominoShapesArray.size();
 			}
-			ShapeIndex--;
-			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+			_shapeIndex--;
+			_currentTetrominoShape = _tetrominoShapesArray[_shapeIndex];
 		});
 	}
 
 	void Tetromino::RotateRight()
 	{
-		RotateTimer.Execute([&]()
+		_rotateTimer.Execute([&]()
 		{
-			if (ShapeIndex == TetrominoShapesArray.size() - 1)
+			if (_shapeIndex == _tetrominoShapesArray.size() - 1)
 			{
-				ShapeIndex = -1;
+				_shapeIndex = -1;
 			}
-			ShapeIndex++;
-			CurrentTetrominoShape = TetrominoShapesArray[ShapeIndex];
+			_shapeIndex++;
+			_currentTetrominoShape = _tetrominoShapesArray[_shapeIndex];
 		});
 	}
 
 	void Tetromino::SetRotateTimerDelay(int delay)
 	{
-		RotateTimer.SetDelay(delay);
+		_rotateTimer.SetDelay(delay);
 	}
 
 	std::vector<std::vector<int>> Tetromino::GetNextShape()
 	{
-		if (ShapeIndex == TetrominoShapesArray.size() - 1)
+		if (_shapeIndex == _tetrominoShapesArray.size() - 1)
 		{
-			return TetrominoShapesArray[0];
+			return _tetrominoShapesArray[0];
 		}
 		else
 		{
-			return TetrominoShapesArray[ShapeIndex + 1];
+			return _tetrominoShapesArray[_shapeIndex + 1];
 		}
 	}
 
 	std::vector<std::vector<int>> Tetromino::GetPreviousShape()
 	{
-		if (ShapeIndex == 0)
+		if (_shapeIndex == 0)
 		{
-			return TetrominoShapesArray[TetrominoShapesArray.size() - 1];
+			return _tetrominoShapesArray[_tetrominoShapesArray.size() - 1];
 		}
 		else
 		{
-			return TetrominoShapesArray[ShapeIndex - 1];
+			return _tetrominoShapesArray[_shapeIndex - 1];
 		}
 	}
 
 	void Tetromino::SetShapes()
 	{
-		switch (Shape)
+		switch (_shape)
 		{
 		case TetrominoShapeEnum::I:
-			TetrominoShapesArray = { 
+			_tetrominoShapesArray = { 
 				{
 					{ 7, 7, 7, 7 },
 					{ 7, 7, 7, 7 },
@@ -111,7 +111,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::J:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 7, 7, 7 },
 					{ 0, 0, 0 },
@@ -135,7 +135,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::L:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 7, 7, 7 },
 					{ 1, 1, 1 },
@@ -159,7 +159,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::O:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 5, 5 },
 					{ 5, 5 }
@@ -167,7 +167,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::S:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 7, 7, 7 },
 					{ 7, 3, 3 },
@@ -181,7 +181,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::Z:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 7, 7, 7 },
 					{ 6, 6, 7 },
@@ -195,7 +195,7 @@ namespace REKTetrisGame
 			};
 			break;
 		case TetrominoShapeEnum::T:
-			TetrominoShapesArray = {
+			_tetrominoShapesArray = {
 				{
 					{ 7, 7, 7 },
 					{ 4, 4, 4 },
@@ -223,28 +223,28 @@ namespace REKTetrisGame
 
 	void Tetromino::SetColor()
 	{
-		switch (Shape)
+		switch (_shape)
 		{
 			case TetrominoShapeEnum::I:
-				Color = TetrominoColorEnum::GREEN;
+				_color = TetrominoColorEnum::GREEN;
 				break;
 			case TetrominoShapeEnum::J:
-				Color = TetrominoColorEnum::BLUE;
+				_color = TetrominoColorEnum::BLUE;
 				break;
 			case TetrominoShapeEnum::L:
-				Color = TetrominoColorEnum::BROWN;
+				_color = TetrominoColorEnum::BROWN;
 				break;
 			case TetrominoShapeEnum::O:
-				Color = TetrominoColorEnum::RED;
+				_color = TetrominoColorEnum::RED;
 				break;
 			case TetrominoShapeEnum::S:
-				Color = TetrominoColorEnum::ORANGE;
+				_color = TetrominoColorEnum::ORANGE;
 				break;
 			case TetrominoShapeEnum::T:
-				Color = TetrominoColorEnum::PURPLE;
+				_color = TetrominoColorEnum::PURPLE;
 				break;
 			case TetrominoShapeEnum::Z:
-				Color = TetrominoColorEnum::YELLOW;
+				_color = TetrominoColorEnum::YELLOW;
 				break;
 		}
 	}

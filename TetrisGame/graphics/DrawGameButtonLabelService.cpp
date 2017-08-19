@@ -5,7 +5,7 @@ namespace REKTetrisGame
 {
 	DrawGameButtonLabelService::DrawGameButtonLabelService()
 	{
-		drawTextSrvc = std::make_unique<DrawTextService>();
+		_drawTextService = std::make_unique<DrawTextService>();
 	}
 
 

@@ -25,16 +25,16 @@ namespace REKTetrisGame
 		
 		void Execute();
 	private:
-		std::shared_ptr<SDL_Window> window;
-		std::shared_ptr<SDL_Renderer> renderer;
+		std::shared_ptr<SDL_Window> _window;
+		std::shared_ptr<SDL_Renderer> _renderer;
 
 		std::shared_ptr<GameConfiguration> _gameConfiguration;
-		std::shared_ptr<GameContextManager> gameContextMngr;
-		std::unique_ptr<InputManager> inputMngr;
-		std::shared_ptr<SoundManager> soundMngr;
+		std::shared_ptr<GameContextManager> _gameContextManager;
+		std::unique_ptr<InputManager> _inputManager;
+		std::shared_ptr<SoundManager> _soundManager;
 
-		std::shared_ptr<GameMenu> gameMenu;
-		std::shared_ptr<Board> boardGame;
+		std::shared_ptr<GameMenu> _gameMenu;
+		std::shared_ptr<Board> _boardGame;
 		std::unique_ptr<GameOverScreen> _gameOverScreen;
 
 		void Loop(SDL_Event& e);

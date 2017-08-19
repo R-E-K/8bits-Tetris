@@ -6,19 +6,19 @@ namespace REKTetrisGame
 {
 	InputManager::InputManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
-		PressedInput = nullptr;
-		keyboardManager = std::make_unique<InputKeyboardManager>(gameContextManager);
-		gamepadManager = std::make_unique<InputGamepadManager>(gameContextManager);
-		gamepadCnfg = std::make_shared<GamepadConfiguration>();
+		_pressedInput = nullptr;
+		_keyboardManager = std::make_unique<InputKeyboardManager>(gameContextManager);
+		_gamepadManager = std::make_unique<InputGamepadManager>(gameContextManager);
+		_gamepadConfiguration = std::make_shared<GamepadConfiguration>();
 
-		gameContextMngr = gameContextManager;
+		_gameContextManager = gameContextManager;
 
-		LTTriggered = false;
-		RTTriggered = false;
+		_ltTriggered = false;
+		_rtTriggered = false;
 
-		canCheckKeyboardInput = false;
+		_canCheckKeyboardInput = false;
 
-		gamepadButtonsPressedState.clear();
+		_gamepadButtonsPressedState.clear();
 	}
 
 	InputManager::~InputManager()
@@ -32,9 +32,9 @@ namespace REKTetrisGame
 		// Even if i do mySmartPointer.get(), PressedInput become undefined
 		while (SDL_PollEvent(&e) > 0)
 		{
-			PressedInput = std::make_unique<SDL_Event>(e);
+			_pressedInput = std::make_unique<SDL_Event>(e);
 
-			switch (PressedInput->type)
+			switch (_pressedInput->type)
 			{
 			case SDL_QUIT:
 				quitGame = true;
@@ -55,66 +55,66 @@ namespace REKTetrisGame
 				SetAxisMotion();
 				break;
 			case SDL_CONTROLLERDEVICEADDED:
-				gamepadCnfg->PlugGamepad();
+				_gamepadConfiguration->PlugGamepad();
 				break;
 			case SDL_CONTROLLERDEVICEREMOVED:
-				gamepadCnfg->UnplugGamepad();
+				_gamepadConfiguration->UnplugGamepad();
 				break;
 			}
 
-			if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
+			if (_ltTriggered || _rtTriggered) CheckGamepadAxisMotion();
 
-			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
-				keyboardManager->CheckInputHold();
+			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !_canCheckKeyboardInput)
+				_keyboardManager->CheckInputHold();
 
 			CheckGamepadInput();
 
 		}
-		if (LTTriggered || RTTriggered) CheckGamepadAxisMotion();
+		if (_ltTriggered || _rtTriggered) CheckGamepadAxisMotion();
 
-		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !canCheckKeyboardInput)
-			keyboardManager->CheckInputHold();
+		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && !_canCheckKeyboardInput)
+			_keyboardManager->CheckInputHold();
 
 		CheckGamepadInput();
 	}
 
 	std::shared_ptr<GamepadConfiguration> InputManager::GetGamepadConfiguration() const
 	{
-		return gamepadCnfg;
+		return _gamepadConfiguration;
 	}
 
 	void InputManager::SetPressedButton()
 	{
-		if (PressedInput != nullptr &&
-			&PressedInput->jbutton != nullptr &&
-			&PressedInput->jbutton.button != nullptr)
+		if (_pressedInput != nullptr &&
+			&_pressedInput->jbutton != nullptr &&
+			&_pressedInput->jbutton.button != nullptr)
 		{
 			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME
-				&& PressedInput->jbutton.button != SDL_CONTROLLER_BUTTON_START)
+				&& _pressedInput->jbutton.button != SDL_CONTROLLER_BUTTON_START)
 			{
-				gamepadButtonsPressedState.push_back(PressedInput->jbutton.button);
+				_gamepadButtonsPressedState.push_back(_pressedInput->jbutton.button);
 			}
 			else
 			{
-				gamepadManager->CheckInput(PressedInput->jbutton.button);
+				_gamepadManager->CheckInput(_pressedInput->jbutton.button);
 			}
 		}
 	}
 
 	void InputManager::SetReleasedButton()
 	{
-		if (PressedInput != nullptr &&
-			&PressedInput->jbutton != nullptr &&
-			&PressedInput->jbutton.button != nullptr)
+		if (_pressedInput != nullptr &&
+			&_pressedInput->jbutton != nullptr &&
+			&_pressedInput->jbutton.button != nullptr)
 		{
-			gamepadManager->CheckReleasedInput(PressedInput->jbutton.button);
+			_gamepadManager->CheckReleasedInput(_pressedInput->jbutton.button);
 
 			// We check that element exists in vector before remove it
-			if (find(gamepadButtonsPressedState.begin(), gamepadButtonsPressedState.end(), PressedInput->jbutton.button)
-				!= gamepadButtonsPressedState.end())
+			if (find(_gamepadButtonsPressedState.begin(), _gamepadButtonsPressedState.end(), _pressedInput->jbutton.button)
+				!= _gamepadButtonsPressedState.end())
 			{
-				gamepadButtonsPressedState.erase(remove(gamepadButtonsPressedState.begin(),
-					gamepadButtonsPressedState.end(), PressedInput->jbutton.button));
+				_gamepadButtonsPressedState.erase(remove(_gamepadButtonsPressedState.begin(),
+					_gamepadButtonsPressedState.end(), _pressedInput->jbutton.button));
 			}
 
 		}
@@ -122,34 +122,34 @@ namespace REKTetrisGame
 
 	void InputManager::SetAxisMotion()
 	{
-		if (PressedInput != nullptr &&
-			&PressedInput->jaxis != nullptr &&
-			&PressedInput->jaxis.axis != nullptr &&
-			&PressedInput->jaxis.value != nullptr)
+		if (_pressedInput != nullptr &&
+			&_pressedInput->jaxis != nullptr &&
+			&_pressedInput->jaxis.axis != nullptr &&
+			&_pressedInput->jaxis.value != nullptr)
 		{
 			if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
 			{
-				if (PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT)
+				if (_pressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT)
 				{
-					LTTriggered = (PressedInput->jaxis.value > 20000);
+					_ltTriggered = (_pressedInput->jaxis.value > 20000);
 				}
 
-				if (PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
+				if (_pressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
 				{
-					RTTriggered = (PressedInput->jaxis.value > 20000);
+					_rtTriggered = (_pressedInput->jaxis.value > 20000);
 				}
 			}
 			else
 			{
 				if (
-					(!LTTriggered && PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT
-						&& PressedInput->jaxis.axis > 20000)
+					(!_ltTriggered && _pressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT
+						&& _pressedInput->jaxis.axis > 20000)
 					||
-					(!RTTriggered && PressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT
-						&& PressedInput->jaxis.axis > 20000)
+					(!_rtTriggered && _pressedInput->jaxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT
+						&& _pressedInput->jaxis.axis > 20000)
 					)
 				{
-					gamepadManager->CheckAxisMotion(PressedInput->jaxis.axis);
+					_gamepadManager->CheckAxisMotion(_pressedInput->jaxis.axis);
 				}
 			}
 
@@ -158,14 +158,14 @@ namespace REKTetrisGame
 
 	void InputManager::CheckInputNotHold()
 	{
-		if (PressedInput != nullptr &&
-			&PressedInput->key != nullptr &&
-			&PressedInput->key.keysym != nullptr &&
-			&PressedInput->key.keysym.scancode != nullptr)
+		if (_pressedInput != nullptr &&
+			&_pressedInput->key != nullptr &&
+			&_pressedInput->key.keysym != nullptr &&
+			&_pressedInput->key.keysym.scancode != nullptr)
 		{
 			if (
 				(GameContextManager::CurrentGameContext == GameContextEnum::INGAME &&
-					PressedInput->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+					_pressedInput->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				||
 				GameContextManager::CurrentGameContext == GameContextEnum::MENU
 				||
@@ -174,46 +174,46 @@ namespace REKTetrisGame
 				GameContextManager::CurrentGameContext == GameContextEnum::STARTED
 				)
 			{
-				keyboardManager->CheckInputNotHold(PressedInput->key.keysym.scancode);
-				canCheckKeyboardInput = true;
+				_keyboardManager->CheckInputNotHold(_pressedInput->key.keysym.scancode);
+				_canCheckKeyboardInput = true;
 			}
 		}
 	}
 
 	void InputManager::CheckReleaseInput()
 	{
-		if (PressedInput != nullptr &&
-			&PressedInput->key != nullptr &&
-			&PressedInput->key.keysym != nullptr &&
-			&PressedInput->key.keysym.scancode != nullptr)
+		if (_pressedInput != nullptr &&
+			&_pressedInput->key != nullptr &&
+			&_pressedInput->key.keysym != nullptr &&
+			&_pressedInput->key.keysym.scancode != nullptr)
 		{
 
-			keyboardManager->CheckReleaseInput(PressedInput->key.keysym.scancode);
-			canCheckKeyboardInput = false;
+			_keyboardManager->CheckReleaseInput(_pressedInput->key.keysym.scancode);
+			_canCheckKeyboardInput = false;
 		}
 	}
 
 	void InputManager::CheckGamepadInput() const
 	{
-		if (!gamepadButtonsPressedState.empty())
+		if (!_gamepadButtonsPressedState.empty())
 		{
-			for (auto pressedButton : gamepadButtonsPressedState)
+			for (auto pressedButton : _gamepadButtonsPressedState)
 			{
-				gamepadManager->CheckInput(pressedButton);
+				_gamepadManager->CheckInput(pressedButton);
 			}
 		}
 	}
 
 	void InputManager::CheckGamepadAxisMotion() const
 	{
-		if (LTTriggered)
+		if (_ltTriggered)
 		{
-			gamepadManager->CheckAxisMotion(SDL_CONTROLLER_AXIS_TRIGGERLEFT);
+			_gamepadManager->CheckAxisMotion(SDL_CONTROLLER_AXIS_TRIGGERLEFT);
 		}
 
-		if (RTTriggered)
+		if (_rtTriggered)
 		{
-			gamepadManager->CheckAxisMotion(SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
+			_gamepadManager->CheckAxisMotion(SDL_CONTROLLER_AXIS_TRIGGERRIGHT);
 		}
 	}
 }

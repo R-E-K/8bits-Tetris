@@ -16,7 +16,7 @@ namespace REKTetrisGame
 
 		bool IsGamepadPlugged() const;
 	private:
-		std::unique_ptr<SDL_GameController, SdlDeleter> gamepad;
+		std::unique_ptr<SDL_GameController, SdlDeleter> _gamepad;
 		void DisplayDebugInformations() const;
 	};
 }

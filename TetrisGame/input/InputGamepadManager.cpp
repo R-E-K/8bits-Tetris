@@ -5,7 +5,7 @@ namespace REKTetrisGame
 {
 	InputGamepadManager::InputGamepadManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
-		gameContextMngr = gameContextManager;
+		_gameContextManager = gameContextManager;
 	}
 
 	InputGamepadManager::~InputGamepadManager()
@@ -18,46 +18,46 @@ namespace REKTetrisGame
 		switch (pressedButton)
 		{
 		case SDL_CONTROLLER_BUTTON_A:
-			gameContextMngr->ExecuteAButtonAction();
+			_gameContextManager->ExecuteAButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_B:
-			gameContextMngr->ExecuteBButtonAction();
+			_gameContextManager->ExecuteBButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_X:
-			gameContextMngr->ExecuteXButtonAction();
+			_gameContextManager->ExecuteXButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_Y:
-			gameContextMngr->ExecuteYButtonAction();
+			_gameContextManager->ExecuteYButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
-			gameContextMngr->ExecuteLBButtonAction();
+			_gameContextManager->ExecuteLBButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
-			gameContextMngr->ExecuteRBButtonAction();
+			_gameContextManager->ExecuteRBButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_LEFTSTICK:
-			gameContextMngr->ExecuteL3ButtonAction();
+			_gameContextManager->ExecuteL3ButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_RIGHTSTICK:
-			gameContextMngr->ExecuteR3ButtonAction();
+			_gameContextManager->ExecuteR3ButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_START:
-			gameContextMngr->ExecuteStartButtonAction();
+			_gameContextManager->ExecuteStartButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_BACK:
-			gameContextMngr->ExecuteBackButtonAction();
+			_gameContextManager->ExecuteBackButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-			gameContextMngr->ExecuteDPadDownButtonAction();
+			_gameContextManager->ExecuteDPadDownButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_UP:
-			gameContextMngr->ExecuteDPadUpButtonAction();
+			_gameContextManager->ExecuteDPadUpButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-			gameContextMngr->ExecuteDPadLeftButtonAction();
+			_gameContextManager->ExecuteDPadLeftButtonAction();
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-			gameContextMngr->ExecuteDPadRightButtonAction();
+			_gameContextManager->ExecuteDPadRightButtonAction();
 			break;
 		}
 	}
@@ -67,7 +67,7 @@ namespace REKTetrisGame
 		switch (releasedButton)
 		{
 		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-			gameContextMngr->ExecuteDPadDownButtonReleaseAction();
+			_gameContextManager->ExecuteDPadDownButtonReleaseAction();
 			break;
 		}
 	}
@@ -77,10 +77,10 @@ namespace REKTetrisGame
 		switch (axisMotion)
 		{
 		case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
-			gameContextMngr->ExecuteLTTriggerAction();
+			_gameContextManager->ExecuteLTTriggerAction();
 			break;
 		case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
-			gameContextMngr->ExecuteRTTriggerAction();
+			_gameContextManager->ExecuteRTTriggerAction();
 			break;
 		}
 	}

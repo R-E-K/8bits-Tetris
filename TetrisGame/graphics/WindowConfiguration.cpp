@@ -14,9 +14,9 @@ namespace REKTetrisGame
 
 	bool WindowConfiguration::IsFullScreen()
 	{
-		auto FullscreenFlag = SDL_WINDOW_FULLSCREEN;
-		bool IsFullscreen = SDL_GetWindowFlags(SDLMainObjectsProvider::GetWindowRawPointer()) & FullscreenFlag;
-		return IsFullscreen;
+		auto fullscreenFlag = SDL_WINDOW_FULLSCREEN;
+		bool isFullscreen = SDL_GetWindowFlags(SDLMainObjectsProvider::GetWindowRawPointer()) & fullscreenFlag;
+		return isFullscreen;
 	}
 
 	void WindowConfiguration::ToggleFullScreen()

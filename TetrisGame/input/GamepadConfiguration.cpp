@@ -6,7 +6,7 @@ namespace REKTetrisGame
 {
 	GamepadConfiguration::GamepadConfiguration()
 	{
-		gamepad = nullptr;
+		_gamepad = nullptr;
 	}
 
 
@@ -21,8 +21,8 @@ namespace REKTetrisGame
 		// The game is one player only, so we only check for first plugged gamepad
 		if (SDL_IsGameController(0))
 		{
-			gamepad = std::unique_ptr<SDL_GameController, SdlDeleter>(SDL_GameControllerOpen(0), SdlDeleter());
-			if (gamepad != nullptr)
+			_gamepad = std::unique_ptr<SDL_GameController, SdlDeleter>(SDL_GameControllerOpen(0), SdlDeleter());
+			if (_gamepad != nullptr)
 			{
 				DisplayDebugInformations();
 			}
@@ -31,21 +31,21 @@ namespace REKTetrisGame
 
 	void GamepadConfiguration::UnplugGamepad()
 	{
-		if (gamepad != nullptr)
+		if (_gamepad != nullptr)
 		{
-			std::cout << "Game controller " << SDL_GameControllerName(gamepad.get()) << "Removed" << std::endl << std::endl;
-			gamepad.reset();
+			std::cout << "Game controller " << SDL_GameControllerName(_gamepad.get()) << "Removed" << std::endl << std::endl;
+			_gamepad.reset();
 		}
 	}
 
 	bool GamepadConfiguration::IsGamepadPlugged() const
 	{
-		return gamepad != nullptr;
+		return _gamepad != nullptr;
 	}
 
 	void GamepadConfiguration::DisplayDebugInformations() const
 	{
 		std::cout << "Gamepad controller informations : " << std::endl;
-		std::cout << "Name : " << SDL_GameControllerName(gamepad.get()) << std::endl << std::endl;
+		std::cout << "Name : " << SDL_GameControllerName(_gamepad.get()) << std::endl << std::endl;
 	}
 }

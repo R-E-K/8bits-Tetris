@@ -18,18 +18,18 @@ namespace REKTetrisGame
 		std::shared_ptr<GamepadConfiguration> GetGamepadConfiguration() const;
 
 	private:
-		std::unique_ptr<SDL_Event> PressedInput;
-		std::unique_ptr<InputKeyboardManager> keyboardManager;
-		std::unique_ptr<InputGamepadManager> gamepadManager;
-		std::shared_ptr<GamepadConfiguration> gamepadCnfg;
-		std::shared_ptr<GameContextManager> gameContextMngr;
+		std::unique_ptr<SDL_Event> _pressedInput;
+		std::unique_ptr<InputKeyboardManager> _keyboardManager;
+		std::unique_ptr<InputGamepadManager> _gamepadManager;
+		std::shared_ptr<GamepadConfiguration> _gamepadConfiguration;
+		std::shared_ptr<GameContextManager> _gameContextManager;
 
-		std::vector<Uint8> gamepadButtonsPressedState;
+		std::vector<Uint8> _gamepadButtonsPressedState;
 
-		bool RTTriggered;
-		bool LTTriggered;
+		bool _rtTriggered;
+		bool _ltTriggered;
 
-		bool canCheckKeyboardInput;
+		bool _canCheckKeyboardInput;
 
 		void SetPressedButton();
 		void SetReleasedButton();

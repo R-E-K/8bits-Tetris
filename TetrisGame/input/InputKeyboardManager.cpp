@@ -5,7 +5,7 @@ namespace REKTetrisGame
 {
 	InputKeyboardManager::InputKeyboardManager(std::shared_ptr<GameContextManager> gameContextManager)
 	{
-		gameContextMngr = gameContextManager;
+		_gameContextManager = gameContextManager;
 	}
 
 	InputKeyboardManager::~InputKeyboardManager()
@@ -19,47 +19,47 @@ namespace REKTetrisGame
 
 		if (PressedKeys[SDL_SCANCODE_W] || PressedKeys[SDL_SCANCODE_UP])
 		{
-			gameContextMngr->ExecuteDPadUpButtonAction();
+			_gameContextManager->ExecuteDPadUpButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_A] || PressedKeys[SDL_SCANCODE_LEFT])
 		{
-			gameContextMngr->ExecuteDPadLeftButtonAction();
+			_gameContextManager->ExecuteDPadLeftButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_S] || PressedKeys[SDL_SCANCODE_DOWN])
 		{
-			gameContextMngr->ExecuteDPadDownButtonAction();
+			_gameContextManager->ExecuteDPadDownButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_D] || PressedKeys[SDL_SCANCODE_RIGHT])
 		{
-			gameContextMngr->ExecuteDPadRightButtonAction();
+			_gameContextManager->ExecuteDPadRightButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_SPACE] || PressedKeys[SDL_SCANCODE_RETURN] || PressedKeys[SDL_SCANCODE_C])
 		{
-			gameContextMngr->ExecuteAButtonAction();
+			_gameContextManager->ExecuteAButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_BACKSPACE])
 		{
-			gameContextMngr->ExecuteBButtonAction();
+			_gameContextManager->ExecuteBButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_X])
 		{
-			gameContextMngr->ExecuteXButtonAction();
+			_gameContextManager->ExecuteXButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_2])
 		{
-			gameContextMngr->ExecuteYButtonAction();
+			_gameContextManager->ExecuteYButtonAction();
 		}
 
 		if (PressedKeys[SDL_SCANCODE_ESCAPE])
 		{
-			gameContextMngr->ExecuteStartButtonAction();
+			_gameContextManager->ExecuteStartButtonAction();
 		}
 
 		// etc...
@@ -71,29 +71,29 @@ namespace REKTetrisGame
 		{
 		case SDL_SCANCODE_W:
 		case SDL_SCANCODE_UP:
-			gameContextMngr->ExecuteDPadUpButtonAction();
+			_gameContextManager->ExecuteDPadUpButtonAction();
 			break;
 		case SDL_SCANCODE_A:
 		case SDL_SCANCODE_LEFT:
-			gameContextMngr->ExecuteDPadLeftButtonAction();
+			_gameContextManager->ExecuteDPadLeftButtonAction();
 			break;
 		case SDL_SCANCODE_S:
 		case SDL_SCANCODE_DOWN:
-			gameContextMngr->ExecuteDPadDownButtonAction();
+			_gameContextManager->ExecuteDPadDownButtonAction();
 			break;
 		case SDL_SCANCODE_D:
 		case SDL_SCANCODE_RIGHT:
-			gameContextMngr->ExecuteDPadRightButtonAction();
+			_gameContextManager->ExecuteDPadRightButtonAction();
 			break;
 		case SDL_SCANCODE_SPACE:
 		case SDL_SCANCODE_RETURN:
-			gameContextMngr->ExecuteAButtonAction();
+			_gameContextManager->ExecuteAButtonAction();
 			break;
 		case SDL_SCANCODE_BACKSPACE:
-			gameContextMngr->ExecuteBButtonAction();
+			_gameContextManager->ExecuteBButtonAction();
 			break;
 		case SDL_SCANCODE_ESCAPE:
-			gameContextMngr->ExecuteStartButtonAction();
+			_gameContextManager->ExecuteStartButtonAction();
 			break;
 		}
 	}
@@ -104,7 +104,7 @@ namespace REKTetrisGame
 		{
 		case SDL_SCANCODE_S:
 		case SDL_SCANCODE_DOWN:
-			gameContextMngr->ExecuteDPadDownButtonReleaseAction();
+			_gameContextManager->ExecuteDPadDownButtonReleaseAction();
 			break;
 		}
 	}

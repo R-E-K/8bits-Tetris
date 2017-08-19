@@ -20,7 +20,7 @@ public:
 	GameConfiguration();
 	~GameConfiguration();
 
-	bool isConfigFileFound() const;
+	bool IsConfigFileFound() const;
 
 	void ToggleFullscreenConfig();
 	SDL_WindowFlags GetFullscreenConfig() const;

@@ -27,7 +27,7 @@ namespace REKTetrisGame
 
 		std::unique_ptr<Tetromino> _nextTetromino;
 
-		std::vector<std::shared_ptr<SDL_Texture>> TetrominosTextures;
+		std::vector<std::shared_ptr<SDL_Texture>> _tetrominosTextures;
 
 		std::shared_ptr<SDL_Texture> NextTetrominoComponent::GetTetrominoTexture(std::string const& imageFilePath) const;
 

@@ -26,14 +26,14 @@ namespace REKTetrisGame
 
 	private:
 
-		TetrominoShapeEnum Shape;
-		TetrominoColorEnum Color;
-		int ShapeIndex;
+		TetrominoShapeEnum _shape;
+		TetrominoColorEnum _color;
+		int _shapeIndex;
 
-		InputTimer RotateTimer;
+		InputTimer _rotateTimer;
 
-		std::vector<std::vector<std::vector<int>>> TetrominoShapesArray;
-		std::vector<std::vector<int>> CurrentTetrominoShape;
+		std::vector<std::vector<std::vector<int>>> _tetrominoShapesArray;
+		std::vector<std::vector<int>> _currentTetrominoShape;
 
 		void SetShapes();
 		void SetColor();

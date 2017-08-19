@@ -43,14 +43,14 @@ namespace REKTetrisGame
 	{
 		Component::LoadTextures();
 
-		TetrominosTextures.resize(7);
-		TetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");
-		TetrominosTextures[1] = GetTetrominoTexture("resources/graphics/tetrominos/brown.png");
-		TetrominosTextures[2] = GetTetrominoTexture("resources/graphics/tetrominos/green.png");
-		TetrominosTextures[3] = GetTetrominoTexture("resources/graphics/tetrominos/orange.png");
-		TetrominosTextures[4] = GetTetrominoTexture("resources/graphics/tetrominos/purple.png");
-		TetrominosTextures[5] = GetTetrominoTexture("resources/graphics/tetrominos/red.png");
-		TetrominosTextures[6] = GetTetrominoTexture("resources/graphics/tetrominos/yellow.png");
+		_tetrominosTextures.resize(7);
+		_tetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");
+		_tetrominosTextures[1] = GetTetrominoTexture("resources/graphics/tetrominos/brown.png");
+		_tetrominosTextures[2] = GetTetrominoTexture("resources/graphics/tetrominos/green.png");
+		_tetrominosTextures[3] = GetTetrominoTexture("resources/graphics/tetrominos/orange.png");
+		_tetrominosTextures[4] = GetTetrominoTexture("resources/graphics/tetrominos/purple.png");
+		_tetrominosTextures[5] = GetTetrominoTexture("resources/graphics/tetrominos/red.png");
+		_tetrominosTextures[6] = GetTetrominoTexture("resources/graphics/tetrominos/yellow.png");
 	}
 
 	void NextTetrominoComponent::DrawBorder() const
@@ -124,7 +124,7 @@ namespace REKTetrisGame
 				if (Tetromino[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 				{
 					SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer()
-						, TetrominosTextures[static_cast<int>(_nextTetromino->GetColor())].get()
+						, _tetrominosTextures[static_cast<int>(_nextTetromino->GetColor())].get()
 						, nullptr, &backgroundTilePosition);
 
 					isEmptyLine = false;

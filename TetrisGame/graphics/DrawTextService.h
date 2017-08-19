@@ -18,6 +18,6 @@ namespace REKTetrisGame
 		static void DrawTextWithColor(std::string const& text, int x, int y, SDL_Color color);
 		static void DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color);
 	private:
-		SDL_Color defaultClr;
+		SDL_Color _defaultColor;
 	};
 }

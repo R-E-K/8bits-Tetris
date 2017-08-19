@@ -15,7 +15,7 @@ namespace REKTetrisGame
 		void CheckReleasedInput(Uint8 releasedButton) const;
 		void CheckAxisMotion(Uint8 axisMotion) const;
 	private:
-		std::shared_ptr<GameContextManager> gameContextMngr;
+		std::shared_ptr<GameContextManager> _gameContextManager;
 	};
 }
 

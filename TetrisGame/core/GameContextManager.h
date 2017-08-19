@@ -16,8 +16,8 @@ namespace REKTetrisGame
 
 		static bool IsGamePaused();
 
-		void SetGameMenu(std::shared_ptr<GameMenu> gMenu);
-		void SetBoardGame(std::shared_ptr<Board> gBoard);
+		void SetGameMenu(std::shared_ptr<GameMenu> gameMenu);
+		void SetBoardGame(std::shared_ptr<Board> boardGame);
 
 		void ExecuteAButtonAction();
 		void ExecuteBButtonAction();
@@ -41,8 +41,8 @@ namespace REKTetrisGame
 		void ExecuteDPadDownButtonReleaseAction();
 
 	private:
-		std::shared_ptr<GameMenu> gameMenu;
-		std::shared_ptr<Board> boardGame;
+		std::shared_ptr<GameMenu> _gameMenu;
+		std::shared_ptr<Board> _boardGame;
 
 		void CloseGameMenu();
 

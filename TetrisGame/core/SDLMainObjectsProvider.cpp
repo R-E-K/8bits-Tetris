@@ -3,8 +3,8 @@
 
 namespace REKTetrisGame
 {
-	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::renderer;
-	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::window;
+	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::_renderer;
+	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::_window;
 
 
 	SDLMainObjectsProvider::SDLMainObjectsProvider()
@@ -18,19 +18,19 @@ namespace REKTetrisGame
 
 	std::shared_ptr<SDL_Renderer> SDLMainObjectsProvider::GetRenderer()
 	{
-		return renderer;
+		return _renderer;
 	}
 
 	std::shared_ptr<SDL_Window> SDLMainObjectsProvider::GetWindow()
 	{
-		return window;
+		return _window;
 	}
 
 	SDL_Renderer* SDLMainObjectsProvider::GetRendererRawPointer()
 	{
-		if (renderer != nullptr)
+		if (_renderer != nullptr)
 		{
-			return renderer.get();
+			return _renderer.get();
 		}
 		else
 		{
@@ -40,9 +40,9 @@ namespace REKTetrisGame
 
 	SDL_Window* SDLMainObjectsProvider::GetWindowRawPointer()
 	{
-		if (window != nullptr)
+		if (_window != nullptr)
 		{
-			return window.get();
+			return _window.get();
 		}
 		else
 		{

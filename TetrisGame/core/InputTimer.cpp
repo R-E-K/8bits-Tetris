@@ -5,24 +5,24 @@ namespace REKTetrisGame
 
 	InputTimer::InputTimer()
 	{
-		InputDownLastTime = 0;
-		InputDownHoldTime = 0;
+		_inputDownLastTime = 0;
+		_inputDownHoldTime = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
 		_startHoldInputDownDelay = 0;
-		InputDownLastTime = 0;
-		InputDownHoldTime = 0;
+		_inputDownLastTime = 0;
+		_inputDownHoldTime = 0;
 	}
 
 	InputTimer::InputTimer(int inputRepeatFrequency, int startHoldInputDownDelay)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
 		_startHoldInputDownDelay = startHoldInputDownDelay;
-		InputDownLastTime = 0;
-		InputDownHoldTime = 0;
+		_inputDownLastTime = 0;
+		_inputDownHoldTime = 0;
 	}
 
 	InputTimer::~InputTimer()
@@ -31,43 +31,43 @@ namespace REKTetrisGame
 
 	void InputTimer::Execute(std::function<void()> function)
 	{
-		currentTime = SDL_GetTicks();
+		_currentTime = SDL_GetTicks();
 
-		if (_delay < currentTime)
+		if (_delay < _currentTime)
 		{
 			// Check at 20 ms. If less, gamepad inputs aren't recognized continously
 			// Maybe a SDL bug, because if an another key is down, gamepad input is recognized continously
-			IsHoldInputDown = (currentTime - InputDownLastTime <= HOLD_THRESHOLD_MS);
+			_isHoldInputDown = (_currentTime - _inputDownLastTime <= HOLD_THRESHOLD_MS);
 
-			if (IsHoldInputDown)
+			if (_isHoldInputDown)
 			{
-				if (!IsStartingHoldInputDown)
+				if (!_isStartingHoldInputDown)
 				{
-					if (currentTime - InputDownHoldTime >= _inputRepeatFrequency)
+					if (_currentTime - _inputDownHoldTime >= _inputRepeatFrequency)
 					{
 						function();
-						InputDownHoldTime = currentTime;
+						_inputDownHoldTime = _currentTime;
 					}
 				}
 				else
 				{
-					IsStartingHoldInputDown = false;
-					InputDownHoldTime = currentTime + _startHoldInputDownDelay;
+					_isStartingHoldInputDown = false;
+					_inputDownHoldTime = _currentTime + _startHoldInputDownDelay;
 				}
 			}
-			else if (!IsHoldInputDown)
+			else if (!_isHoldInputDown)
 			{
-				if (InputDownLastTime == 0)
+				if (_inputDownLastTime == 0)
 				{
-					InputDownLastTime = SDL_GetTicks();
+					_inputDownLastTime = SDL_GetTicks();
 				}
 				// If not safety threshold, it will be repeated continously
-				if (currentTime - InputDownLastTime >= SAFETY_THRESHOLD_MS)
+				if (_currentTime - _inputDownLastTime >= SAFETY_THRESHOLD_MS)
 				{
 					function();
-					IsStartingHoldInputDown = true;
+					_isStartingHoldInputDown = true;
 				}
-				InputDownLastTime = currentTime;
+				_inputDownLastTime = _currentTime;
 			}
 		}
 	}

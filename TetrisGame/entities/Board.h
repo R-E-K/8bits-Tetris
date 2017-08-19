@@ -43,36 +43,42 @@ namespace REKTetrisGame
 
 	private:
 
+		// Properties
+		const int MOVE_DOWN_TIMER_DEFAULT_FREQUENCY = 1000;
+
 		std::unique_ptr<LevelComponent> _levelComponent;
 		std::unique_ptr<LinesRemovedCounterComponent> _linesRemovedCounterComponent;
 		std::unique_ptr<ScoreComponent> _scoreComponent;
 		std::unique_ptr<NextTetrominoComponent> _nextTetrominoComponent;
 
-		bool gameOver;
 
-		InputTimer MoveTetrominoToLeftOrRightTimer;
-		Timer TetrominoMovingDownTimer;
-		const int MoveDownTimerDefaultFrequency = 1000;
-		int MoveDownTimerFrequency;
+		InputTimer _moveTetrominoToLeftOrRightTimer;
+		Timer _tetrominoMovingDownTimer;
+		int _moveDownTimerFrequency;
+		bool _gameOver;
 
-		std::stack<int> TetrominoTileXPrevious;
-		std::stack<int> TetrominoTileYPrevious;
+		std::stack<int> _tetrominoTileXPrevious;
+		std::stack<int> _tetrominoTileYPrevious;
 
-		std::shared_ptr<SDL_Texture> lightBackgroundTexture;
-		std::shared_ptr<SDL_Texture> darkBackgroundTexture;
-		std::unique_ptr<SDL_Texture, SdlDeleter> borderBackgroundTexture;
+		std::shared_ptr<SDL_Texture> _lightBackgroundTexture;
+		std::shared_ptr<SDL_Texture> _darkBackgroundTexture;
+		std::unique_ptr<SDL_Texture, SdlDeleter> _borderBackgroundTexture;
 
-		std::vector<std::shared_ptr<SDL_Texture>> TetrominosTextures;
+		std::vector<std::shared_ptr<SDL_Texture>> _tetrominosTextures;
 
-		int backgroundTextureWidth;
-		int backgroundTextureHeight;
+		int _backgroundTextureWidth;
+		int _backgroundTextureHeight;
 
 		// TODO : Maybe Boost Multi Array could be interesting
-		std::vector<std::vector<TetrominoColorEnum>> logicalTetrominosArray;
+		std::vector<std::vector<TetrominoColorEnum>> _logicalTetrominosArray;
 
-		std::unique_ptr<Tetromino> CurrentTetromino;
-		int TetrominoPositionX;
-		int TetrominoPositionY;
+		std::unique_ptr<Tetromino> _currentTetromino;
+		int _tetrominoPositionX;
+		int _tetrominoPositionY;
+
+
+
+		// Methods
 			
 		void SetTexturesBackground();
 		void SetBorderBackground();

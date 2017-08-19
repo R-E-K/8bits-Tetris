@@ -8,13 +8,13 @@ namespace REKTetrisGame
 {
 	Timer::Timer()
 	{
-		lastTime = 0;
+		_lastTime = 0;
 	}
 
 	Timer::Timer(int inputRepeatFrequency)
 	{
 		_inputRepeatFrequency = inputRepeatFrequency;
-		lastTime = 0;
+		_lastTime = 0;
 	}
 
 	Timer::~Timer()
@@ -30,19 +30,19 @@ namespace REKTetrisGame
 	{
 		if (!GameContextManager::IsGamePaused())
 		{
-			currentTime = SDL_GetTicks();
+			_currentTime = SDL_GetTicks();
 
-			if (_delay < currentTime)
+			if (_delay < _currentTime)
 			{
-				if (lastTime == 0)
+				if (_lastTime == 0)
 				{
-					lastTime = SDL_GetTicks();
+					_lastTime = SDL_GetTicks();
 				}
 
-				if (currentTime - lastTime >= _inputRepeatFrequency)
+				if (_currentTime - _lastTime >= _inputRepeatFrequency)
 				{
 					function();
-					lastTime = SDL_GetTicks();
+					_lastTime = SDL_GetTicks();
 				}
 			}
 		}
@@ -51,9 +51,9 @@ namespace REKTetrisGame
 			// Keep the same difference time between current time and last execution time
 			// When the game is paused
 			// Unless, the timer will be executed to fast when leaving pause
-			int difference = currentTime - lastTime;
-			currentTime = SDL_GetTicks();
-			lastTime = currentTime - difference;
+			int difference = _currentTime - _lastTime;
+			_currentTime = SDL_GetTicks();
+			_lastTime = _currentTime - difference;
 		}
 			
 	}

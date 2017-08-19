@@ -12,7 +12,7 @@ GameConfiguration::~GameConfiguration()
 {
 }
 
-bool GameConfiguration::isConfigFileFound() const
+bool GameConfiguration::IsConfigFileFound() const
 {
 	return _configFileFound;
 }

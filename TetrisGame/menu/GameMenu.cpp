@@ -9,28 +9,28 @@ namespace REKTetrisGame
 		, std::shared_ptr<GameConfiguration> gameConfiguration
 		, std::shared_ptr<GamepadConfiguration> gamepadConfiguration)
 	{
-		gameMenuItems.clear();
-		gameMenuItems[0] = GameMenuItemEnum::PLAY;
-		gameMenuItems[1] = GameMenuItemEnum::FULLSCREEN;
-		gameMenuItems[2] = GameMenuItemEnum::CREDITS;
-		gameMenuItems[3] = GameMenuItemEnum::QUITGAME;
+		_gameMenuItems.clear();
+		_gameMenuItems[0] = GameMenuItemEnum::PLAY;
+		_gameMenuItems[1] = GameMenuItemEnum::FULLSCREEN;
+		_gameMenuItems[2] = GameMenuItemEnum::CREDITS;
+		_gameMenuItems[3] = GameMenuItemEnum::QUITGAME;
 
-		GameMenuLevel = 0;
+		_gameMenuLevel = 0;
 
-		selectedItem = GameMenuItemEnum::PLAY;
-		selectedItemIndex = 0;
+		_selectedItem = GameMenuItemEnum::PLAY;
+		_selectedItemIndex = 0;
 
-		background = nullptr;
+		_background = nullptr;
 
-		drawTextSrvc = std::make_unique<DrawTextService>();
-		DrawGameButtonLabelSrvc = std::make_unique<DrawGameButtonLabelService>();
+		_drawTextService = std::make_unique<DrawTextService>();
+		_drawGameButtonLabelService = std::make_unique<DrawGameButtonLabelService>();
 
-		soundMngr = soundManager;
+		_soundManager = soundManager;
 		_gameConfiguration = gameConfiguration;
 		_gamepadConfiguration = gamepadConfiguration;
 
-		backgroundPositionX = (SCREEN_WIDTH / 4);
-		backgroundPositionY = (SCREEN_HEIGHT / 8);
+		_backgroundPositionX = (SCREEN_WIDTH / 4);
+		_backgroundPositionY = (SCREEN_HEIGHT / 8);
 	}
 
 	GameMenu::~GameMenu()
@@ -40,13 +40,13 @@ namespace REKTetrisGame
 
 	void GameMenu::Draw(std::shared_ptr<Board> board)
 	{
-		if (GameMenuLevel == 0)
+		if (_gameMenuLevel == 0)
 		{
 			DrawMainMenu(board);
 		}
 		else
 		{
-			switch (selectedItem)
+			switch (_selectedItem)
 			{
 			case GameMenuItemEnum::CREDITS:
 				DrawCredits();
@@ -57,27 +57,27 @@ namespace REKTetrisGame
 
 	void GameMenu::NavigateDown()
 	{
-		if (selectedItemIndex < gameMenuItems.size() - 1 && GameMenuLevel == 0)
+		if (_selectedItemIndex < _gameMenuItems.size() - 1 && _gameMenuLevel == 0)
 		{
-			selectedItemIndex++;
-			selectedItem = gameMenuItems[selectedItemIndex];
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_selectedItemIndex++;
+			_selectedItem = _gameMenuItems[_selectedItemIndex];
+			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}
 
 	void GameMenu::NavigateUp()
 	{
-		if (selectedItemIndex > 0 && GameMenuLevel == 0)
+		if (_selectedItemIndex > 0 && _gameMenuLevel == 0)
 		{
-			selectedItemIndex--;
-			selectedItem = gameMenuItems[selectedItemIndex];
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_selectedItemIndex--;
+			_selectedItem = _gameMenuItems[_selectedItemIndex];
+			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
 		}
 	}
 
 	void GameMenu::SelectItemMenu()
 	{
-		switch (selectedItem)
+		switch (_selectedItem)
 		{
 		case GameMenuItemEnum::PLAY:
 			break;
@@ -86,8 +86,8 @@ namespace REKTetrisGame
 			WindowConfiguration::ToggleFullScreen();
 			break;
 		case GameMenuItemEnum::CREDITS:
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
-			GameMenuLevel = 1;
+			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_gameMenuLevel = 1;
 			break;
 		case GameMenuItemEnum::QUITGAME:
 			SDL_Event quitGame;
@@ -99,26 +99,26 @@ namespace REKTetrisGame
 
 	void GameMenu::MenuBack()
 	{
-		switch (selectedItem)
+		switch (_selectedItem)
 		{
 		case GameMenuItemEnum::PLAY:
 		case GameMenuItemEnum::QUITGAME:
 			break;
 		case GameMenuItemEnum::CREDITS:
-			GameMenuLevel = 0;
-			soundMngr->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_gameMenuLevel = 0;
+			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
 			break;
 		}
 	}
 
 	bool GameMenu::MustDestroyGameMenuOnSelect() const
 	{
-		return (selectedItem == GameMenuItemEnum::PLAY || selectedItem == GameMenuItemEnum::QUITGAME);
+		return (_selectedItem == GameMenuItemEnum::PLAY || _selectedItem == GameMenuItemEnum::QUITGAME);
 	}
 
 	bool GameMenu::MustDestroyGameMenuOnBack(std::shared_ptr<Board> board) const
 	{
-		return GameMenuLevel == 0 
+		return _gameMenuLevel == 0 
 			&& GameContextManager::CurrentGameContext != GameContextEnum::STARTED
 			&& GameContextManager::CurrentGameContext != GameContextEnum::GAMEOVER
 			&& board != nullptr && !board->IsGameOver();
@@ -126,18 +126,18 @@ namespace REKTetrisGame
 
 	GameMenuItemEnum GameMenu::GetLastItemMenuSelected() const
 	{
-		return selectedItem;
+		return _selectedItem;
 	}
 
 	std::shared_ptr<SDL_Texture> GameMenu::CreateBackground(SDL_Rect& gameMenuPosition)
 	{
-		gameMenuPosition.x = backgroundPositionX;
-		gameMenuPosition.y = backgroundPositionY;
+		gameMenuPosition.x = _backgroundPositionX;
+		gameMenuPosition.y = _backgroundPositionY;
 		gameMenuPosition.w = (SCREEN_WIDTH / 2);
 		gameMenuPosition.h = (SCREEN_HEIGHT / 1.5);
 
-		backgroundTextureWidth = gameMenuPosition.w;
-		backgroundTextureHeight = gameMenuPosition.h;
+		_backgroundTextureWidth = gameMenuPosition.w;
+		_backgroundTextureHeight = gameMenuPosition.h;
 
 		auto backgroundSurface = std::unique_ptr<SDL_Surface, SdlDeleter>(
 			SDL_CreateRGBSurface(0, gameMenuPosition.w, gameMenuPosition.h, 32, 0, 0, 0, 0)
@@ -161,9 +161,9 @@ namespace REKTetrisGame
 	void GameMenu::DrawMainMenu(std::shared_ptr<Board> board)
 	{
 		SDL_Rect gameMenuPosition;
-		background = CreateBackground(gameMenuPosition);
+		_background = CreateBackground(gameMenuPosition);
 
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), _background.get(), nullptr, &gameMenuPosition);
 
 		DrawItemsMenu(board);
 		AddValidButton();
@@ -176,8 +176,8 @@ namespace REKTetrisGame
 
 	void GameMenu::DrawItemsMenu(std::shared_ptr<Board> board) const
 	{
-		int x = backgroundPositionX + (backgroundTextureWidth / 15);
-		int y = backgroundPositionY + (backgroundTextureHeight / 15);
+		int x = _backgroundPositionX + (_backgroundTextureWidth / 15);
+		int y = _backgroundPositionY + (_backgroundTextureHeight / 15);
 
 		if (board != nullptr && !board->IsGameOver())
 		{
@@ -188,7 +188,7 @@ namespace REKTetrisGame
 			DrawItemMenu("Play", GameMenuItemEnum::PLAY, x, y);
 		}
 
-		y += (backgroundTextureHeight / 8);
+		y += (_backgroundTextureHeight / 8);
 		if (WindowConfiguration::IsFullScreen())
 		{
 			DrawItemMenu("Set  windowed", GameMenuItemEnum::FULLSCREEN, x, y);
@@ -198,9 +198,9 @@ namespace REKTetrisGame
 			DrawItemMenu("Set  fullscreen", GameMenuItemEnum::FULLSCREEN, x, y);
 		}
 
-		y += (backgroundTextureHeight / 8);
+		y += (_backgroundTextureHeight / 8);
 		DrawItemMenu("Credits", GameMenuItemEnum::CREDITS, x, y);
-		y += (backgroundTextureHeight / 8);
+		y += (_backgroundTextureHeight / 8);
 		DrawItemMenu("Quit game", GameMenuItemEnum::QUITGAME, x, y);
 	}
 
@@ -208,7 +208,7 @@ namespace REKTetrisGame
 	{
 		SDL_Color textColorSelected;
 
-		if (selectedItem == gameMenuItem)
+		if (_selectedItem == gameMenuItem)
 		{
 			textColorSelected = { 255, 255, 0 };
 		}
@@ -218,58 +218,58 @@ namespace REKTetrisGame
 		}
 
 		DrawTextService::DrawTextWithSizeAndColor(itemMenuName, x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, textColorSelected);
 	}
 
 	void GameMenu::DrawCredits()
 	{
 		SDL_Rect gameMenuPosition;
-		background = CreateBackground(gameMenuPosition);
-		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), background.get(), nullptr, &gameMenuPosition);
+		_background = CreateBackground(gameMenuPosition);
+		SDL_RenderCopy(SDLMainObjectsProvider::GetRendererRawPointer(), _background.get(), nullptr, &gameMenuPosition);
 
-		int x = backgroundPositionX + (backgroundTextureWidth / 10);
-		int y = backgroundPositionY + (backgroundTextureHeight / 10);
+		int x = _backgroundPositionX + (_backgroundTextureWidth / 10);
+		int y = _backgroundPositionY + (_backgroundTextureHeight / 10);
 
 
 		DrawTextService::DrawTextWithSizeAndColor("Code, design, music", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 12);
+		y += (_backgroundTextureHeight / 12);
 
 		DrawTextService::DrawTextWithSizeAndColor("and sounds : REK", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 8);
+		y += (_backgroundTextureHeight / 8);
 
 		DrawTextService::DrawTextWithSizeAndColor("Font : Upheaval", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 12);
+		y += (_backgroundTextureHeight / 12);
 
 		DrawTextService::DrawTextWithSizeAndColor("by Brian Kent", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 8);
+		y += (_backgroundTextureHeight / 8);
 
 		DrawTextService::DrawTextWithSizeAndColor("Source code and more", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 12);
+		y += (_backgroundTextureHeight / 12);
 
 		DrawTextService::DrawTextWithSizeAndColor("infos on", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
-		y += (backgroundTextureHeight / 12);
+		y += (_backgroundTextureHeight / 12);
 
 		DrawTextService::DrawTextWithSizeAndColor("github.com/R-E-K", x, y
-			, (backgroundTextureHeight / 15)
+			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
 		AddBackButton();
@@ -279,28 +279,28 @@ namespace REKTetrisGame
 	{
 
 		int textureWidth, textureHeight;
-		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
-		int x = backgroundPositionX + (backgroundTextureWidth - (backgroundTextureWidth / 3.5));
-		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
+		SDL_QueryTexture(_background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
+		int x = _backgroundPositionX + (_backgroundTextureWidth - (_backgroundTextureWidth / 3.5));
+		int y = _backgroundPositionY + (_backgroundTextureHeight - (_backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(
+		_drawGameButtonLabelService->DrawWithLabel(
 			(_gamepadConfiguration->IsGamepadPlugged()) ? GamepadButtonsFilePathConsts::BButton : KeyboardKeysFilePathConsts::BackspaceKey
 			, "Back", x, y
-			, (backgroundTextureWidth / 16)
-			, (backgroundTextureHeight / 16));
+			, (_backgroundTextureWidth / 16)
+			, (_backgroundTextureHeight / 16));
 	}
 
 	void GameMenu::AddValidButton() const
 	{
 		int textureWidth, textureHeight;
-		SDL_QueryTexture(background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
-		int x = backgroundPositionX + (backgroundTextureWidth / 15);
-		int y = backgroundPositionY + (backgroundTextureHeight - (backgroundTextureHeight / 8));
+		SDL_QueryTexture(_background.get(), nullptr, nullptr, &textureWidth, &textureHeight);
+		int x = _backgroundPositionX + (_backgroundTextureWidth / 15);
+		int y = _backgroundPositionY + (_backgroundTextureHeight - (_backgroundTextureHeight / 8));
 
-		DrawGameButtonLabelSrvc->DrawWithLabel(
+		_drawGameButtonLabelService->DrawWithLabel(
 			(_gamepadConfiguration->IsGamepadPlugged()) ? GamepadButtonsFilePathConsts::AButton : KeyboardKeysFilePathConsts::EnterKey
 			, "Select", x, y
-			, (backgroundTextureWidth / 16)
-			, (backgroundTextureHeight / 16));
+			, (_backgroundTextureWidth / 16)
+			, (_backgroundTextureHeight / 16));
 	}
 }

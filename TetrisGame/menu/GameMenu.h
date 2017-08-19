@@ -37,22 +37,22 @@ namespace REKTetrisGame
 		GameMenuItemEnum GetLastItemMenuSelected() const;
 
 	private:
-		std::map<Uint8, GameMenuItemEnum> gameMenuItems;
-		GameMenuItemEnum selectedItem;
-		Uint8 selectedItemIndex;
-		Uint8 GameMenuLevel;
+		std::map<Uint8, GameMenuItemEnum> _gameMenuItems;
+		GameMenuItemEnum _selectedItem;
+		Uint8 _selectedItemIndex;
+		Uint8 _gameMenuLevel;
 
-		std::unique_ptr<DrawTextService> drawTextSrvc;
-		std::unique_ptr<DrawGameButtonLabelService> DrawGameButtonLabelSrvc;
-		std::shared_ptr<SoundManager> soundMngr;
+		std::unique_ptr<DrawTextService> _drawTextService;
+		std::unique_ptr<DrawGameButtonLabelService> _drawGameButtonLabelService;
+		std::shared_ptr<SoundManager> _soundManager;
 		std::shared_ptr<GameConfiguration> _gameConfiguration;
 		std::shared_ptr<GamepadConfiguration> _gamepadConfiguration;
 
-		std::shared_ptr<SDL_Texture> background;
-		int backgroundPositionX;
-		int backgroundPositionY;
-		int backgroundTextureWidth;
-		int backgroundTextureHeight;
+		std::shared_ptr<SDL_Texture> _background;
+		int _backgroundPositionX;
+		int _backgroundPositionY;
+		int _backgroundTextureWidth;
+		int _backgroundTextureHeight;
 
 		std::shared_ptr<SDL_Texture> CreateBackground(SDL_Rect& gameMenuPosition);
 		void DrawMainMenu(std::shared_ptr<Board> board);

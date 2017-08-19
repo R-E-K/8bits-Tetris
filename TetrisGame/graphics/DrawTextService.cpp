@@ -5,12 +5,12 @@ namespace REKTetrisGame
 {
 	DrawTextService::DrawTextService()
 	{
-		defaultClr = { 255, 255, 255 };
+		_defaultColor = { 255, 255, 255 };
 	}
 
 	DrawTextService::DrawTextService(SDL_Color defaultColor)
 	{
-		defaultClr = defaultColor;
+		_defaultColor = defaultColor;
 	}
 
 	DrawTextService::~DrawTextService()
@@ -25,13 +25,13 @@ namespace REKTetrisGame
 
 	void DrawTextService::DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color)
 	{
-		auto fontMenu = std::unique_ptr<TTF_Font, SdlDeleter>(
+		auto font = std::unique_ptr<TTF_Font, SdlDeleter>(
 			TTF_OpenFont("resources/fonts/upheavtt.ttf", textSize)
 			,SdlDeleter()
 			);
 
 		auto textSurface = std::unique_ptr<SDL_Surface, SdlDeleter>(
-			TTF_RenderText_Solid(fontMenu.get(), text.c_str(), color)
+			TTF_RenderText_Solid(font.get(), text.c_str(), color)
 			,SdlDeleter()
 			);
 
