@@ -13,9 +13,9 @@ namespace REKTetrisGame
 		ImageLoader();
 		~ImageLoader();
 
-		static std::shared_ptr<SDL_Surface> GetImage(std::string const& pathfile);
-		static std::shared_ptr<SDL_Surface> ImageLoader::GetImage(std::string const& pathfile, SDL_Color transparentColor);
-		static std::shared_ptr<SDL_Surface> ImageLoader::GetImageWithoutTransparency(std::string const& pathfile);
+		static std::unique_ptr<SDL_Surface, SdlDeleter> GetImage(std::string const& pathfile);
+		static std::unique_ptr<SDL_Surface, SdlDeleter> ImageLoader::GetImage(std::string const& pathfile, SDL_Color transparentColor);
+		static std::unique_ptr<SDL_Surface, SdlDeleter> ImageLoader::GetImageWithoutTransparency(std::string const& pathfile);
 	};
 }
 

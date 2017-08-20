@@ -12,30 +12,30 @@ namespace REKTetrisGame
 	{
 	}
 
-	std::shared_ptr<SDL_Surface> ImageLoader::GetImageWithoutTransparency(std::string const& pathfile)
+	std::unique_ptr<SDL_Surface, SdlDeleter> ImageLoader::GetImageWithoutTransparency(std::string const& pathfile)
 	{
-		auto picture = std::shared_ptr<SDL_Surface>(IMG_Load(pathfile.c_str()), SdlDeleter());
+		auto picture = std::unique_ptr<SDL_Surface, SdlDeleter>(IMG_Load(pathfile.c_str()), SdlDeleter());
 
-		return picture;
+		return std::move(picture);
 	}
 
-	std::shared_ptr<SDL_Surface> ImageLoader::GetImage(std::string const& pathfile)
+	std::unique_ptr<SDL_Surface, SdlDeleter> ImageLoader::GetImage(std::string const& pathfile)
 	{
-		auto picture = std::shared_ptr<SDL_Surface>(IMG_Load(pathfile.c_str()), SdlDeleter());
+		auto picture = std::unique_ptr<SDL_Surface, SdlDeleter>(IMG_Load(pathfile.c_str()), SdlDeleter());
 
 		// Set transparency
 		SDL_SetColorKey(picture.get(), SDL_TRUE, SDL_MapRGB(picture->format, 0xFF, 0x00, 0xFF));
 
-		return picture;
+		return std::move(picture);
 	}
 
-	std::shared_ptr<SDL_Surface> ImageLoader::GetImage(std::string const& pathfile, SDL_Color transparentColor)
+	std::unique_ptr<SDL_Surface, SdlDeleter> ImageLoader::GetImage(std::string const& pathfile, SDL_Color transparentColor)
 	{
-		auto picture = std::shared_ptr<SDL_Surface>(IMG_Load(pathfile.c_str()), SdlDeleter());
+		auto picture = std::unique_ptr<SDL_Surface, SdlDeleter>(IMG_Load(pathfile.c_str()), SdlDeleter());
 
 		// Set transparency
 		SDL_SetColorKey(picture.get(), SDL_TRUE, SDL_MapRGB(picture->format, transparentColor.r, transparentColor.g, transparentColor.b));
 
-		return picture;
+		return std::move(picture);
 	}
 }
