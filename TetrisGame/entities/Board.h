@@ -17,6 +17,7 @@
 #include "../core/SDLMainObjectsProvider.h"
 #include "../graphics/ImageLoader.h"
 #include "../core/Timer.h"
+#include "../core/AssetsFilePathConsts.h"
 
 namespace REKTetrisGame
 {

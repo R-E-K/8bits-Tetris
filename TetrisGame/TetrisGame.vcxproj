@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="core\AssetsFilePathConsts.cpp" />
     <ClCompile Include="utils\FileManager.cpp" />
     <ClCompile Include="utils\EncryptDecryptManager.cpp" />
     <ClCompile Include="entities\Component.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="graphics\WindowConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\AssetsFilePathConsts.h" />
     <ClInclude Include="utils\FileManager.h" />
     <ClInclude Include="utils\EncryptDecryptManager.h" />
     <ClInclude Include="entities\Component.h" />

@@ -61,7 +61,7 @@ namespace REKTetrisGame
 		{
 			_selectedItemIndex++;
 			_selectedItem = _gameMenuItems[_selectedItemIndex];
-			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuOver, 1);
 		}
 	}
 
@@ -71,7 +71,7 @@ namespace REKTetrisGame
 		{
 			_selectedItemIndex--;
 			_selectedItem = _gameMenuItems[_selectedItemIndex];
-			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuOver, 1);
 		}
 	}
 
@@ -86,7 +86,7 @@ namespace REKTetrisGame
 			WindowConfiguration::ToggleFullScreen();
 			break;
 		case GameMenuItemEnum::CREDITS:
-			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuOver, 1);
 			_gameMenuLevel = 1;
 			break;
 		case GameMenuItemEnum::QUITGAME:
@@ -106,7 +106,7 @@ namespace REKTetrisGame
 			break;
 		case GameMenuItemEnum::CREDITS:
 			_gameMenuLevel = 0;
-			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuOver, 1);
 			break;
 		}
 	}

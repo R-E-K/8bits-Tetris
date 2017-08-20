@@ -9,6 +9,7 @@
 #include "../core/SDLDeletersFunctor.h"
 #include "../graphics/DrawTextService.h"
 #include "Component.h"
+#include "../core/AssetsFilePathConsts.h"
 
 namespace REKTetrisGame
 {

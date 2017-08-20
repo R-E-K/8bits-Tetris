@@ -1,5 +1,6 @@
 #pragma once
 #include "DrawTextService.h"
+#include "../core/AssetsFilePathConsts.h"
 
 namespace REKTetrisGame
 {
@@ -26,7 +27,7 @@ namespace REKTetrisGame
 	void DrawTextService::DrawTextWithSizeAndColor(std::string const& text, int x, int y, int textSize, SDL_Color color)
 	{
 		auto font = std::unique_ptr<TTF_Font, SdlDeleter>(
-			TTF_OpenFont("resources/fonts/upheavtt.ttf", textSize)
+			TTF_OpenFont(AssetsFilePathConsts::Font.c_str(), textSize)
 			,SdlDeleter()
 			);
 

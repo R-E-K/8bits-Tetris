@@ -14,6 +14,7 @@
 #include "GameContextManager.h"
 #include "GameConfiguration.h"
 #include "../utils/FileManager.h"
+#include "AssetsFilePathConsts.h"
 
 
 namespace REKTetrisGame

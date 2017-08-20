@@ -89,82 +89,85 @@ namespace REKTetrisGame
 	{
 		bool isInitOk = true;
 
-		//Initialize SDL
-		if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) < 0)
+		if (!AreAllAssetsExists())
 		{
-			ErrorMessageManager::WriteErrorMessageToMessageBox("SDL could not be initialized. Application will be closed.");
+			ErrorMessageManager::WriteErrorMessageToMessageBox("All assets are not present in resources folder, you need to redownload the game. Application will be closed. END END END");
 			isInitOk = false;
 		}
 		else
 		{
-			_gameConfiguration = std::make_shared<GameConfiguration>();
-			if (_gameConfiguration->IsConfigFileFound())
-			{
-				_window = std::shared_ptr<SDL_Window>(
-					SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, _gameConfiguration->GetFullscreenConfig())
-					, SdlDeleter()
-					);
 
-				if (_window == nullptr)
+			//Initialize SDL
+			if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) < 0)
+			{
+				ErrorMessageManager::WriteErrorMessageToMessageBox("SDL could not be initialized. Application will be closed.");
+				isInitOk = false;
+			}
+			else
+			{
+				_gameConfiguration = std::make_shared<GameConfiguration>();
+				if (_gameConfiguration->IsConfigFileFound())
 				{
-					ErrorMessageManager::WriteErrorMessageToMessageBox("Window could not be created. Application will be closed.");
-					isInitOk = false;
-				}
-				else
-				{
-					_renderer = std::shared_ptr<SDL_Renderer>(
-						SDL_CreateRenderer(_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
+					_window = std::shared_ptr<SDL_Window>(
+						SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, _gameConfiguration->GetFullscreenConfig())
 						, SdlDeleter()
 						);
 
-					if (_renderer == nullptr)
+					if (_window == nullptr)
 					{
-						ErrorMessageManager::WriteErrorMessageToMessageBox("Renderer could not be created. Application will be closed.");
+						ErrorMessageManager::WriteErrorMessageToMessageBox("Window could not be created. Application will be closed.");
 						isInitOk = false;
 					}
 					else
 					{
-						// Init screen with light grey all over the surface
-						SDL_SetRenderDrawColor(_renderer.get(), 0x44, 0x87, 0xC5, SDL_ALPHA_OPAQUE);
-						SDL_RenderSetLogicalSize(_renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
+						_renderer = std::shared_ptr<SDL_Renderer>(
+							SDL_CreateRenderer(_window.get(), -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC)
+							, SdlDeleter()
+							);
 
-						// About mouse cursor
-						if (SDL_ShowCursor(SDL_DISABLE) < 0)
+						if (_renderer == nullptr)
 						{
-							ErrorMessageManager::WriteErrorMessageToMessageBox("Cannot hide mouse cursor. Application will be closed.");
+							ErrorMessageManager::WriteErrorMessageToMessageBox("Renderer could not be created. Application will be closed.");
 							isInitOk = false;
 						}
 						else
 						{
-							_gameContextManager = std::make_shared<GameContextManager>();
-							_inputManager = std::make_unique<InputManager>(_gameContextManager);
+							// Init screen with light grey all over the surface
+							SDL_SetRenderDrawColor(_renderer.get(), 0x44, 0x87, 0xC5, SDL_ALPHA_OPAQUE);
+							SDL_RenderSetLogicalSize(_renderer.get(), SCREEN_WIDTH, SCREEN_HEIGHT);
 
-
-							// SDL_ttf
-							if (TTF_Init() != 0)
+							// About mouse cursor
+							if (SDL_ShowCursor(SDL_DISABLE) < 0)
 							{
-								ErrorMessageManager::WriteErrorMessageToMessageBox("Could not load SDL2_ttf. Application will be closed.");
+								ErrorMessageManager::WriteErrorMessageToMessageBox("Cannot hide mouse cursor. Application will be closed.");
 								isInitOk = false;
 							}
 							else
 							{
-								_soundManager = std::make_shared<SoundManager>();
-								if (_soundManager->Init() < 0)
-								{
-									ErrorMessageManager::WriteErrorMessageToMessageBox("Could not Init SDL2_Mixer with OGG format. Application will be closed.");
-									isInitOk = false;
-								}
+								_gameContextManager = std::make_shared<GameContextManager>();
+								_inputManager = std::make_unique<InputManager>(_gameContextManager);
 
-								if (!AreAllAssetsExists())
+
+								// SDL_ttf
+								if (TTF_Init() != 0)
 								{
-									ErrorMessageManager::WriteErrorMessageToMessageBox("All assets are not present in resources folder, you need to redownload the game. Application will be closed. END END END");
+									ErrorMessageManager::WriteErrorMessageToMessageBox("Could not load SDL2_ttf. Application will be closed.");
 									isInitOk = false;
 								}
 								else
 								{
-									_soundManager->PlayMusic("resources/songs/Tetris_MIDI.ogg", 4000);
+									_soundManager = std::make_shared<SoundManager>();
+									if (_soundManager->Init() < 0)
+									{
+										ErrorMessageManager::WriteErrorMessageToMessageBox("Could not Init SDL2_Mixer with OGG format. Application will be closed.");
+										isInitOk = false;
+									}
+									else
+									{
+										_soundManager->PlayMusic(AssetsFilePathConsts::Music, 4000);
 
-									SetSDLMainObjectsToProvider();
+										SetSDLMainObjectsToProvider();
+									}
 								}
 							}
 						}
@@ -179,7 +182,22 @@ namespace REKTetrisGame
 	bool Game::AreAllAssetsExists()
 	{
 		std::vector<std::string> fileNames;
-		fileNames.push_back("config.txt");
+		fileNames.push_back(AssetsFilePathConsts::ConfigFile);
+		fileNames.push_back(AssetsFilePathConsts::Font);
+		fileNames.push_back(AssetsFilePathConsts::Music);
+		fileNames.push_back(AssetsFilePathConsts::SoundMenuClick);
+		fileNames.push_back(AssetsFilePathConsts::SoundMenuOver);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoBlue);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoBrown);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoGreen);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoOrange);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoPurple);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoRed);
+		fileNames.push_back(AssetsFilePathConsts::TetrominoYellow);
+		fileNames.push_back(KeyboardKeysFilePathConsts::EnterKey);
+		fileNames.push_back(KeyboardKeysFilePathConsts::BackspaceKey);
+		fileNames.push_back(GamepadButtonsFilePathConsts::AButton);
+		fileNames.push_back(GamepadButtonsFilePathConsts::BButton);
 		bool allAssetsExists = true;
 
 		for (auto filename : fileNames)
@@ -223,7 +241,7 @@ namespace REKTetrisGame
 				auto gamepadConfig = _inputManager->GetGamepadConfiguration();
 				_gameMenu = std::make_shared<GameMenu>(_soundManager, _gameConfiguration, gamepadConfig);
 				_gameContextManager->SetGameMenu(_gameMenu);
-				_soundManager->PlaySound("resources/sounds/MenuClick.wav", 1);
+				_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuClick, 1);
 			}
 			_gameMenu->Draw(_boardGame);
 		}
@@ -232,7 +250,7 @@ namespace REKTetrisGame
 		{
 
 			_gameMenu.reset();
-			_soundManager->PlaySound("resources/sounds/MenuOver.wav", 1);
+			_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuOver, 1);
 
 			if (_boardGame != nullptr && _boardGame->IsGameOver())
 			{

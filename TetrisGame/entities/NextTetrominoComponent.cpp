@@ -44,13 +44,13 @@ namespace REKTetrisGame
 		Component::LoadTextures();
 
 		_tetrominosTextures.resize(7);
-		_tetrominosTextures[0] = GetTetrominoTexture("resources/graphics/tetrominos/blue.png");
-		_tetrominosTextures[1] = GetTetrominoTexture("resources/graphics/tetrominos/brown.png");
-		_tetrominosTextures[2] = GetTetrominoTexture("resources/graphics/tetrominos/green.png");
-		_tetrominosTextures[3] = GetTetrominoTexture("resources/graphics/tetrominos/orange.png");
-		_tetrominosTextures[4] = GetTetrominoTexture("resources/graphics/tetrominos/purple.png");
-		_tetrominosTextures[5] = GetTetrominoTexture("resources/graphics/tetrominos/red.png");
-		_tetrominosTextures[6] = GetTetrominoTexture("resources/graphics/tetrominos/yellow.png");
+		_tetrominosTextures[0] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoBlue);
+		_tetrominosTextures[1] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoBrown);
+		_tetrominosTextures[2] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoGreen);
+		_tetrominosTextures[3] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoOrange);
+		_tetrominosTextures[4] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoPurple);
+		_tetrominosTextures[5] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoRed);
+		_tetrominosTextures[6] = GetTetrominoTexture(AssetsFilePathConsts::TetrominoYellow);
 	}
 
 	void NextTetrominoComponent::DrawBorder() const

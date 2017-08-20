@@ -1,99 +1,104 @@
 #include "GameConfiguration.h"
+#include "AssetsFilePathConsts.h"
 
-
-
-GameConfiguration::GameConfiguration()
+namespace REKTetrisGame
 {
-	Init();
-}
 
 
-GameConfiguration::~GameConfiguration()
-{
-}
-
-bool GameConfiguration::IsConfigFileFound() const
-{
-	return _configFileFound;
-}
-
-void GameConfiguration::ToggleFullscreenConfig()
-{
-	if (_lines.at("Fullscreen") == "1")
+	GameConfiguration::GameConfiguration()
 	{
-		_lines["Fullscreen"] = "0";
+		Init();
 	}
-	else
-	{
-		_lines["Fullscreen"] = "1";
-	}
-	RewriteFile();
-}
 
-SDL_WindowFlags GameConfiguration::GetFullscreenConfig() const
-{
-	SDL_WindowFlags fullscreenFlag;
-	if (_lines.count("Fullscreen") > 0)
+
+	GameConfiguration::~GameConfiguration()
+	{
+	}
+
+	bool GameConfiguration::IsConfigFileFound() const
+	{
+		return _configFileFound;
+	}
+
+	void GameConfiguration::ToggleFullscreenConfig()
 	{
 		if (_lines.at("Fullscreen") == "1")
 		{
-			fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
+			_lines["Fullscreen"] = "0";
+		}
+		else
+		{
+			_lines["Fullscreen"] = "1";
+		}
+		RewriteFile();
+	}
+
+	SDL_WindowFlags GameConfiguration::GetFullscreenConfig() const
+	{
+		// If fullscreen config line is not found, we set windowed mode
+		SDL_WindowFlags fullscreenFlag;
+		if (_lines.count("Fullscreen") > 0)
+		{
+			if (_lines.at("Fullscreen") == "1")
+			{
+				fullscreenFlag = SDL_WINDOW_FULLSCREEN_DESKTOP;
+			}
+			else
+			{
+				fullscreenFlag = SDL_WINDOW_SHOWN;
+			}
 		}
 		else
 		{
 			fullscreenFlag = SDL_WINDOW_SHOWN;
 		}
-	}
-	else
-	{
-		fullscreenFlag = SDL_WINDOW_SHOWN;
+
+		return fullscreenFlag;
 	}
 
-	return fullscreenFlag;
-}
-
-void GameConfiguration::Init()
-{
-	std::string line;
-	std::ifstream configFile("config.txt");
-	SDL_WindowFlags fullscreenFlag;
-
-	if (configFile.is_open())
+	void GameConfiguration::Init()
 	{
-		_configFileFound = true;
-		bool isParam = true;
-		ConfigLine configLine;
-		while (std::getline(configFile, line, '='))
+		std::string line;
+		std::ifstream configFile(AssetsFilePathConsts::ConfigFile);
+		SDL_WindowFlags fullscreenFlag;
+
+		if (configFile.is_open())
 		{
-			std::istringstream iss(line);
-
-			if (isParam)
+			_configFileFound = true;
+			bool isParam = true;
+			ConfigLine configLine;
+			while (std::getline(configFile, line, '='))
 			{
-				configLine.param = line;
-			}
-			else
-			{
-				configLine.value = line;
-				_lines.insert(std::make_pair(configLine.param, configLine.value));
-			}
+				std::istringstream iss(line);
 
-			isParam = !isParam;
+				if (isParam)
+				{
+					configLine.param = line;
+				}
+				else
+				{
+					configLine.value = line;
+					_lines.insert(std::make_pair(configLine.param, configLine.value));
+				}
+
+				isParam = !isParam;
+			}
+		}
+		else
+		{
+			_configFileFound = false;
 		}
 	}
-	else
-	{
-		std::cout << "Cannot load config.txt";
-		_configFileFound = false;
-	}
-}
 
-void GameConfiguration::RewriteFile()
-{
-	std::ofstream configFile("config.txt", std::ofstream::out | std::ofstream::trunc);
-
-	for (auto line : _lines)
+	void GameConfiguration::RewriteFile()
 	{
-		configFile << line.first << "=" << line.second;
+		std::ofstream configFile(AssetsFilePathConsts::ConfigFile, std::ofstream::out | std::ofstream::trunc);
+
+		for (auto line : _lines)
+		{
+			configFile << line.first << "=" << line.second;
+		}
+		configFile.close();
 	}
-	configFile.close();
+
 }

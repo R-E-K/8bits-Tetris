@@ -131,6 +131,9 @@
     <ClCompile Include="utils\FileManager.cpp">
       <Filter>sources\utils</Filter>
     </ClCompile>
+    <ClCompile Include="core\AssetsFilePathConsts.cpp">
+      <Filter>sources\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\ErrorMessageManager.h">
@@ -243,6 +246,9 @@
     </ClInclude>
     <ClInclude Include="utils\FileManager.h">
       <Filter>sources\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AssetsFilePathConsts.h">
+      <Filter>sources\core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

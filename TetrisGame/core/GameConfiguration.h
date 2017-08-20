@@ -8,28 +8,30 @@
 #include <algorithm>
 #include <map>
 
-struct ConfigLine
+namespace REKTetrisGame
 {
-	std::string param;
-	std::string value;
-};
+	struct ConfigLine
+	{
+		std::string param;
+		std::string value;
+	};
 
-class GameConfiguration
-{
-public:
-	GameConfiguration();
-	~GameConfiguration();
+	class GameConfiguration
+	{
+	public:
+		GameConfiguration();
+		~GameConfiguration();
 
-	bool IsConfigFileFound() const;
+		bool IsConfigFileFound() const;
 
-	void ToggleFullscreenConfig();
-	SDL_WindowFlags GetFullscreenConfig() const;
+		void ToggleFullscreenConfig();
+		SDL_WindowFlags GetFullscreenConfig() const;
 
-private:
-	void Init();
-	void RewriteFile();
+	private:
+		void Init();
+		void RewriteFile();
 
-	std::map<std::string, std::string> _lines;
-	bool _configFileFound;
-};
-
+		std::map<std::string, std::string> _lines;
+		bool _configFileFound;
+	};
+}
