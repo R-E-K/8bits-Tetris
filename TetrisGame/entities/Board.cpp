@@ -598,31 +598,22 @@ namespace REKTetrisGame
 				}
 				else // Others pieces bottom collision
 				{
-					// Si tuile du tétromino est pleine
 					if (shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE))
 					{
-
-						// Si pas de tuile de tétromino en dessous et tuile du plateau est pleine
 						if (i == shapeToCheck.size() - 1
 							&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 						{
-							// Alors isCollide = true;
 							isCollide = true;
-							// Fin Si
 						}
 						else if (i < shapeToCheck.size() - 1)
 						{
-							// Si tuile du tétromino en dessous est vide et tuile du plateau est pleine
 							if (shapeToCheck[i + 1][j] == static_cast<int>(TetrominoColorEnum::NONE)
 								&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 							{
-								// Alors isCollide = true;
 								isCollide = true;
-								// Fin Si
 							}
 						}
 
-						// Fin Si
 					}
 				}
 
@@ -653,7 +644,7 @@ namespace REKTetrisGame
 		}
 	}
 
-	void Board::UpdateScore(int nbLinesJustRemoved)
+	void Board::UpdateScore(int nbLinesJustRemoved) const
 	{
 		if (nbLinesJustRemoved > 0)
 		{

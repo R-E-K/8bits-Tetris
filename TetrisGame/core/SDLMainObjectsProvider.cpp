@@ -28,25 +28,11 @@ namespace REKTetrisGame
 
 	SDL_Renderer* SDLMainObjectsProvider::GetRendererRawPointer()
 	{
-		if (_renderer != nullptr)
-		{
-			return _renderer.get();
-		}
-		else
-		{
-			// TODO : Handle Exception
-		}
+		return _renderer.get();
 	}
 
 	SDL_Window* SDLMainObjectsProvider::GetWindowRawPointer()
 	{
-		if (_window != nullptr)
-		{
-			return _window.get();
-		}
-		else
-		{
-			// TODO : Handle Exception
-		}
+		return _window.get();
 	}
 }

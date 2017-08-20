@@ -110,7 +110,7 @@ namespace REKTetrisGame
 		void SetTimers();
 
 		void CheckLevel(int nbLinesJustRemoved);
-		void UpdateScore(int nbLinesJustRemoved);
+		void UpdateScore(int nbLinesJustRemoved) const;
 	};
 
 }
