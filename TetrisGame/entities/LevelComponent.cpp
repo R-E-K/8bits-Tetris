@@ -2,16 +2,6 @@
 
 namespace REKTetrisGame
 {
-	//LevelComponent::LevelComponent()
-	//{
-	//	_level = 1;
-
-	//	_backgroundTextureWidth = (SCREEN_HEIGHT * (20.0 / 100.0));
-	//	_backgroundTextureHeight = (SCREEN_HEIGHT * (10.0 / 100.0));
-
-	//	//LoadTextures();
-	//}
-
 	LevelComponent::LevelComponent(double widthPercent, double HeightPercent)
 		: Component(widthPercent, HeightPercent)
 	{
@@ -86,7 +76,7 @@ namespace REKTetrisGame
 		SDL_Color color = { 50, 50, 255 };
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_level)
-			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (66.0 / 100.0))
+			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (50.0 / 100.0))
 			, SCREEN_HEIGHT * (1.5 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
 			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);

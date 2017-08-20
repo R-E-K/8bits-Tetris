@@ -98,7 +98,7 @@ namespace REKTetrisGame
 		SDL_Color color = { 50, 50, 255 };
 
 		DrawTextService::DrawTextWithSizeAndColor(std::to_string(_countLinesRemoved)
-			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (66.0 / 100.0))
+			, (SCREEN_WIDTH / 6) + (_backgroundTextureWidth * (50.0 / 100.0))
 			, SCREEN_HEIGHT * (14.5 / 100.0) + (_backgroundTextureHeight * (50.0 / 100.0))
 			, _backgroundTextureHeight * (50.0 / 100.0)
 			, color);
