@@ -475,7 +475,7 @@ namespace REKTetrisGame
 				}
 
 				// Others pieces collision
-				if (tetrominoTileX > 0 && tetrominoTileX < EntitiesConsts::NB_COLUMNS && tetrominoTileY < EntitiesConsts::NB_ROWS)
+				if (tetrominoTileX >= 0 && tetrominoTileX < EntitiesConsts::NB_COLUMNS && tetrominoTileY < EntitiesConsts::NB_ROWS)
 				{
 					if (_currentTetromino->GetTetrominoCurrentShape()[i][j] == static_cast<int>(TetrominoColorEnum::NONE)
 						&& _logicalTetrominosArray[tetrominoTileY][tetrominoTileX] != TetrominoColorEnum::NONE)
