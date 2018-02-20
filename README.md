@@ -30,7 +30,19 @@ Moving down tetromino faster : Down Arrow / Down
 # Dev Dependencies
 Developped with Visual Studio 2015 Community Edition
 
-- SDL2 (2.0.5) => https://www.libsdl.org/download-2.0.php
-- SDL2 Image (2.0.1) => https://www.libsdl.org/projects/SDL_image/
-- SDL2 Mixer (2.0.1) => https://www.libsdl.org/projects/SDL_mixer/
-- SDL2 TTF (2.0.14) => https://www.libsdl.org/projects/SDL_ttf/
+- SDL2 (2.0.5) =>
+    - Runtime Binary : https://www.libsdl.org/release/SDL2-2.0.5-win32-x86.zip
+    - Development Library (Visual C++) : https://www.libsdl.org/release/SDL2-devel-2.0.5-VC.zip
+    - Development Library (MinGW) : https://www.libsdl.org/release/SDL2-devel-2.0.5-mingw.tar.gz
+- SDL2 Image (2.0.1) =>
+    - Runtime Binary : https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.1-win32-x86.zip
+    - Development Library (Visual C++) : https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.1-VC.zip
+    - Development Library (MinGW) : https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.1-mingw.tar.gz
+- SDL2 Mixer (2.0.1) =>
+    - Runtime Binary : https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1-win32-x86.zip
+    - Development Library (Visual C++) : https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.1-VC.zip
+    - Development Library (MinGW) : https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.1-mingw.tar.gz
+- SDL2 TTF (2.0.14) =>
+    - Runtime Binary : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.14-win32-x86.zip
+    - Development Library (Visual C++) : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.14-VC.zip
+    - Development Library (MinGW) : https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-devel-2.0.14-mingw.tar.gz
