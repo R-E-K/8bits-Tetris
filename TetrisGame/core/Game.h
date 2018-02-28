@@ -46,6 +46,12 @@ namespace REKTetrisGame
 		void SetSDLMainObjectsToProvider() const;
 
 		void HandleGameMenu();
+		void HandleBoardGame();
+		void HandleGameOver();
+
+		void Input(SDL_Event& e, bool& quitGame);
+		void Update();
+		void Render();
 	};
 }
 

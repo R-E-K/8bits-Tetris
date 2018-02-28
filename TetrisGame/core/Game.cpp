@@ -40,47 +40,9 @@ namespace REKTetrisGame
 
 		while (!quitGame)
 		{
-			SDL_RenderClear(_renderer.get());
-
-			if (_inputManager != nullptr)
-				_inputManager->CheckInput(e, quitGame);
-
-			if (_boardGame != nullptr)
-			{
-				if (!_boardGame->IsGameOver())
-				{
-					_boardGame->Update();
-				}
-
-				_boardGame->Draw();
-			}
-
-			HandleGameMenu();
-
-			// Handle Game Over
-			if (_boardGame != nullptr)
-			{
-				if (_boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
-				{
-					GameContextManager::CurrentGameContext = GameContextEnum::GAMEOVER;
-				}
-			}
-
-			if (GameContextManager::CurrentGameContext == GameContextEnum::GAMEOVER)
-			{
-				if (_gameOverScreen == nullptr)
-				{
-					auto gamepadConfig = _inputManager->GetGamepadConfiguration();
-					_gameOverScreen = std::make_unique<GameOverScreen>(gamepadConfig);
-				}
-				
-				_gameOverScreen->Draw();
-			}
-
-			//Update the surface
-			//SDL_UpdateWindowSurface(_window); // software rendering : Not good
-			SDL_RenderPresent(_renderer.get()); // GPU rendering : Good !
-
+			Input(e, quitGame);
+			Update();
+			Render();
 		}
 	}
 
@@ -243,9 +205,11 @@ namespace REKTetrisGame
 				_gameContextManager->SetGameMenu(_gameMenu);
 				_soundManager->PlaySound(AssetsFilePathConsts::SoundMenuClick, 1);
 			}
-			_gameMenu->Draw(_boardGame);
 		}
+	}
 
+	void Game::HandleBoardGame()
+	{
 		if (GameContextManager::CurrentGameContext == GameContextEnum::INGAME && _gameMenu != nullptr)
 		{
 
@@ -269,6 +233,61 @@ namespace REKTetrisGame
 				_gameContextManager->SetBoardGame(_boardGame);
 			}
 		}
+	}
+
+	void Game::HandleGameOver()
+	{
+		if (_boardGame != nullptr)
+		{
+			if (_boardGame->IsGameOver() && GameContextManager::CurrentGameContext == GameContextEnum::INGAME)
+			{
+				GameContextManager::CurrentGameContext = GameContextEnum::GAMEOVER;
+			}
+		}
+	}
+
+	void Game::Input(SDL_Event& e, bool& quitGame)
+	{
+		if (_inputManager != nullptr)
+			_inputManager->CheckInput(e, quitGame);
+	}
+
+	void Game::Update()
+	{
+		HandleGameMenu();
+		HandleBoardGame();
+		HandleGameOver();
+
+		if (_boardGame != nullptr)
+			_boardGame->Update();
+	}
+
+	void Game::Render()
+	{
+		SDL_RenderClear(_renderer.get());
+
+		if (_boardGame != nullptr)
+		{
+			_boardGame->Draw();
+		}
+
+		if (GameContextManager::CurrentGameContext == GameContextEnum::GAMEOVER)
+		{
+			if (_gameOverScreen == nullptr)
+			{
+				auto gamepadConfig = _inputManager->GetGamepadConfiguration();
+				_gameOverScreen = std::make_unique<GameOverScreen>(gamepadConfig);
+			}
+
+			_gameOverScreen->Draw();
+		}
+
+		if (_gameMenu != nullptr)
+			_gameMenu->Draw(_boardGame);
+
+		//Update the surface
+		//SDL_UpdateWindowSurface(_window); // software rendering : Not good !
+		SDL_RenderPresent(_renderer.get()); // GPU rendering : Good !
 	}
 
 }

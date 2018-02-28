@@ -87,11 +87,11 @@ namespace REKTetrisGame
 		void SetTetrominosTextures();
 
 		void InitLogicalTetrominosArray();
+		void SetCurrentTetrominosPositionOnBoard();
 
 		void DrawBorder() const;
 		void DrawBackground() const;
 		void DrawTetrominos() const;
-		void DrawCurrentTetrominosOnBoard();
 
 		TetrominoShapeEnum RandomlySelectTetrominoType();
 		void SetTetrominoStartPosition(TetrominoShapeEnum tetrominoShape);

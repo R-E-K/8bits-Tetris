@@ -41,7 +41,6 @@ namespace REKTetrisGame
 		DrawBorder();
 		DrawBackground();
 		DrawTetrominos();
-		DrawCurrentTetrominosOnBoard();
 
 		_levelComponent->Draw();
 		_linesRemovedCounterComponent->Draw();
@@ -67,35 +66,37 @@ namespace REKTetrisGame
 
 	void Board::Update()
 	{
-
-		// Need to be draw here to have the last shape
-		DrawCurrentTetrominosOnBoard();
-
-		_tetrominoMovingDownTimer.Execute([&]()
+		if (!_gameOver)
 		{
-			if (!IsCollideBottom())
+			SetCurrentTetrominosPositionOnBoard();
+
+			_tetrominoMovingDownTimer.Execute([&]()
 			{
-				_tetrominoPositionY++;
-			}
-			else
-			{
-				// Clear Stacks
-				// Unfortunately, extension methods don't exist in C++
-				while (!_tetrominoTileXPrevious.empty())
+				if (!IsCollideBottom())
 				{
-					_tetrominoTileXPrevious.pop();
+					_tetrominoPositionY++;
 				}
-
-				while (!_tetrominoTileYPrevious.empty())
+				else
 				{
-					_tetrominoTileYPrevious.pop();
+					// Clear Stacks
+					// Unfortunately, extension methods don't exist in C++
+					// So, we have to do a while loop
+					while (!_tetrominoTileXPrevious.empty())
+					{
+						_tetrominoTileXPrevious.pop();
+					}
+
+					while (!_tetrominoTileYPrevious.empty())
+					{
+						_tetrominoTileYPrevious.pop();
+					}
+
+					RemoveFullLines();
+
+					NewTetromino();
 				}
-
-				RemoveFullLines();
-
-				NewTetromino();
-			}
-		});
+			});
+		}
 	}
 
 	bool Board::IsGameOver() const
@@ -229,7 +230,7 @@ namespace REKTetrisGame
 		}
 	}
 
-	void Board::DrawCurrentTetrominosOnBoard()
+	void Board::SetCurrentTetrominosPositionOnBoard()
 	{
 		if (!_tetrominoTileXPrevious.empty())
 		{
@@ -563,6 +564,10 @@ namespace REKTetrisGame
 				if(shapeToCheck[i][j] != static_cast<int>(TetrominoColorEnum::NONE)
 					&& _logicalTetrominosArray[tetrominoTileY + 1][tetrominoTileX] != TetrominoColorEnum::NONE)
 				{
+					// We set tetrominos position here
+					// So we can see the last Tetrominos, who made us lose the game
+					SetCurrentTetrominosPositionOnBoard();
+
 					_scoreComponent->SaveScoreIfBest();
 					isGameOver = true;
 					break;
