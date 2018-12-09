@@ -1,12 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{485FD1B9-7E3B-4504-AC73-BDAE35B831DE}"
 	ProjectSection(SolutionItems) = preProject
 		croquis_Tetris_1J.png = croquis_Tetris_1J.png
 		croquis_Tetris_2J.png = croquis_Tetris_2J.png
+		DevDependencies\SDL2-2.0.5-win32-x86.zip = DevDependencies\SDL2-2.0.5-win32-x86.zip
+		DevDependencies\SDL2-devel-2.0.5-VC.zip = DevDependencies\SDL2-devel-2.0.5-VC.zip
+		DevDependencies\SDL2_image-2.0.1-win32-x86.zip = DevDependencies\SDL2_image-2.0.1-win32-x86.zip
+		DevDependencies\SDL2_image-devel-2.0.1-VC.zip = DevDependencies\SDL2_image-devel-2.0.1-VC.zip
+		DevDependencies\SDL2_mixer-2.0.1-win32-x86.zip = DevDependencies\SDL2_mixer-2.0.1-win32-x86.zip
+		DevDependencies\SDL2_mixer-devel-2.0.1-VC.zip = DevDependencies\SDL2_mixer-devel-2.0.1-VC.zip
+		DevDependencies\SDL2_ttf-2.0.14-win32-x86.zip = DevDependencies\SDL2_ttf-2.0.14-win32-x86.zip
+		DevDependencies\SDL2_ttf-devel-2.0.14-VC.zip = DevDependencies\SDL2_ttf-devel-2.0.14-VC.zip
 		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
@@ -31,5 +39,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB60BCD1-CEC9-4880-8A87-DB00954AC29C}
 	EndGlobalSection
 EndGlobal

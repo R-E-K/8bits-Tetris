@@ -30,6 +30,9 @@
     <Filter Include="sources\utils">
       <UniqueIdentifier>{c2fe286d-f262-42a1-8280-24a1aa01ee54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources\fonts">
+      <UniqueIdentifier>{64a1eea7-8f9d-427e-aad3-ed2fe68b7010}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -250,5 +253,102 @@
     <ClInclude Include="core\AssetsFilePathConsts.h">
       <Filter>sources\core</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\upheavtt.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\fonts\upheaval.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\graphics\tetrominos\blue.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\brown.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\green.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\orange.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\purple.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\red.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\graphics\tetrominos\yellow.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\keys\Keyboard_White_Backspace_Alt.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\keys\Keyboard_White_Enter.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_A.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_B.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Back_Alt.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Down.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Left.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Right.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Dpad_Up.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_LB.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Left_Stick.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_LT.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Right_Stick.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_RB.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_RT.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Start_Alt.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_X.png">
+      <Filter>resources</Filter>
+    </Image>
+    <Image Include="resources\xbox360pad\360_Y.png">
+      <Filter>resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\songs\Tetris_MIDI.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resources\sounds\MenuClick.wav">
+      <Filter>resources</Filter>
+    </Media>
+    <Media Include="resources\sounds\MenuOver.wav">
+      <Filter>resources</Filter>
+    </Media>
   </ItemGroup>
 </Project>

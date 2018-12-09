@@ -268,7 +268,7 @@ namespace REKTetrisGame
 
 		y += (_backgroundTextureHeight / 12);
 
-		DrawTextService::DrawTextWithSizeAndColor("github.com/R-E-K", x, y
+		DrawTextService::DrawTextWithSizeAndColor("github.com/reisack", x, y
 			, (_backgroundTextureHeight / 15)
 			, { 255, 255, 255 });
 
